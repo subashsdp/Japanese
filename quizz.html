@@ -357,9 +357,6 @@
             padding: 20px;
             margin-bottom: 20px;
         }
-        .allJapanDataDiv{
-            margin-top: 30px;
-        }
     </style>
 </head>
 
@@ -459,23 +456,6 @@
         <div id="quiz-container"></div>
         <div>
             <div class="accordion" id="accordionExample"></div>
-
-            <div class="container allJapanDataDiv card" id="allJapanDataDiv">
-                <table id="allJapanData" class="table table-bordered table-striped" data-search="true"
-                    data-sortable="true" data-height="460"
-                    data-fixed-scroll="true"
-                    data-custom-search="customSearch">
-                    <thead class="table-light">
-                        <tr>
-                            <th data-field="type" data-sortable="true">Type</th>
-                            <th data-field="character">Character</th>
-                            <th data-field="romaji" data-sortable="true">Romaji</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-            </div>
         </div>
 
     </div>
@@ -818,7 +798,6 @@
         $(document).ready(function () {
             $('#start-quiz').on('click', startQuiz);
             $('#quizTableDiv').hide();
-            $('#allJapanDataDiv').hide();
             $(document).on('click', '#options-container .option', function () {
 
                 const option = $(this).text();
@@ -883,30 +862,20 @@
                 $('#quiz-container').slideUp();
                 $('#accordionExample').slideUp();
                 $('#quizTableDiv').slideUp();
-                $('#allJapanDataDiv').slideUp();
                 retryQuiz(2)
             } else if (value == 2) {
                 if (databindonreference == 0) {
                     renderFlashcards();
-                    debugger
-                    let alldata = [];
-                    Object.entries(hiraganaFlashcards).map((a) => a[1].map((b) => alldata.push({ 'type': 'Hiragana', 'romaji': b.romaji, 'character': b.character })));
-                    katakanaFlashcards.map((b) => alldata.push({ 'type': 'Katakana', 'romaji': b.romaji, 'character': b.character }))
-                    kanjiFlashcards.map((b) => alldata.push({ 'type': 'Kanji', 'romaji': b.romaji, 'character': b.character }))
-
-                    $('#allJapanData').bootstrapTable({ data: alldata.filter(a => a.romaji != '-') })
                 }
                 retryQuiz(2)
                 $('#quiz-container').slideUp();
                 $('#input-container').slideUp();
                 $('#quizTableDiv').slideUp();
                 $('#accordionExample').slideDown();
-                $('#allJapanDataDiv').slideDown();
             } else if (value == 3) {
                 $('#quiz-container').slideUp();
                 $('#input-container').slideUp();
                 $('#accordionExample').slideUp();
-                $('#allJapanDataDiv').slideUp();
                 $('#quizTableDiv').slideDown();
             }
         }
