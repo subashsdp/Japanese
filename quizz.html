@@ -28,7 +28,7 @@
             margin: 0 auto;
             padding: 25px 0px 0px 0px;
             border-radius: 10px;
-            width: 800px;
+            width: 700px;
         }
 
         .quiz-app #quiz-container,
@@ -939,9 +939,43 @@
                 databindonreference = 1;
                 return cardsHtml;
             }
-
             // Render Katakana, Kanji, and Hiragana cards
-            accordionContainer.append(generateCards([...hiraganaFlashcards.Basic, ...hiraganaFlashcards.With_Maru, ...hiraganaFlashcards.With_Tenten, ...hiraganaFlashcards.Combination_without_Tenten, ...hiraganaFlashcards.Combination_with_Maru, ...hiraganaFlashcards.Combination_with_Tenten], 'Hiragana', 'hiragana'));
+            accordionContainer.append(generateCards(
+                [
+                
+                ...hiraganaFlashcards.Basic.slice(0,10),
+                ...hiraganaFlashcards.Combination_without_Tenten.slice(0,5),
+                ...hiraganaFlashcards.With_Tenten.slice(0,5),
+                ...hiraganaFlashcards.Combination_with_Tenten.slice(0,5),
+
+                ...hiraganaFlashcards.Basic.slice(10,15),
+                ...hiraganaFlashcards.Combination_without_Tenten.slice(5,10),
+                ...hiraganaFlashcards.With_Tenten.slice(5,10),
+                ...hiraganaFlashcards.Combination_with_Tenten.slice(5,10),
+
+                ...hiraganaFlashcards.Basic.slice(15,20),
+                ...hiraganaFlashcards.Combination_without_Tenten.slice(10,15),
+                ...hiraganaFlashcards.With_Tenten.slice(10,15),
+
+                ...hiraganaFlashcards.Basic.slice(20,25),
+                ...hiraganaFlashcards.Combination_without_Tenten.slice(15,20),
+
+                ...hiraganaFlashcards.Basic.slice(25,30),
+                ...hiraganaFlashcards.Combination_without_Tenten.slice(20,25),
+                ...hiraganaFlashcards.With_Tenten.slice(15,20),
+                ...hiraganaFlashcards.Combination_with_Tenten.slice(10,15),
+                ...hiraganaFlashcards.With_Maru,
+                ...hiraganaFlashcards.Combination_with_Maru, 
+
+                ...hiraganaFlashcards.Basic.slice(30,35),
+                ...hiraganaFlashcards.Combination_without_Tenten.slice(25,30),
+
+                ...hiraganaFlashcards.Basic.slice(35,40),
+                ...hiraganaFlashcards.Basic.slice(40,45),
+                ...hiraganaFlashcards.Combination_without_Tenten.slice(30,35),
+
+                ...hiraganaFlashcards.Basic.slice(45,50)
+            ], 'Hiragana', 'hiragana'));
             accordionContainer.append(generateCards(katakanaFlashcards, 'Katakana', 'katakana'));
             accordionContainer.append(generateCards(kanjiFlashcards, 'Kanji', 'kanji'));
 
