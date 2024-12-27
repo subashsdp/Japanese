@@ -5,8 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yen Japan</title>
-    <link rel="icon" type="image/x-icon" href="https://img.icons8.com/?size=100&id=APFJafQJJSrb&format=png&color=000000">
-    
+    <link rel="icon" type="image/x-icon"
+        href="https://img.icons8.com/?size=100&id=APFJafQJJSrb&format=png&color=000000">
+
 
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -356,6 +357,9 @@
             padding: 20px;
             margin-bottom: 20px;
         }
+        .allJapanDataDiv{
+            margin-top: 50px;
+        }
     </style>
 </head>
 
@@ -453,9 +457,26 @@
             </div>
         </div>
         <div id="quiz-container"></div>
+        <div>
+            <div class="accordion" id="accordionExample"></div>
 
-        <div class="accordion" id="accordionExample"></div>
-
+            <div class="container allJapanDataDiv card" id="allJapanDataDiv">
+                <table id="allJapanData" class="table table-bordered table-striped" data-search="true"
+                    data-sortable="true" data-height="460"
+                    data-fixed-scroll="true" data-mobile-responsive="true" data-check-on-init="true"
+                    data-custom-search="customSearch">
+                    <thead class="table-light">
+                        <tr>
+                            <th data-field="type" data-sortable="true">Type</th>
+                            <th data-field="character">Character</th>
+                            <th data-field="romaji" data-sortable="true">Romaji</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
     </div>
     <div>
@@ -482,6 +503,8 @@
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://unpkg.com/bootstrap-table@1.21.1/dist/bootstrap-table.min.js"></script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap-table@1.24.0/dist/extensions/mobile/bootstrap-table-mobile.min.js"></script>
     <script>
         let quizType = "";
         let flashcards = [];
@@ -794,6 +817,7 @@
         $(document).ready(function () {
             $('#start-quiz').on('click', startQuiz);
             $('#quizTableDiv').hide();
+            $('#allJapanDataDiv').hide();
             $(document).on('click', '#options-container .option', function () {
 
                 const option = $(this).text();
@@ -836,6 +860,7 @@
                 });
             });
             $('#quizTable').bootstrapTable({ data: new_dataset })
+           
         });
         function stopQuiz() {
             onclick_pagetype_radio(1);
@@ -857,24 +882,38 @@
                 $('#quiz-container').slideUp();
                 $('#accordionExample').slideUp();
                 $('#quizTableDiv').slideUp();
+                $('#allJapanDataDiv').slideUp();
                 retryQuiz(2)
             } else if (value == 2) {
                 if (databindonreference == 0) {
                     renderFlashcards();
+                    debugger
+                    let alldata = [];
+                    Object.entries(hiraganaFlashcards).map((a) => a[1].map((b) => alldata.push({ 'type': 'Hiragana', 'romaji': b.romaji, 'character': b.character })));
+                    katakanaFlashcards.map((b) => alldata.push({ 'type': 'Katakana', 'romaji': b.romaji, 'character': b.character }))
+                    kanjiFlashcards.map((b) => alldata.push({ 'type': 'Kanji', 'romaji': b.romaji, 'character': b.character }))
+
+                    $('#allJapanData').bootstrapTable({ data: alldata.filter(a => a.romaji != '-') })
                 }
                 retryQuiz(2)
                 $('#quiz-container').slideUp();
                 $('#input-container').slideUp();
                 $('#quizTableDiv').slideUp();
                 $('#accordionExample').slideDown();
+                $('#allJapanDataDiv').slideDown();
             } else if (value == 3) {
                 $('#quiz-container').slideUp();
                 $('#input-container').slideUp();
                 $('#accordionExample').slideUp();
+                $('#allJapanDataDiv').slideUp();
                 $('#quizTableDiv').slideDown();
             }
         }
-
+        function customSearch(data, text) {
+            return data.filter(function (row) {
+                return row.romaji.indexOf(text) > -1
+        })
+        }
         const katakanaFlashcards = [{ character: "ア", romaji: "a" }, { character: "イ", romaji: "i" }, { character: "ウ", romaji: "u" }, { character: "エ", romaji: "e" }, { character: "オ", romaji: "o" }, { character: "カ", romaji: "ka" }, { character: "キ", romaji: "ki" }, { character: "ク", romaji: "ku" }, { character: "ケ", romaji: "ke" }, { character: "コ", romaji: "ko" }, { character: "サ", romaji: "sa" }, { character: "シ", romaji: "shi" }, { character: "ス", romaji: "su" }, { character: "セ", romaji: "se" }, { character: "ソ", romaji: "so" }, { character: "タ", romaji: "ta" }, { character: "チ", romaji: "chi" }, { character: "ツ", romaji: "tsu" }, { character: "テ", romaji: "te" }, { character: "ト", romaji: "to" }, { character: "ナ", romaji: "na" }, { character: "ニ", romaji: "ni" }, { character: "ヌ", romaji: "nu" }, { character: "ネ", romaji: "ne" }, { character: "ノ", romaji: "no" }, { character: "ハ", romaji: "ha" }, { character: "ヒ", romaji: "hi" }, { character: "フ", romaji: "fu" }, { character: "ヘ", romaji: "he" }, { character: "ホ", romaji: "ho" }, { character: "マ", romaji: "ma" }, { character: "ミ", romaji: "mi" }, { character: "ム", romaji: "mu" }, { character: "メ", romaji: "me" }, { character: "モ", romaji: "mo" }, { character: "ヤ", romaji: "ya" }, { character: "ユ", romaji: "yu" }, { character: "ヨ", romaji: "yo" }, { character: "ラ", romaji: "ra" }, { character: "リ", romaji: "ri" }, { character: "ル", romaji: "ru" }, { character: "レ", romaji: "re" }, { character: "ロ", romaji: "ro" }, { character: "ワ", romaji: "wa" }, { character: "ヲ", romaji: "wo" }, { character: "ン", romaji: "n" }];
 
         const kanjiFlashcards = [{ character: "一", romaji: "ichi", meaning: "one" }, { character: "二", romaji: "ni", meaning: "two" }, { character: "三", romaji: "san", meaning: "three" }, { character: "四", romaji: "shi/yon", meaning: "four" }, { character: "五", romaji: "go", meaning: "five" }, { character: "六", romaji: "roku", meaning: "six" }, { character: "七", romaji: "shichi/nana", meaning: "seven" }, { character: "八", romaji: "hachi", meaning: "eight" }, { character: "九", romaji: "kyuu/ku", meaning: "nine" }, { character: "十", romaji: "juu", meaning: "ten" }, { character: "百", romaji: "hyaku", meaning: "hundred" }, { character: "千", romaji: "sen", meaning: "thousand" }, { character: "万", romaji: "man", meaning: "ten thousand" }, { character: "円", romaji: "en", meaning: "yen, circle" }, { character: "口", romaji: "kuchi", meaning: "mouth" }, { character: "目", romaji: "me", meaning: "eye" }, { character: "耳", romaji: "mimi", meaning: "ear" }, { character: "手", romaji: "te", meaning: "hand" }, { character: "足", romaji: "ashi", meaning: "foot, leg" }, { character: "力", romaji: "chikara", meaning: "power, strength" }, { character: "男", romaji: "otoko", meaning: "man" }, { character: "女", romaji: "onna", meaning: "woman" }, { character: "子", romaji: "ko", meaning: "child" }, { character: "山", romaji: "yama", meaning: "mountain" }, { character: "川", romaji: "kawa", meaning: "river" }, { character: "田", romaji: "ta", meaning: "rice field" }, { character: "休", romaji: "kyuu", meaning: "rest" }, { character: "先", romaji: "saki", meaning: "ahead, previous" }, { character: "生", romaji: "sei", meaning: "life, birth" }, { character: "学", romaji: "gaku", meaning: "study, learning" }, { character: "校", romaji: "kou", meaning: "school" }, { character: "書", romaji: "kaku", meaning: "write" }, { character: "読む", romaji: "yomu", meaning: "read" }, { character: "食", romaji: "taberu", meaning: "eat" }, { character: "飲", romaji: "nomu", meaning: "drink" }, { character: "行", romaji: "iku", meaning: "go" }, { character: "来", romaji: "kuru", meaning: "come" }, { character: "見", romaji: "miru", meaning: "see" }, { character: "言", romaji: "iu", meaning: "say" }, { character: "話", romaji: "hanasu", meaning: "talk, speak" }, { character: "聞", romaji: "kiku", meaning: "ask, hear" }, { character: "買", romaji: "kau", meaning: "buy" }, { character: "売", romaji: "uru", meaning: "sell" }, { character: "出", romaji: "deru", meaning: "exit, leave" }, { character: "入", romaji: "hairu", meaning: "enter" }, { character: "大", romaji: "dai/oo", meaning: "big, large" }, { character: "小", romaji: "shou", meaning: "small" }, { character: "長", romaji: "naga", meaning: "long" }, { character: "早", romaji: "haya", meaning: "early, fast" }, { character: "古", romaji: "furui", meaning: "old" }, { character: "新", romaji: "shin", meaning: "new" }, { character: "白", romaji: "shiro", meaning: "white" }, { character: "黒", romaji: "kuro", meaning: "black" }, { character: "青", romaji: "ao", meaning: "blue, green" }, { character: "赤", romaji: "aka", meaning: "red" }, { character: "色", romaji: "iro", meaning: "color" }, { character: "金", romaji: "kin", meaning: "gold, money" }, { character: "銀", romaji: "gin", meaning: "silver" }, { character: "土", romaji: "tsuchi", meaning: "earth, soil" }, { character: "天", romaji: "ten", meaning: "heaven" }, { character: "雨", romaji: "ame", meaning: "rain" }, { character: "電", romaji: "den", meaning: "electricity" }, { character: "車", romaji: "kuruma", meaning: "car, vehicle" }, { character: "音", romaji: "on", meaning: "sound" }, { character: "楽", romaji: "raku", meaning: "music, comfort" }, { character: "校", romaji: "kou", meaning: "school" }];
@@ -945,7 +984,6 @@
             // Render Katakana, Kanji, and Hiragana cards
             accordionContainer.append(generateCards(
                 [
-
                     ...hiraganaFlashcards.Basic.slice(0, 10),
                     ...hiraganaFlashcards.Combination_without_Tenten.slice(0, 5),
                     ...hiraganaFlashcards.With_Tenten.slice(0, 5),
