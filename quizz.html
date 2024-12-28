@@ -357,6 +357,78 @@
             padding: 20px;
             margin-bottom: 20px;
         }
+
+        .qzm2-card {
+            width: 100%;
+            height: 150px;
+            /* background-color: #ffffff; */
+            border: 2px solid #0d6efd;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            /* padding: 10px; */
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            overflow: hidden;
+            user-select: none;
+            /* Disable text selection */
+            -webkit-user-select: none;
+            /* Safari */
+            -moz-user-select: none;
+            /* Firefox */
+            -ms-user-select: none;
+            /* Internet Explorer/Edge */
+            /* Prevent content overflow */
+        }
+
+        .qzm2-card-inner {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+        }
+
+        .qzm2-card.flipped .qzm2-card-inner {
+            transform: rotateY(180deg);
+            
+        }
+
+        .qzm2-card-front,
+        .qzm2-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            
+        }
+        .qzm2-card-front{
+            text-transform: uppercase;
+        }
+        .qzm2-card-back {
+            transform: rotateY(180deg);
+            background-color: #0d6efd;
+        }
+
+        .qzm2-card-header {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .qzm2-card-back div{
+            color: white;
+        }
+
+        .qzm2-card-body {
+            font-size: 18px;
+            color: #555;
+        }
     </style>
 </head>
 
@@ -462,8 +534,7 @@
     <div>
         <div class="container quizTableDiv" id="quizTableDiv">
             <table id="quizTable" class="table table-bordered table-striped" data-search="true" data-sortable="true"
-            data-height="460"
-            data-fixed-scroll="true" >
+                data-height="460" data-fixed-scroll="true">
                 <thead class="table-light">
                     <tr>
                         <th data-field="quiztype" data-sortable="true">Quiz Type</th>
@@ -840,7 +911,7 @@
                 });
             });
             $('#quizTable').bootstrapTable({ data: new_dataset })
-           
+
         });
         function stopQuiz() {
             onclick_pagetype_radio(1);
@@ -882,7 +953,7 @@
         function customSearch(data, text) {
             return data.filter(function (row) {
                 return row.romaji.indexOf(text) > -1
-        })
+            })
         }
         const katakanaFlashcards = [{ character: "ア", romaji: "a" }, { character: "イ", romaji: "i" }, { character: "ウ", romaji: "u" }, { character: "エ", romaji: "e" }, { character: "オ", romaji: "o" }, { character: "カ", romaji: "ka" }, { character: "キ", romaji: "ki" }, { character: "ク", romaji: "ku" }, { character: "ケ", romaji: "ke" }, { character: "コ", romaji: "ko" }, { character: "サ", romaji: "sa" }, { character: "シ", romaji: "shi" }, { character: "ス", romaji: "su" }, { character: "セ", romaji: "se" }, { character: "ソ", romaji: "so" }, { character: "タ", romaji: "ta" }, { character: "チ", romaji: "chi" }, { character: "ツ", romaji: "tsu" }, { character: "テ", romaji: "te" }, { character: "ト", romaji: "to" }, { character: "ナ", romaji: "na" }, { character: "ニ", romaji: "ni" }, { character: "ヌ", romaji: "nu" }, { character: "ネ", romaji: "ne" }, { character: "ノ", romaji: "no" }, { character: "ハ", romaji: "ha" }, { character: "ヒ", romaji: "hi" }, { character: "フ", romaji: "fu" }, { character: "ヘ", romaji: "he" }, { character: "ホ", romaji: "ho" }, { character: "マ", romaji: "ma" }, { character: "ミ", romaji: "mi" }, { character: "ム", romaji: "mu" }, { character: "メ", romaji: "me" }, { character: "モ", romaji: "mo" }, { character: "ヤ", romaji: "ya" }, { character: "ユ", romaji: "yu" }, { character: "ヨ", romaji: "yo" }, { character: "ラ", romaji: "ra" }, { character: "リ", romaji: "ri" }, { character: "ル", romaji: "ru" }, { character: "レ", romaji: "re" }, { character: "ロ", romaji: "ro" }, { character: "ワ", romaji: "wa" }, { character: "ヲ", romaji: "wo" }, { character: "ン", romaji: "n" }];
 
@@ -895,7 +966,8 @@
             accordionContainer.empty(); // Clear existing accordion content before rendering
 
             // Function to generate card HTML for any dataset
-            function generateCards(flashcards, title, datasetType) {
+            function generateCards(flashcards, title, datasetType, mode) {
+                debugger
                 let cardsHtml = `
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="heading${title}">
@@ -914,19 +986,20 @@
                             aria-labelledby="heading${title}"
                             data-bs-parent="#accordionExample">
                             <div class="accordion-body">
-                                <div class="toggle-pronunciation-container text-end">
+                                ${mode == 1
+                                ? `<div class="toggle-pronunciation-container text-end">
                                     <button
                                         class="btn btn-primary btn-sm toggle-pronunciation"
-                                        data-target="#collapse${title}"
+                                        data-target="#collapse ${title}"
                                         style="display: none;">
                                         <i class="bi bi-eye-slash-fill"></i> <!-- Default state: "Hide Pronunciation" -->
                                     </button>
-                                </div>
+                                </div>` : '' }
                                 <div class="kanji-flashcard-container">
                     `;
-
-                flashcards.forEach((card, index) => {
-                    cardsHtml += `
+                if (mode == 1) {
+                    flashcards.forEach((card, index) => {
+                        cardsHtml += `
                         <div class="kanji-card">
                             <div class="kanji-card-header">
                                 ${card.character}
@@ -934,13 +1007,29 @@
                             <div class="kanji-card-body">
                                 <div class="kanji-romaji">${card.romaji}</div>
                                 ${datasetType === 'kanji'
-                            ? `<div class="kanji-meaning">${card.meaning}</div>`
-                            : ''
-                        }
+                                ? `<div class="kanji-meaning">${card.meaning}</div>`
+                                : ''
+                            }
                             </div>
                         </div>
                         `;
-                });
+                    });
+                } else if (mode == 2) {
+                    flashcards.forEach((card, index) => {
+                        cardsHtml += `
+                        <div class="qzm2-card">
+                            <div class="qzm2-card-inner">
+                                <div class="qzm2-card-front">
+                                    <div class="kanji-card-header">${card.romaji}</div>
+                                </div>
+                                <div class="qzm2-card-back">
+                                    <div class="kanji-card-header">${card.character}</div>
+                                </div>
+                            </div>
+                        </div>
+                        `;
+                    });
+                }
 
                 cardsHtml += `
                                 </div>
@@ -951,9 +1040,8 @@
                 databindonreference = 1;
                 return cardsHtml;
             }
-            // Render Katakana, Kanji, and Hiragana cards
-            accordionContainer.append(generateCards(
-                [
+
+            let orderedhiraganaCards = [
                     ...hiraganaFlashcards.Basic.slice(0, 10),
                     ...hiraganaFlashcards.Combination_without_Tenten.slice(0, 5),
                     ...hiraganaFlashcards.With_Tenten.slice(0, 5),
@@ -986,12 +1074,19 @@
                     ...hiraganaFlashcards.Combination_without_Tenten.slice(30, 35),
 
                     ...hiraganaFlashcards.Basic.slice(45, 50)
-                ], 'Hiragana', 'hiragana'));
-            accordionContainer.append(generateCards(katakanaFlashcards, 'Katakana', 'katakana'));
-            accordionContainer.append(generateCards(kanjiFlashcards, 'Kanji', 'kanji'));
+                ]
+            // Render Katakana, Kanji, and Hiragana cards
+            accordionContainer.append(generateCards(orderedhiraganaCards, 'Hiragana', 'hiragana', 1));
+            accordionContainer.append(generateCards(katakanaFlashcards, 'Katakana', 'katakana', 1));
+            accordionContainer.append(generateCards(kanjiFlashcards, 'Kanji', 'kanji', 1));
 
+            accordionContainer.append(generateCards(shuffleArray(orderedhiraganaCards.filter(a=>a.character != '-')), 'Hiragana-Quiz', 'hiragana', 2));
+            accordionContainer.append(generateCards(shuffleArray(katakanaFlashcards), 'Katagana-Quiz', 'katagana', 2));
+
+            $('.qzm2-card').on('click', function () {
+                $(this).toggleClass('flipped');
+            });
         }
-
         // Ensure event is bound only once
         $(document).off('click', '.toggle-pronunciation').on('click', '.toggle-pronunciation', function () {
             const target = $(this).data('target'); // Get the target accordion
