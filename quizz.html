@@ -393,7 +393,7 @@
 
         .qzm2-card.flipped .qzm2-card-inner {
             transform: rotateY(180deg);
-            
+
         }
 
         .qzm2-card-front,
@@ -407,7 +407,7 @@
             justify-content: center;
             background-color: white;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            
+
         }
         .qzm2-card-front{
             text-transform: uppercase;
@@ -511,7 +511,7 @@
                 <div class="row">
                     <div class="col">
                         <label for="num-questions">Number of Questions: </label>
-                        <input type="number" id="num-questions" class="form-control" min="1" value="5">
+                        <input type="number" id="num-questions" class="form-control" min="1" value="46">
                     </div>
                     <br>
                     <div class="col">
@@ -888,6 +888,48 @@
                     $('input[name="hiragana-type"]:not(#btnradio17):checked').length;
                 $('#btnradio17').prop('checked', allChecked);
             });
+            $('input[name="hiragana-type"]').change(function () {
+                debugger
+                let lettervalue = 0; let noofselect = 0
+                $('input[name="hiragana-type"]').map((a) => {
+                    debugger
+                    if ($('input[name="hiragana-type"]')[a].checked == true) {
+                        if (a == 0) {
+                            lettervalue += 46
+                            noofselect++
+                        }
+                        if (a == 1) {
+                            lettervalue += 20
+                            noofselect++
+                        }
+                        if (a == 2) {
+                            lettervalue += 5
+                            noofselect++
+                        }
+                        if (a == 3) {
+                            lettervalue += 21
+                            noofselect++
+                        }
+                        if (a == 4) {
+                            lettervalue += 9
+                            noofselect++
+                        }
+                        if (a == 5) {
+                            lettervalue += 3
+                            noofselect++
+                        }
+                        if(a == 6){
+                            lettervalue = 104
+                            noofselect++
+                        }
+                    }
+                });
+                $('#num-questions').val(lettervalue)
+                if(noofselect == 0){
+                    $('#btnradio11').prop('checked', true)
+                    $('#num-questions').val(46)
+                }
+            });
 
             let key = 'history_quiz'
             if (sessionStorage.getItem(key) !== null) {
@@ -986,15 +1028,6 @@
                             aria-labelledby="heading${title}"
                             data-bs-parent="#accordionExample">
                             <div class="accordion-body">
-                                ${mode == 1
-                                ? `<div class="toggle-pronunciation-container text-end">
-                                    <button
-                                        class="btn btn-primary btn-sm toggle-pronunciation"
-                                        data-target="#collapse ${title}"
-                                        style="display: none;">
-                                        <i class="bi bi-eye-slash-fill"></i> <!-- Default state: "Hide Pronunciation" -->
-                                    </button>
-                                </div>` : '' }
                                 <div class="kanji-flashcard-container">
                     `;
                 if (mode == 1) {
@@ -1042,45 +1075,45 @@
             }
 
             let orderedhiraganaCards = [
-                    ...hiraganaFlashcards.Basic.slice(0, 10),
-                    ...hiraganaFlashcards.Combination_without_Tenten.slice(0, 5),
-                    ...hiraganaFlashcards.With_Tenten.slice(0, 5),
-                    ...hiraganaFlashcards.Combination_with_Tenten.slice(0, 5),
+                ...hiraganaFlashcards.Basic.slice(0, 10),
+                ...hiraganaFlashcards.Combination_without_Tenten.slice(0, 5),
+                ...hiraganaFlashcards.With_Tenten.slice(0, 5),
+                ...hiraganaFlashcards.Combination_with_Tenten.slice(0, 5),
 
-                    ...hiraganaFlashcards.Basic.slice(10, 15),
-                    ...hiraganaFlashcards.Combination_without_Tenten.slice(5, 10),
-                    ...hiraganaFlashcards.With_Tenten.slice(5, 10),
-                    ...hiraganaFlashcards.Combination_with_Tenten.slice(5, 10),
+                ...hiraganaFlashcards.Basic.slice(10, 15),
+                ...hiraganaFlashcards.Combination_without_Tenten.slice(5, 10),
+                ...hiraganaFlashcards.With_Tenten.slice(5, 10),
+                ...hiraganaFlashcards.Combination_with_Tenten.slice(5, 10),
 
-                    ...hiraganaFlashcards.Basic.slice(15, 20),
-                    ...hiraganaFlashcards.Combination_without_Tenten.slice(10, 15),
-                    ...hiraganaFlashcards.With_Tenten.slice(10, 15),
+                ...hiraganaFlashcards.Basic.slice(15, 20),
+                ...hiraganaFlashcards.Combination_without_Tenten.slice(10, 15),
+                ...hiraganaFlashcards.With_Tenten.slice(10, 15),
 
-                    ...hiraganaFlashcards.Basic.slice(20, 25),
-                    ...hiraganaFlashcards.Combination_without_Tenten.slice(15, 20),
+                ...hiraganaFlashcards.Basic.slice(20, 25),
+                ...hiraganaFlashcards.Combination_without_Tenten.slice(15, 20),
 
-                    ...hiraganaFlashcards.Basic.slice(25, 30),
-                    ...hiraganaFlashcards.Combination_without_Tenten.slice(20, 25),
-                    ...hiraganaFlashcards.With_Tenten.slice(15, 20),
-                    ...hiraganaFlashcards.Combination_with_Tenten.slice(10, 15),
-                    ...hiraganaFlashcards.With_Maru,
-                    ...hiraganaFlashcards.Combination_with_Maru,
+                ...hiraganaFlashcards.Basic.slice(25, 30),
+                ...hiraganaFlashcards.Combination_without_Tenten.slice(20, 25),
+                ...hiraganaFlashcards.With_Tenten.slice(15, 20),
+                ...hiraganaFlashcards.Combination_with_Tenten.slice(10, 15),
+                ...hiraganaFlashcards.With_Maru,
+                ...hiraganaFlashcards.Combination_with_Maru,
 
-                    ...hiraganaFlashcards.Basic.slice(30, 35),
-                    ...hiraganaFlashcards.Combination_without_Tenten.slice(25, 30),
+                ...hiraganaFlashcards.Basic.slice(30, 35),
+                ...hiraganaFlashcards.Combination_without_Tenten.slice(25, 30),
 
-                    ...hiraganaFlashcards.Basic.slice(35, 40),
-                    ...hiraganaFlashcards.Basic.slice(40, 45),
-                    ...hiraganaFlashcards.Combination_without_Tenten.slice(30, 35),
+                ...hiraganaFlashcards.Basic.slice(35, 40),
+                ...hiraganaFlashcards.Basic.slice(40, 45),
+                ...hiraganaFlashcards.Combination_without_Tenten.slice(30, 35),
 
-                    ...hiraganaFlashcards.Basic.slice(45, 50)
-                ]
+                ...hiraganaFlashcards.Basic.slice(45, 50)
+            ]
             // Render Katakana, Kanji, and Hiragana cards
             accordionContainer.append(generateCards(orderedhiraganaCards, 'Hiragana', 'hiragana', 1));
             accordionContainer.append(generateCards(katakanaFlashcards, 'Katakana', 'katakana', 1));
             accordionContainer.append(generateCards(kanjiFlashcards, 'Kanji', 'kanji', 1));
 
-            accordionContainer.append(generateCards(shuffleArray(orderedhiraganaCards.filter(a=>a.character != '-')), 'Hiragana-Quiz', 'hiragana', 2));
+            accordionContainer.append(generateCards(shuffleArray(orderedhiraganaCards.filter(a => a.character != '-')), 'Hiragana-Quiz', 'hiragana', 2));
             accordionContainer.append(generateCards(shuffleArray(katakanaFlashcards), 'Katagana-Quiz', 'katagana', 2));
 
             $('.qzm2-card').on('click', function () {
