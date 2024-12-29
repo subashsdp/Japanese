@@ -409,9 +409,11 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
         }
-        .qzm2-card-front{
+
+        .qzm2-card-front {
             text-transform: uppercase;
         }
+
         .qzm2-card-back {
             transform: rotateY(180deg);
             background-color: #0d6efd;
@@ -421,7 +423,8 @@
             font-size: 24px;
             font-weight: bold;
         }
-        .qzm2-card-back div{
+
+        .qzm2-card-back div {
             color: white;
         }
 
@@ -918,14 +921,14 @@
                             lettervalue += 3
                             noofselect++
                         }
-                        if(a == 6){
+                        if (a == 6) {
                             lettervalue = 104
                             noofselect++
                         }
                     }
                 });
                 $('#num-questions').val(lettervalue)
-                if(noofselect == 0){
+                if (noofselect == 0) {
                     $('#btnradio11').prop('checked', true)
                     $('#num-questions').val(46)
                 }
@@ -1021,6 +1024,7 @@
                                 aria-expanded="false"
                                 aria-controls="collapse${title}">
                                 ${title}
+                                ${mode == 2 ? `<span class="badge rounded-pill text-bg-primary" id="score${title}" style="margin-left: 5px;"></span>` : ''}
                             </button>
                         </h2>
                         <div id="collapse${title}"
@@ -1163,6 +1167,25 @@
                 sessionStorage.setItem(key, JSON.stringify(history_dataset));
             }
         }
+
+        $(document).on('click', '.qzm2-card', function () {
+            let HiraganaScore = $('#collapseHiragana-Quiz .accordion-body .kanji-flashcard-container .qzm2-card.flipped').length;
+            let KataganaScore = $('#collapseKatagana-Quiz .accordion-body .kanji-flashcard-container .qzm2-card.flipped').length;
+            if (HiraganaScore == 0) {
+                $('#scoreHiragana-Quiz').hide()
+            }
+            if (KataganaScore == 0) {
+                $('#scoreKatagana-Quiz').hide()
+            } if (HiraganaScore > 0) {
+                $('#scoreHiragana-Quiz').show()
+            }
+            if (KataganaScore > 0) {
+                $('#scoreKatagana-Quiz').show()
+            }
+            $('#scoreHiragana-Quiz').text(HiraganaScore)
+            $('#scoreKatagana-Quiz').text(KataganaScore)
+
+        });
     </script>
 </body>
 
