@@ -172,7 +172,32 @@
             /* Prevent content overflow */
         }
 
-        .kanji-card:hover {
+        .kanji-card2 {
+            width: 100%;
+            height: 115px;
+            background-color: #ffffff;
+            border: 2px solid #0d6efd;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            overflow: hidden;
+            user-select: none;
+            /* Disable text selection */
+            -webkit-user-select: none;
+            /* Safari */
+            -moz-user-select: none;
+            /* Firefox */
+            -ms-user-select: none;
+            /* Internet Explorer/Edge */
+            /* Prevent content overflow */
+        }
+
+        .kanji-card:hover, .kanji-card2:hover {
             transform: translateY(-5px);
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
             background-color: #0d6efd;
@@ -187,7 +212,10 @@
 
         .kanji-card:hover .kanji-card-header,
         .kanji-card:hover .kanji-romaji,
-        .kanji-card:hover .kanji-meaning {
+        .kanji-card:hover .kanji-meaning,
+        .kanji-card2:hover .kanji-card-header,
+        .kanji-card2:hover .kanji-romaji,
+        .kanji-card2:hover .kanji-meaning {
             color: white;
         }
 
@@ -360,7 +388,7 @@
 
         .qzm2-card {
             width: 100%;
-            height: 150px;
+            height: 115px;
             /* background-color: #ffffff; */
             border: 2px solid #0d6efd;
             border-radius: 10px;
@@ -431,6 +459,50 @@
         .qzm2-card-body {
             font-size: 18px;
             color: #555;
+        }
+
+        .card2 {
+            width: 100%;
+            height: 115px;
+            background-color: #ffffff;
+            border: 2px solid #0d6efd;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+            overflow: hidden;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        .card2:hover {
+            background-color: #0d6efd;
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .card2:hover .character,
+        .card2:hover .pronunciation {
+            color: #ffffff;
+        }
+
+
+        .card2 .character {
+            font-size: 25px;
+            font-weight: bold;
+            color: black;
+            text-align: center;
+        }
+
+        .card2 .pronunciation {
+            font-size: 15px;
+            color: #0d6efd;
+            font-weight: bold;
+            text-transform: uppercase;
         }
     </style>
 </head>
@@ -1006,6 +1078,8 @@
 
         const hiraganaFlashcards = { "Basic": [{ "character": "あ", "romaji": "a" }, { "character": "い", "romaji": "i" }, { "character": "う", "romaji": "u" }, { "character": "え", "romaji": "e" }, { "character": "お", "romaji": "o" }, { "character": "か", "romaji": "ka" }, { "character": "き", "romaji": "ki" }, { "character": "く", "romaji": "ku" }, { "character": "け", "romaji": "ke" }, { "character": "こ", "romaji": "ko" }, { "character": "さ", "romaji": "sa" }, { "character": "し", "romaji": "shi" }, { "character": "す", "romaji": "su" }, { "character": "せ", "romaji": "se" }, { "character": "そ", "romaji": "so" }, { "character": "た", "romaji": "ta" }, { "character": "ち", "romaji": "chi" }, { "character": "つ", "romaji": "tsu" }, { "character": "て", "romaji": "te" }, { "character": "と", "romaji": "to" }, { "character": "な", "romaji": "na" }, { "character": "に", "romaji": "ni" }, { "character": "ぬ", "romaji": "nu" }, { "character": "ね", "romaji": "ne" }, { "character": "の", "romaji": "no" }, { "character": "は", "romaji": "ha" }, { "character": "ひ", "romaji": "hi" }, { "character": "ふ", "romaji": "fu" }, { "character": "へ", "romaji": "he" }, { "character": "ほ", "romaji": "ho" }, { "character": "ま", "romaji": "ma" }, { "character": "み", "romaji": "mi" }, { "character": "む", "romaji": "mu" }, { "character": "め", "romaji": "me" }, { "character": "も", "romaji": "mo" }, { "character": "や", "romaji": "ya" }, { "character": "-", "romaji": "-" }, { "character": "ゆ", "romaji": "yu" }, { "character": "-", "romaji": "-" }, { "character": "よ", "romaji": "yo" }, { "character": "ら", "romaji": "ra" }, { "character": "り", "romaji": "ri" }, { "character": "る", "romaji": "ru" }, { "character": "れ", "romaji": "re" }, { "character": "ろ", "romaji": "ro" }, { "character": "わ", "romaji": "wa" }, { "character": "-", "romaji": "-" }, { "character": "を", "romaji": "wo" }, { "character": "-", "romaji": "-" }, { "character": "ん", "romaji": "n" }], "With_Tenten": [{ "character": "が", "romaji": "ga" }, { "character": "ぎ", "romaji": "gi" }, { "character": "ぐ", "romaji": "gu" }, { "character": "げ", "romaji": "ge" }, { "character": "ご", "romaji": "go" }, { "character": "ざ", "romaji": "za" }, { "character": "じ", "romaji": "ji" }, { "character": "ず", "romaji": "zu" }, { "character": "ぜ", "romaji": "ze" }, { "character": "ぞ", "romaji": "zo" }, { "character": "だ", "romaji": "da" }, { "character": "ぢ", "romaji": "ji" }, { "character": "づ", "romaji": "zu" }, { "character": "で", "romaji": "de" }, { "character": "ど", "romaji": "do" }, { "character": "ば", "romaji": "ba" }, { "character": "び", "romaji": "bi" }, { "character": "ぶ", "romaji": "bu" }, { "character": "べ", "romaji": "be" }, { "character": "ぼ", "romaji": "bo" }], "With_Maru": [{ "character": "ぱ", "romaji": "pa" }, { "character": "ぴ", "romaji": "pi" }, { "character": "ぷ", "romaji": "pu" }, { "character": "ぺ", "romaji": "pe" }, { "character": "ぽ", "romaji": "po" }], "Combination_without_Tenten": [{ "character": "-", "romaji": "-" }, { "character": "きゃ", "romaji": "kya" }, { "character": "きゅ", "romaji": "kyu" }, { "character": "きょ", "romaji": "kyo" }, { "character": "-", "romaji": "-" }, { "character": "-", "romaji": "-" }, { "character": "しゃ", "romaji": "sha" }, { "character": "しゅ", "romaji": "shu" }, { "character": "しょ", "romaji": "sho" }, { "character": "-", "romaji": "-" }, { "character": "-", "romaji": "-" }, { "character": "ちゃ", "romaji": "cha" }, { "character": "ちゅ", "romaji": "chu" }, { "character": "ちょ", "romaji": "cho" }, { "character": "-", "romaji": "-" }, { "character": "-", "romaji": "-" }, { "character": "にゃ", "romaji": "nya" }, { "character": "にゅ", "romaji": "nyu" }, { "character": "にょ", "romaji": "nyo" }, { "character": "-", "romaji": "-" }, { "character": "-", "romaji": "-" }, { "character": "ひゃ", "romaji": "hya" }, { "character": "ひゅ", "romaji": "hyu" }, { "character": "ひょ", "romaji": "hyo" }, { "character": "-", "romaji": "-" }, { "character": "-", "romaji": "-" }, { "character": "みゃ", "romaji": "mya" }, { "character": "みゅ", "romaji": "myu" }, { "character": "みょ", "romaji": "myo" }, { "character": "-", "romaji": "-" }, { "character": "-", "romaji": "-" }, { "character": "りゃ", "romaji": "rya" }, { "character": "りゅ", "romaji": "ryu" }, { "character": "りょ", "romaji": "ryo" }, { "character": "-", "romaji": "-" }], "Combination_with_Tenten": [{ "character": "-", "romaji": "-" }, { "character": "ぎゃ", "romaji": "gya" }, { "character": "ぎゅ", "romaji": "gyu" }, { "character": "ぎょ", "romaji": "gyo" }, { "character": "-", "romaji": "-" }, { "character": "-", "romaji": "-" }, { "character": "じゃ", "romaji": "ja" }, { "character": "じゅ", "romaji": "ju" }, { "character": "じょ", "romaji": "jo" }, { "character": "-", "romaji": "-" }, { "character": "-", "romaji": "-" }, { "character": "びゃ", "romaji": "bya" }, { "character": "びゅ", "romaji": "byu" }, { "character": "びょ", "romaji": "byo" }, { "character": "-", "romaji": "-" }], "Combination_with_Maru": [{ "character": "-", "romaji": "-" }, { "character": "ぴゃ", "romaji": "pya" }, { "character": "ぴゅ", "romaji": "pyu" }, { "character": "ぴょ", "romaji": "pyo" }, { "character": "-", "romaji": "-" }] }
 
+        const combinedhiraganakatakana_dataset = [{ "character": "あ | ア", "romaji": "a" }, { "character": "い | イ", "romaji": "i" }, { "character": "う | ウ", "romaji": "u" }, { "character": "え | エ", "romaji": "e" }, { "character": "お | オ", "romaji": "o" }, { "character": "か | カ", "romaji": "ga | ka" }, { "character": "き | キ", "romaji": "ki | gi" }, { "character": "く | ク", "romaji": "gu | ku" }, { "character": "け | ケ", "romaji": "ke | ge" }, { "character": "こ | コ", "romaji": "ko | go" }, { "character": "さ | サ", "romaji": "za | sa" }, { "character": "し | シ", "romaji": "ji | shi" }, { "character": "す | ス", "romaji": "su | zu" }, { "character": "せ | セ", "romaji": "ze | se" }, { "character": "そ | ソ", "romaji": "so | zo" }, { "character": "た | タ", "romaji": "ta | da" }, { "character": "ち | チ", "romaji": "ji | chi" }, { "character": "つ | ツ", "romaji": "zu | tsu" }, { "character": "て | テ", "romaji": "te | de" }, { "character": "と | ト", "romaji": "do | to" }, { "character": "な | ナ", "romaji": "na" }, { "character": "に | ニ", "romaji": "ni" }, { "character": "ぬ | ヌ", "romaji": "nu" }, { "character": "ね | ネ", "romaji": "ne" }, { "character": "の | ノ", "romaji": "no" }, { "character": "は | ハ", "romaji": "pa | ba | ha" }, { "character": "ひ | ヒ", "romaji": "bi | pi | hi" }, { "character": "ふ | フ", "romaji": "bu | fu | pu" }, { "character": "へ | ヘ", "romaji": "be | he | pe" }, { "character": "ほ | ホ", "romaji": "ho | po | bo" }, { "character": "ま | マ", "romaji": "ma" }, { "character": "み | ミ", "romaji": "mi" }, { "character": "む | ム", "romaji": "mu" }, { "character": "め | メ", "romaji": "me" }, { "character": "も | モ", "romaji": "mo" }, { "character": "や | ヤ", "romaji": "ya" }, { "character": "ゆ | ユ", "romaji": "yu" }, { "character": "よ | ヨ", "romaji": "yo" }, { "character": "ら | ラ", "romaji": "ra" }, { "character": "り | リ", "romaji": "ri" }, { "character": "る | ル", "romaji": "ru" }, { "character": "れ | レ", "romaji": "re" }, { "character": "ろ | ロ", "romaji": "ro" }, { "character": "わ | ワ", "romaji": "wa" }, { "character": "を | ヲ", "romaji": "wo" }, { "character": "ん | ン", "romaji": "n" }]
+
         function renderFlashcards() {
             const accordionContainer = $('#accordionExample');
             accordionContainer.empty(); // Clear existing accordion content before rendering
@@ -1037,7 +1111,7 @@
                 if (mode == 1) {
                     flashcards.forEach((card, index) => {
                         cardsHtml += `
-                        <div class="kanji-card">
+                        <div class=${datasetType === 'kanji' ? `kanji-card` : 'kanji-card2' }>
                             <div class="kanji-card-header">
                                 ${card.character}
                             </div>
@@ -1062,6 +1136,19 @@
                                 <div class="qzm2-card-back">
                                     <div class="kanji-card-header">${card.character}</div>
                                 </div>
+                            </div>
+                        </div>
+                        `;
+                    });
+                } else if (mode == 3) {
+                    flashcards.forEach((card, index) => {
+                        cardsHtml += `
+                        <div class="card2">
+                            <div class="character">
+                                <span>${card.character}</span>
+                            </div>
+                            <div class="pronunciation">
+                                ${card.romaji}
                             </div>
                         </div>
                         `;
@@ -1113,12 +1200,15 @@
                 ...hiraganaFlashcards.Basic.slice(45, 50)
             ]
             // Render Katakana, Kanji, and Hiragana cards
+            accordionContainer.append(generateCards(combinedhiraganakatakana_dataset, 'Hiragana-Katagana', 'hiraganakatagana', 3));
+            
             accordionContainer.append(generateCards(orderedhiraganaCards, 'Hiragana', 'hiragana', 1));
             accordionContainer.append(generateCards(katakanaFlashcards, 'Katakana', 'katakana', 1));
             accordionContainer.append(generateCards(kanjiFlashcards, 'Kanji', 'kanji', 1));
 
-            accordionContainer.append(generateCards(shuffleArray(orderedhiraganaCards.filter(a => a.character != '-')), 'Hiragana-Quiz', 'hiragana', 2));
-            accordionContainer.append(generateCards(shuffleArray(katakanaFlashcards), 'Katagana-Quiz', 'katagana', 2));
+            accordionContainer.append(generateCards(shuffleArray(shuffleArray(orderedhiraganaCards.filter(a => a.character != '-'))), 'Hiragana-Quiz', 'hiragana', 2));
+            accordionContainer.append(generateCards(shuffleArray(shuffleArray(katakanaFlashcards)), 'Katagana-Quiz', 'katagana', 2));
+
 
             $('.qzm2-card').on('click', function () {
                 $(this).toggleClass('flipped');
