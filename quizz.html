@@ -146,6 +146,17 @@
             box-sizing: border-box;
             /* Prevent overflow */
         }
+        .numbers-flashcard-container{
+            display: grid;
+            grid-template-columns: repeat(3, minmax(115px, 1fr));
+            /* Automatically adjust columns */
+            gap: 20px;
+            margin-top: 20px;
+            padding: 0 10px;
+            width: 100%;
+            /* Ensure full width utilization */
+            box-sizing: border-box;
+        }
 
         .kanji-card {
             width: 100%;
@@ -253,7 +264,7 @@
 
         /* Responsive layout for small screens */
         @media (max-width: 768px) {
-            .kanji-flashcard-container {
+            .kanji-flashcard-container,.numbers-flashcard-container {
                 grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
                 /* For smaller screens */
             }
@@ -270,7 +281,7 @@
         }
 
         @media (max-width: 480px) {
-            .kanji-flashcard-container {
+            .kanji-flashcard-container,.numbers-flashcard-container {
                 grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
                 /* For very small screens */
             }
@@ -510,6 +521,9 @@
         }
         .carousel-inner, .carousel-item{
             border-radius: 10px;
+        }
+        .numbers-flashcard-container .kanji-card2 .kanji-card-header{
+            font-size: 35px;
         }
     </style>
 </head>
@@ -1126,7 +1140,7 @@
                             aria-labelledby="heading${title}"
                             data-bs-parent="#accordionExample">
                             <div class="accordion-body">
-                                <div class="kanji-flashcard-container">
+                                <div class=${datasetType === 'hiragananumbers' ? `numbers-flashcard-container` : 'kanji-flashcard-container'}>
                     `;
                 if (mode == 1) {
                     flashcards.forEach((card, index) => {
