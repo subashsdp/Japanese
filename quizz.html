@@ -146,16 +146,14 @@
             box-sizing: border-box;
             /* Prevent overflow */
         }
-
-        .threerow-flashcard-container {
+        .Greetings,.ClassroomInstructions,.QuestionTypes,.PluralTypes,.DaysOfTheWeek,.Days
+        ,.Year,.Month,.Week,.Numbers-Basic,.MultiplesOf10,.Time,.Minutes,.Months,.Days_of_the_Month,.Colors,.Position,.Directions
+        ,.Seasons,.Weather,.Family,.Other_Family,.Body_Parts,.Daily_Phrases,.One-Lac,.Ten-Thousands,.Thousands,.Tens,.Hundreds {
             display: grid;
-            grid-template-columns: repeat(3, minmax(115px, 1fr));
-            /* Automatically adjust columns */
             gap: 20px;
             margin-top: 20px;
             padding: 0 10px;
             width: 100%;
-            /* Ensure full width utilization */
             box-sizing: border-box;
         }
 
@@ -186,7 +184,7 @@
 
         .kanji-card2 {
             width: 100%;
-            height: 115px;
+            /* height: 115px; */
             background-color: #ffffff;
             border: 2px solid #0d6efd;
             border-radius: 10px;
@@ -266,8 +264,7 @@
         /* Responsive layout for small screens */
         @media (max-width: 768px) {
 
-            .kanji-flashcard-container,
-            .threerow-flashcard-container {
+            .kanji-flashcard-container {
                 grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
                 /* For smaller screens */
             }
@@ -285,8 +282,7 @@
 
         @media (max-width: 480px) {
 
-            .kanji-flashcard-container,
-            .threerow-flashcard-container {
+            .kanji-flashcard-container{
                 grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
                 /* For very small screens */
             }
@@ -531,9 +527,6 @@
             border-radius: 10px;
         }
 
-        .threerow-flashcard-container .kanji-card2 .kanji-card-header {
-            font-size: 25px;
-        }
     </style>
 </head>
 
@@ -1111,229 +1104,7 @@
 
         const combinedhiraganakatakana_dataset = [{ "character": "あ | ア", "romaji": "a" }, { "character": "い | イ", "romaji": "i" }, { "character": "う | ウ", "romaji": "u" }, { "character": "え | エ", "romaji": "e" }, { "character": "お | オ", "romaji": "o" }, { "character": "か | カ", "romaji": "ka | ga", "others": [{ "character": "か | カ", "romaji": "ka" }, { "character": "が | ガ", "romaji": "ga" }] }, { "character": "き | キ", "romaji": "ki | gi", "others": [{ "character": "き | キ", "romaji": "ki" }, { "character": "ぎ | ギ", "romaji": "gi" }] }, { "character": "く | ク", "romaji": "ku | gu", "others": [{ "character": "く | ク", "romaji": "ku" }, { "character": "ぐ | グ", "romaji": "gu" }] }, { "character": "け | ケ", "romaji": "ke | ge", "others": [{ "character": "け | ケ", "romaji": "ke" }, { "character": "げ | ゲ", "romaji": "ge" }] }, { "character": "こ | コ", "romaji": "ko | go", "others": [{ "character": "こ | コ", "romaji": "ko" }, { "character": "ご | ゴ", "romaji": "go" }] }, { "character": "さ | サ", "romaji": "sa | za", "others": [{ "character": "さ | サ", "romaji": "sa" }, { "character": "ざ | ザ", "romaji": "za" }] }, { "character": "し | シ", "romaji": "shi | ji", "others": [{ "character": "し | シ", "romaji": "shi" }, { "character": "じ | ジ", "romaji": "ji" }] }, { "character": "す | ス", "romaji": "su | zu", "others": [{ "character": "す | ス", "romaji": "su" }, { "character": "ず | ズ", "romaji": "zu" }] }, { "character": "せ | セ", "romaji": "se | ze", "others": [{ "character": "せ | セ", "romaji": "se" }, { "character": "ぜ | ゼ", "romaji": "ze" }] }, { "character": "そ | ソ", "romaji": "so | zo", "others": [{ "character": "そ | ソ", "romaji": "so" }, { "character": "ぞ | ゾ", "romaji": "zo" }] }, { "character": "た | タ", "romaji": "ta | da", "others": [{ "character": "た | タ", "romaji": "ta" }, { "character": "だ | ダ", "romaji": "da" }] }, { "character": "ち | チ", "romaji": "chi | ji", "others": [{ "character": "ち | チ", "romaji": "chi" }, { "character": "ぢ | ヂ", "romaji": "ji" }] }, { "character": "つ | ツ", "romaji": "tsu | zu", "others": [{ "character": "つ | ツ", "romaji": "tsu" }, { "character": "づ | ヅ", "romaji": "zu" }] }, { "character": "て | テ", "romaji": "te | de", "others": [{ "character": "て | テ", "romaji": "te" }, { "character": "で | デ", "romaji": "de" }] }, { "character": "と | ト", "romaji": "to | do", "others": [{ "character": "と | ト", "romaji": "to" }, { "character": "ど | ド", "romaji": "do" }] }, { "character": "な | ナ", "romaji": "na" }, { "character": "に | ニ", "romaji": "ni" }, { "character": "ぬ | ヌ", "romaji": "nu" }, { "character": "ね | ネ", "romaji": "ne" }, { "character": "の | ノ", "romaji": "no" }, { "character": "は | ハ", "romaji": "ha | ba | pa", "others": [{ "character": "は | ハ", "romaji": "ha" }, { "character": "ば | バ", "romaji": "ba" }, { "character": "ぱ | パ", "romaji": "pa" }] }, { "character": "ひ | ヒ", "romaji": "hi | bi | pi", "others": [{ "character": "ひ | ヒ", "romaji": "hi" }, { "character": "び | ビ", "romaji": "bi" }, { "character": "ぴ | ピ", "romaji": "pi" }] }, { "character": "ふ | フ", "romaji": "fu | bu | pu", "others": [{ "character": "ふ | フ", "romaji": "fu" }, { "character": "ぶ | ブ", "romaji": "bu" }, { "character": "ぷ | プ", "romaji": "pu" }] }, { "character": "へ", "romaji": "he |be | pe", "others": [{ "character": "へ", "romaji": "he" }, { "character": "べ", "romaji": "be" }, { "character": "ぺ", "romaji": "pe" }] }, { "character": "ほ | ホ", "romaji": "ho | bo | po", "others": [{ "character": "ほ | ホ", "romaji": "ho" }, { "character": "ぼ | ボ", "romaji": "bo" }, { "character": "ぽ | ポ", "romaji": "po" }] }, { "character": "ま | マ", "romaji": "ma" }, { "character": "み | ミ", "romaji": "mi" }, { "character": "む | ム", "romaji": "mu" }, { "character": "め | メ", "romaji": "me" }, { "character": "も | モ", "romaji": "mo" }, { "character": "や | ヤ", "romaji": "ya" }, { "character": "-", "romaji": "-" }, { "character": "ゆ | ユ", "romaji": "yu" }, { "character": "-", "romaji": "-" }, { "character": "よ | ヨ", "romaji": "yo" }, { "character": "ら | ラ", "romaji": "ra" }, { "character": "り | リ", "romaji": "ri" }, { "character": "る | ル", "romaji": "ru" }, { "character": "れ | レ", "romaji": "re" }, { "character": "ろ | ロ", "romaji": "ro" }, { "character": "わ | ワ", "romaji": "wa" }, { "character": "-", "romaji": "-" }, { "character": "を | ヲ", "romaji": "wo" }, { "character": "-", "romaji": "-" }, { "character": "ん | ン", "romaji": "n" }]
 
-        const h_numbers = [
-            { "character": "いち", "romaji": "ichi | 1" },
-            { "character": "に", "romaji": "ni | 2" },
-            { "character": "さん", "romaji": "san | 3" },
-            { "character": "し / よん", "romaji": "shi / yon | 4" },
-            { "character": "ご", "romaji": "go | 5" },
-            { "character": "ろく", "romaji": "roku | 6" },
-            { "character": "しち / なな", "romaji": "shichi / nana | 7" },
-            { "character": "はち", "romaji": "hachi | 8" },
-            { "character": "きゅう / く", "romaji": "kyuu / ku | 9" },
-            { "character": "じゅう", "romaji": "juu | 10" },
-            { "character": "じゅういち", "romaji": "juuichi | 11" },
-            { "character": "じゅうに", "romaji": "juuni | 12" },
-            { "character": "じゅうさん", "romaji": "juusan | 13" },
-            { "character": "じゅうし / じゅうよん", "romaji": "juushi / juuyon | 14" },
-            { "character": "じゅうご", "romaji": "juugo | 15" },
-            { "character": "じゅうろく", "romaji": "juuroku | 16" },
-            { "character": "じゅうしち / じゅうなな", "romaji": "juushichi / juunana | 17" },
-            { "character": "じゅうはち", "romaji": "juuhachi | 18" },
-            { "character": "じゅうきゅう / じゅうく", "romaji": "juukyuu / juuku | 19" },
-            { "character": "にじゅう", "romaji": "nijuu | 20" },
-            { "character": "さんじゅう", "romaji": "sanjuu | 30" },
-            { "character": "よんじゅう", "romaji": "yonjuu | 40" },
-            { "character": "ごじゅう", "romaji": "gojuu | 50" },
-            { "character": "ろくじゅう", "romaji": "rokujuu | 60" },
-            { "character": "ななじゅう", "romaji": "nanajuu | 70" },
-            { "character": "はちじゅう", "romaji": "hachijuu | 80" },
-            { "character": "きゅうじゅう", "romaji": "kyuujuu | 90" },
-            { "character": "ひゃく", "romaji": "hyaku | 100" },
-            { "character": "せん", "romaji": "sen | 1000" },
-            { "character": "いちまん", "romaji": "ichiman | 10000" },
-            { "character": "にまん", "romaji": "niman | 20000" }
-        ]
-
-
-        const h_week_dataset = [
-            { "character": "げつようび", "romaji": "getsuyoubi | Monday" },
-            { "character": "かようび", "romaji": "kayoubi | Tuesday" },
-            { "character": "すいようび", "romaji": "suiyoubi | Wednesday" },
-            { "character": "もくようび", "romaji": "mokuyoubi | Thursday" },
-            { "character": "きんようび", "romaji": "kinyoubi | Friday" },
-            { "character": "どようび", "romaji": "doyoubi | Saturday" },
-            { "character": "にちようび", "romaji": "nichiyoubi | Sunday" }
-        ]
-
-
-        const h_month_dataset = [
-            { "character": "いちがつ", "romaji": "ichigatsu | 1" },
-            { "character": "にがつ", "romaji": "nigatsu | 2" },
-            { "character": "さんがつ", "romaji": "sangatsu | 3" },
-            { "character": "しがつ", "romaji": "shigatsu | 4" },
-            { "character": "ごがつ", "romaji": "gogatsu | 5" },
-            { "character": "ろくがつ", "romaji": "rokugatsu | 6" },
-            { "character": "しちがつ", "romaji": "shichigatsu | 7" },
-            { "character": "はちがつ", "romaji": "hachigatsu | 8" },
-            { "character": "くがつ", "romaji": "kugatsu | 9" },
-            { "character": "じゅうがつ", "romaji": "juugatsu | 10" },
-            { "character": "じゅういちがつ", "romaji": "juuichigatsu | 11" },
-            { "character": "じゅうにがつ", "romaji": "juunigatsu | 12" }
-        ]
-
-
-        const h_hour_dataset = [
-            { "character": "いちじ", "romaji": "ichiji | 1" },
-            { "character": "にじ", "romaji": "niji | 2" },
-            { "character": "さんじ", "romaji": "sanji | 3" },
-            { "character": "よじ", "romaji": "yoji | 4" },
-            { "character": "ごじ", "romaji": "goji | 5" },
-            { "character": "ろくじ", "romaji": "rokuji | 6" },
-            { "character": "しちじ", "romaji": "shichiji | 7" },
-            { "character": "はちじ", "romaji": "hachiji | 8" },
-            { "character": "くじ", "romaji": "kuji | 9" },
-            { "character": "じゅうじ", "romaji": "juuji | 10" },
-            { "character": "じゅういちじ", "romaji": "juuichiji | 11" },
-            { "character": "じゅうにじ", "romaji": "juuniji | 12" }
-        ]
-
-        const h_minute_dataset = [
-            { "character": "いっぷん", "romaji": "ippun | 1" },
-            { "character": "にふん", "romaji": "nifun | 2" },
-            { "character": "さんぷん", "romaji": "sanpun | 3" },
-            { "character": "よんぷん", "romaji": "yonpun | 4" },
-            { "character": "ごふん", "romaji": "gofun | 5" },
-            { "character": "ろっぷん", "romaji": "roppun | 6" },
-            { "character": "ななふん", "romaji": "nanafun | 7" },
-            { "character": "はっぷん", "romaji": "happun | 8" },
-            { "character": "きゅうふん", "romaji": "kyuufun | 9" },
-            { "character": "じゅっぷん", "romaji": "juppun | 10" },
-            { "character": "じゅういっぷん", "romaji": "juuippun | 11" },
-            { "character": "じゅうにふん", "romaji": "juunifun | 12" },
-            { "character": "じゅうさんぷん", "romaji": "juusanpun | 13" },
-            { "character": "じゅうよんぷん", "romaji": "juuyonpun | 14" },
-            { "character": "じゅうごふん", "romaji": "juugofun | 15" },
-            { "character": "じゅうろっぷん", "romaji": "juuroppun | 16" },
-            { "character": "じゅうななふん", "romaji": "juunanafun | 17" },
-            { "character": "じゅうはっぷん", "romaji": "juuhappun | 18" },
-            { "character": "じゅうきゅうふん", "romaji": "juukyuufun | 19" },
-            { "character": "にじゅっぷん", "romaji": "nijuppun | 20" },
-            { "character": "さんじゅっぷん", "romaji": "sanjuppun | 30" },
-            { "character": "よんじゅっぷん", "romaji": "yonjuppun | 40" },
-            { "character": "ごじゅっぷん", "romaji": "gojuppun | 50" },
-            { "character": "ろくじゅっぷん", "romaji": "rokujuppun | 60" }
-        ]
-
-        const h_time_related_dataset = [
-            { "character": "ごぜん", "romaji": "gozen | AM" },
-            { "character": "ごご", "romaji": "gogo | PM" },
-            { "character": "はん", "romaji": "han | half past" }
-        ]
-        const k_numbers = [
-            { "character": "イチ", "romaji": "ichi | 1" },
-            { "character": "ニ", "romaji": "ni | 2" },
-            { "character": "サン", "romaji": "san | 3" },
-            { "character": "シ / ヨン", "romaji": "shi / yon | 4" },
-            { "character": "ゴ", "romaji": "go | 5" },
-            { "character": "ロク", "romaji": "roku | 6" },
-            { "character": "シチ / ナナ", "romaji": "shichi / nana | 7" },
-            { "character": "ハチ", "romaji": "hachi | 8" },
-            { "character": "キュウ / ク", "romaji": "kyuu / ku | 9" },
-            { "character": "ジュウ", "romaji": "juu | 10" },
-            { "character": "ジュウイチ", "romaji": "juuichi | 11" },
-            { "character": "ジュウニ", "romaji": "juuni | 12" },
-            { "character": "ジュウサン", "romaji": "juusan | 13" },
-            { "character": "ジュウシ / ジュウヨン", "romaji": "juushi / juuyon | 14" },
-            { "character": "ジュウゴ", "romaji": "juugo | 15" },
-            { "character": "ジュウロク", "romaji": "juuroku | 16" },
-            { "character": "ジュウシチ / ジュウナナ", "romaji": "juushichi / juunana | 17" },
-            { "character": "ジュウハチ", "romaji": "juuhachi | 18" },
-            { "character": "ジュウキュウ / ジュウク", "romaji": "juukyuu / juuku | 19" },
-            { "character": "ニジュウ", "romaji": "nijuu | 20" },
-            { "character": "サンジュウ", "romaji": "sanjuu | 30" },
-            { "character": "ヨンジュウ", "romaji": "yonjuu | 40" },
-            { "character": "ゴジュウ", "romaji": "gojuu | 50" },
-            { "character": "ロクジュウ", "romaji": "rokujuu | 60" },
-            { "character": "ナナジュウ", "romaji": "nanajuu | 70" },
-            { "character": "ハチジュウ", "romaji": "hachijuu | 80" },
-            { "character": "キュウジュウ", "romaji": "kyuujuu | 90" },
-            { "character": "ヒャク", "romaji": "hyaku | 100" },
-            { "character": "セン", "romaji": "sen | 1000" },
-            { "character": "イチマン", "romaji": "ichiman | 10000" },
-            { "character": "ニマン", "romaji": "niman | 20000" }
-        ]
-
-
-
-        const k_week_dataset = [
-            { "character": "ゲツヨウビ", "romaji": "getsuyoubi | Monday" },
-            { "character": "カヨウビ", "romaji": "kayoubi | Tuesday" },
-            { "character": "スイヨウビ", "romaji": "suiyoubi | Wednesday" },
-            { "character": "モクヨウビ", "romaji": "mokuyoubi | Thursday" },
-            { "character": "キンヨウビ", "romaji": "kinyoubi | Friday" },
-            { "character": "ドヨウビ", "romaji": "doyoubi | Saturday" },
-            { "character": "ニチヨウビ", "romaji": "nichiyoubi | Sunday" }
-        ]
-
-
-
-        const k_month_dataset = [
-            { "character": "イチガツ", "romaji": "ichigatsu | 1" },
-            { "character": "ニガツ", "romaji": "nigatsu | 2" },
-            { "character": "サンガツ", "romaji": "sangatsu | 3" },
-            { "character": "シガツ", "romaji": "shigatsu | 4" },
-            { "character": "ゴガツ", "romaji": "gogatsu | 5" },
-            { "character": "ロクガツ", "romaji": "rokugatsu | 6" },
-            { "character": "シチガツ", "romaji": "shichigatsu | 7" },
-            { "character": "ハチガツ", "romaji": "hachigatsu | 8" },
-            { "character": "クガツ", "romaji": "kugatsu | 9" },
-            { "character": "ジュウガツ", "romaji": "juugatsu | 10" },
-            { "character": "ジュウイチガツ", "romaji": "juuichigatsu | 11" },
-            { "character": "ジュウニガツ", "romaji": "juunigatsu | 12" }
-        ]
-
-
-
-        const k_hour_dataset = [
-            { "character": "イチジ", "romaji": "ichiji | 1 o'clock" },
-            { "character": "ニジ", "romaji": "niji | 2 o'clock" },
-            { "character": "サンジ", "romaji": "sanji | 3 o'clock" },
-            { "character": "ヨジ", "romaji": "yoji | 4 o'clock" },
-            { "character": "ゴジ", "romaji": "goji | 5 o'clock" },
-            { "character": "ロクジ", "romaji": "rokuji | 6 o'clock" },
-            { "character": "シチジ", "romaji": "shichiji | 7 o'clock" },
-            { "character": "ハチジ", "romaji": "hachiji | 8 o'clock" },
-            { "character": "クジ", "romaji": "kuji | 9 o'clock" },
-            { "character": "ジュウジ", "romaji": "juuji | 10 o'clock" },
-            { "character": "ジュウイチジ", "romaji": "juuichiji | 11 o'clock" },
-            { "character": "ジュウニジ", "romaji": "juuniji | 12 o'clock" }
-        ]
-
-
-        const k_minute_dataset = [
-            { "character": "イップン", "romaji": "ippun | 1 minute" },
-            { "character": "ニフン", "romaji": "nifun | 2 minutes" },
-            { "character": "サンプン", "romaji": "sanpun | 3 minutes" },
-            { "character": "ヨンプン", "romaji": "yonpun | 4 minutes" },
-            { "character": "ゴフン", "romaji": "gofun | 5 minutes" },
-            { "character": "ロップン", "romaji": "roppun | 6 minutes" },
-            { "character": "ナナフン", "romaji": "nanafun | 7 minutes" },
-            { "character": "ハップン", "romaji": "happun | 8 minutes" },
-            { "character": "キュウフン", "romaji": "kyuufun | 9 minutes" },
-            { "character": "ジュップン", "romaji": "juppun | 10 minutes" },
-            { "character": "ジュウイップン", "romaji": "juuippun | 11 minutes" },
-            { "character": "ジュウニフン", "romaji": "juunifun | 12 minutes" },
-            { "character": "ジュウサンプン", "romaji": "juusanpun | 13 minutes" },
-            { "character": "ジュウヨンプン", "romaji": "juuyonpun | 14 minutes" },
-            { "character": "ジュウゴフン", "romaji": "juugofun | 15 minutes" },
-            { "character": "ジュウロップン", "romaji": "juuroppun | 16 minutes" },
-            { "character": "ジュウナナフン", "romaji": "juunanafun | 17 minutes" },
-            { "character": "ジュウハップン", "romaji": "juuhappun | 18 minutes" },
-            { "character": "ジュウキュウフン", "romaji": "juukyuufun | 19 minutes" },
-            { "character": "ニジュップン", "romaji": "nijuppun | 20 minutes" },
-            { "character": "サンジュップン", "romaji": "sanjuppun | 30 minutes" }
-        ]
-
-
-        const k_time_related_dataset = [
-            { "character": "ゴゼン", "romaji": "gozen | AM" },
-            { "character": "ゴゴ", "romaji": "gogo | PM" },
-            { "character": "ハン", "romaji": "han | half past" }
-        ]
-
-
-
+        const japanese_dataset = [{ "Greetings": [{ "Japanese": "おはよう ございます", "Romaji": "ohayou gozaimasu", "English": "Good morning" }, { "Japanese": "こんにちは", "Romaji": "konnichiwa", "English": "Good afternoon / Hello / Hi" }, { "Japanese": "おやすみなさい", "Romaji": "oyasuminasai", "English": "Good Night" }, { "Japanese": "すみません", "Romaji": "sumimasen", "English": "Sorry / Excuse me / Thank you" }, { "Japanese": "ごめんなさい", "Romaji": "gomennasai", "English": "Sorry" }, { "Japanese": "みなさん", "Romaji": "minasan", "English": "Everyone" }, { "Japanese": "ありがとう ございます", "Romaji": "arigatou gozaimasu", "English": "Thank you" }, { "Japanese": "どういたしまして", "Romaji": "douitashimashite", "English": "You are welcome" }, { "Japanese": "じゃまた", "Romaji": "ja mata", "English": "See you again" }, { "Japanese": "さようなら", "Romaji": "sayounara", "English": "Goodbye" }, { "Japanese": "こんばんは", "Romaji": "konbanwa", "English": "Good evening" }, { "Japanese": "おねがいします", "Romaji": "onegaishimasu", "English": "Please (while asking a favor)" }, { "Japanese": "どうぞ", "Romaji": "douzo", "English": "Please (while offering something)" }, { "Japanese": "ください", "Romaji": "kudasai", "English": "Please" }, { "Japanese": "おめでとうございます", "Romaji": "omedetou gozaimasu", "English": "Congratulations" }, { "Japanese": "だいじょうぶです", "Romaji": "daijoubu desu", "English": "It’s ok / Alright" }, { "Japanese": "たんじょうび", "Romaji": "tanjoubi", "English": "Birthday" }], "ClassroomInstructions": [{ "Japanese": "はじめます", "Romaji": "hajimemasu", "English": "To start" }, { "Japanese": "わかります", "Romaji": "wakarimasu", "English": "To understand" }, { "Japanese": "やすみます", "Romaji": "yasumimasu", "English": "To take a break/rest" }, { "Japanese": "おわります", "Romaji": "owarimasu", "English": "To finish" }], "QuestionTypes": [{ "Japanese": "はじめましょうか", "Romaji": "hajimemashou ka", "English": "Shall we start?" }, { "Japanese": "やすみましょうか", "Romaji": "yasumimashou ka", "English": "Shall we take a break?" }, { "Japanese": "おわりましょうか", "Romaji": "owarimashou ka", "English": "Shall we finish?" }, { "Japanese": "わかりますか", "Romaji": "wakarimasu ka", "English": "Do you understand?" }], "PluralTypes": [{ "Japanese": "はじめましょう", "Romaji": "hajimemashou", "English": "Let’s start" }, { "Japanese": "やすみましょう", "Romaji": "yasumimashou", "English": "Let’s take a break" }, { "Japanese": "おわりましょう", "Romaji": "owarimashou", "English": "Let’s finish" }], "DaysOfTheWeek": [{ "Japanese": "にちようび", "Romaji": "nichiyoubi", "English": "Sunday (Sun)" }, { "Japanese": "げつようび", "Romaji": "getsuyoubi", "English": "Monday (Moon)" }, { "Japanese": "かようび", "Romaji": "kayoubi", "English": "Tuesday (Fire)" }, { "Japanese": "すいようび", "Romaji": "suiyoubi", "English": "Wednesday (Water)" }, { "Japanese": "もくようび", "Romaji": "mokuyoubi", "English": "Thursday (Tree/Wood)" }, { "Japanese": "きんようび", "Romaji": "kinyoubi", "English": "Friday (Gold)" }, { "Japanese": "どようび", "Romaji": "doyoubi", "English": "Saturday (Soil/Earth)" }, { "Japanese": "なんようび ですか", "Romaji": "nanyoubi desu ka", "English": "What day?" }, { "Japanese": "きょうは なんようび ですか？", "Romaji": "kyou wa nanyoubi desu ka?", "English": "What is the day today?" }], "Days": [{ "Japanese": "おととい", "Romaji": "ototoi", "English": "Day before yesterday" }, { "Japanese": "きのう/さくじつ", "Romaji": "kinou/sakujitsu", "English": "Yesterday" }, { "Japanese": "きょう/ほんじつ", "Romaji": "kyou/honjitsu", "English": "Today" }, { "Japanese": "あした/あす/よくじつ", "Romaji": "ashita/asu/yokujitsu", "English": "Tomorrow" }, { "Japanese": "あさって", "Romaji": "asatte", "English": "Day after tomorrow" }], "Year": [{ "Japanese": "おととし", "Romaji": "ototoshi", "English": "Year before last" }, { "Japanese": "きょねん", "Romaji": "kyonen", "English": "Last year" }, { "Japanese": "ことし", "Romaji": "kotoshi", "English": "This year" }, { "Japanese": "らいねん", "Romaji": "rainen", "English": "Next year" }, { "Japanese": "さらいねん", "Romaji": "sarainen", "English": "Year after next" }], "Month": [{ "Japanese": "せんせんげつ", "Romaji": "sensengestu", "English": "Month before last" }, { "Japanese": "せんげつ", "Romaji": "sengetsu", "English": "Last month" }, { "Japanese": "こんげつ", "Romaji": "kongetsu", "English": "This month" }, { "Japanese": "らいげつ", "Romaji": "raigetsu", "English": "Next month" }, { "Japanese": "さらいげつ", "Romaji": "saraigetsu", "English": "Month after next" }], "Week": [{ "Japanese": "せんせんしゅう", "Romaji": "sensenshuu", "English": "Week before last" }, { "Japanese": "せんしゅう", "Romaji": "senshuu", "English": "Last week" }, { "Japanese": "こんしゅう", "Romaji": "konshuu", "English": "This week" }, { "Japanese": "らいしゅう", "Romaji": "raishuu", "English": "Next week" }, { "Japanese": "さらいしゅう", "Romaji": "saraishuu", "English": "Week after next" }], "Numbers-Basic": [{ "Japanese": "いち", "Romaji": "ichi", "English": "1" }, { "Japanese": "に", "Romaji": "ni", "English": "2" }, { "Japanese": "さん", "Romaji": "san", "English": "3" }, { "Japanese": "よん/よ/し", "Romaji": "yon/yo/shi", "English": "4" }, { "Japanese": "ご", "Romaji": "go", "English": "5" }, { "Japanese": "ろく", "Romaji": "roku", "English": "6" }, { "Japanese": "なな/しち", "Romaji": "nana/shichi", "English": "7" }, { "Japanese": "はち", "Romaji": "hachi", "English": "8" }, { "Japanese": "きゅう/く", "Romaji": "kyuu/ku", "English": "9" }, { "Japanese": "じゅう", "Romaji": "juu", "English": "10" }], "Tens": [{ "Japanese": "じゅういち", "Romaji": "juuichi", "English": "11" }, { "Japanese": "じゅうに", "Romaji": "juuni", "English": "12" }, { "Japanese": "じゅうさん", "Romaji": "juusan", "English": "13" }, { "Japanese": "じゅうよん", "Romaji": "juuyon", "English": "14" }, { "Japanese": "じゅうご", "Romaji": "juugo", "English": "15" }, { "Japanese": "じゅうろく", "Romaji": "juuroku", "English": "16" }, { "Japanese": "じゅうなな", "Romaji": "juunana", "English": "17" }, { "Japanese": "じゅうはち", "Romaji": "juuhachi", "English": "18" }, { "Japanese": "じゅうきゅう", "Romaji": "juukyuu", "English": "19" }], "MultiplesOf10": [{ "Japanese": "にじゅう", "Romaji": "nijuu", "English": "20" }, { "Japanese": "にじゅういち", "Romaji": "nijuuichi", "English": "21" }], "Hundreds": [{ "Japanese": "ひゃく", "Romaji": "hyaku", "English": "100" }, { "Japanese": "にひゃく", "Romaji": "nihyaku", "English": "200" }, { "Japanese": "さんびゃく", "Romaji": "sanbyaku", "English": "300" }, { "Japanese": "よんひゃく", "Romaji": "yonhyaku", "English": "400" }, { "Japanese": "ごひゃく", "Romaji": "gohyaku", "English": "500" }, { "Japanese": "ろっぴゃく", "Romaji": "roppyaku", "English": "600" }, { "Japanese": "ななひゃく", "Romaji": "nanahyaku", "English": "700" }, { "Japanese": "はっぴゃく", "Romaji": "happyaku", "English": "800" }, { "Japanese": "きゅうひゃく", "Romaji": "kyuuhyaku", "English": "900" }], "Thousands": [{ "Japanese": "せん/いっせん", "Romaji": "sen/issen", "English": "1000" }, { "Japanese": "にせん", "Romaji": "nisen", "English": "2000" }, { "Japanese": "さんぜん", "Romaji": "sanzen", "English": "3000" }, { "Japanese": "よんせん", "Romaji": "yonsen", "English": "4000" }, { "Japanese": "ごせん", "Romaji": "gosen", "English": "5000" }, { "Japanese": "ろくせん", "Romaji": "rokusen", "English": "6000" }, { "Japanese": "ななせん", "Romaji": "nanasen", "English": "7000" }, { "Japanese": "はっせん", "Romaji": "hassen", "English": "8000" }, { "Japanese": "きゅうせん", "Romaji": "kyuusen", "English": "9000" }], "Ten-Thousands": [{ "Japanese": "いちまん", "Romaji": "ichiman", "English": "10,000" }, { "Japanese": "にまん", "Romaji": "niman", "English": "20,000" }, { "Japanese": "さんまん", "Romaji": "sanman", "English": "30,000" }, { "Japanese": "よんまん", "Romaji": "yonman", "English": "40,000" }, { "Japanese": "ごまん", "Romaji": "goman", "English": "50,000" }, { "Japanese": "ろくまん", "Romaji": "rokuman", "English": "60,000" }, { "Japanese": "ななまん", "Romaji": "nanaman", "English": "70,000" }, { "Japanese": "はちまん", "Romaji": "hachiman", "English": "80,000" }, { "Japanese": "きゅうまん", "Romaji": "kyuuman", "English": "90,000" }, { "Japanese": "じゅうまん", "Romaji": "juuman", "English": "One-Lac" }], "Time": [{ "Japanese": "ごぜん", "Romaji": "gozen", "English": "a.m." }, { "Japanese": "ごご", "Romaji": "gogo", "English": "p.m." }, { "Japanese": "いちじ", "Romaji": "ichiji", "English": "1 o’clock" }, { "Japanese": "にじ", "Romaji": "niji", "English": "2 o’clock" }, { "Japanese": "さんじ", "Romaji": "sanji", "English": "3 o’clock" }, { "Japanese": "よじ", "Romaji": "yoji", "English": "4 o’clock" }, { "Japanese": "ごじ", "Romaji": "goji", "English": "5 o’clock" }, { "Japanese": "ろくじ", "Romaji": "rokuji", "English": "6 o’clock" }, { "Japanese": "しちじ", "Romaji": "shichiji", "English": "7 o’clock" }, { "Japanese": "はちじ", "Romaji": "hachiji", "English": "8 o’clock" }, { "Japanese": "くじ", "Romaji": "kuji", "English": "9 o’clock" }, { "Japanese": "じゅうじ", "Romaji": "juuji", "English": "10 o’clock" }, { "Japanese": "じゅういちじ", "Romaji": "juuichiji", "English": "11 o’clock" }, { "Japanese": "じゅうにじ", "Romaji": "juuniji", "English": "12 o’clock" }, { "Japanese": "いまなんじですか？", "Romaji": "ima nanji desu ka?", "English": "What is the time now?" }], "Minutes": [{ "Japanese": "いっぷん", "Romaji": "ippun", "English": "1 minute" }, { "Japanese": "にふん", "Romaji": "nifun", "English": "2 minutes" }, { "Japanese": "さんぷん", "Romaji": "sanpun", "English": "3 minutes" }, { "Japanese": "よんぷん", "Romaji": "yonpun", "English": "4 minutes" }, { "Japanese": "ごふん", "Romaji": "gofun", "English": "5 minutes" }, { "Japanese": "ろっぷん", "Romaji": "roppun", "English": "6 minutes" }, { "Japanese": "ななふん", "Romaji": "nanafun", "English": "7 minutes" }, { "Japanese": "はっぷん", "Romaji": "happun", "English": "8 minutes" }, { "Japanese": "きゅうふん", "Romaji": "kyuufun", "English": "9 minutes" }, { "Japanese": "じゅっぷん/じっぷん", "Romaji": "juppun/jippun", "English": "10 minutes" }, { "Japanese": "じゅういっぷん", "Romaji": "juuippun", "English": "11 minutes" }, { "Japanese": "じゅうにふん", "Romaji": "juunifun", "English": "12 minutes" }, { "Japanese": "じゅうさんぷん", "Romaji": "juusanpun", "English": "13 minutes" }, { "Japanese": "じゅうきゅうふん", "Romaji": "juukyuufun", "English": "19 minutes" }, { "Japanese": "にじゅっぷん", "Romaji": "nijuppun", "English": "20 minutes" }, { "Japanese": "さんじゅっぷん/はん", "Romaji": "sanjuppun/han", "English": "30 minutes/half past" }, { "Japanese": "よんじゅっぷん", "Romaji": "yonjuppun", "English": "40 minutes" }, { "Japanese": "ごじゅっぷん", "Romaji": "gojuppun", "English": "50 minutes" }, { "Japanese": "ごじゅうきゅうふん", "Romaji": "gojuukyuu fun", "English": "59 minutes" }, { "Japanese": "なんぷん", "Romaji": "nanpun", "English": "What minute?" }], "Months": [{ "Japanese": "しょうがつ", "Romaji": "shougatsu", "English": "New Year" }, { "Japanese": "いちがつ", "Romaji": "ichigatsu", "English": "1st Month (January)" }, { "Japanese": "にがつ", "Romaji": "nigatsu", "English": "2nd Month (February)" }, { "Japanese": "さんがつ", "Romaji": "sangatsu", "English": "3rd Month (March)" }, { "Japanese": "しがつ", "Romaji": "shigatsu", "English": "4th Month (April)" }, { "Japanese": "ごがつ", "Romaji": "gogatsu", "English": "5th Month (May)" }, { "Japanese": "ろくがつ", "Romaji": "rokugatsu", "English": "6th Month (June)" }, { "Japanese": "しちがつ", "Romaji": "shichigatsu", "English": "7th Month (July)" }, { "Japanese": "はちがつ", "Romaji": "hachigatsu", "English": "8th Month (August)" }, { "Japanese": "くがつ", "Romaji": "kugatsu", "English": "9th Month (September)" }, { "Japanese": "じゅうがつ", "Romaji": "juugatsu", "English": "10th Month (October)" }, { "Japanese": "じゅういちがつ", "Romaji": "juuichigatsu", "English": "11th Month (November)" }, { "Japanese": "じゅうにがつ", "Romaji": "juunigatsu", "English": "12th Month (December)" }, { "Japanese": "なんがつ", "Romaji": "nangatsu", "English": "What month?" }], "Days_of_the_Month": [{ "Japanese": "ついたち", "Romaji": "tsuitachi", "English": "1st" }, { "Japanese": "ふつか", "Romaji": "futsuka", "English": "2nd" }, { "Japanese": "みっか", "Romaji": "mikka", "English": "3rd" }, { "Japanese": "よっか", "Romaji": "yokka", "English": "4th" }, { "Japanese": "いつか", "Romaji": "itsuka", "English": "5th" }, { "Japanese": "むいか", "Romaji": "muika", "English": "6th" }, { "Japanese": "なのか", "Romaji": "nanoka", "English": "7th" }, { "Japanese": "ようか", "Romaji": "youka", "English": "8th" }, { "Japanese": "ここのか", "Romaji": "kokonoka", "English": "9th" }, { "Japanese": "とおか", "Romaji": "tooka", "English": "10th" }, { "Japanese": "じゅういちにち", "Romaji": "juuichinichi", "English": "11th" }, { "Japanese": "じゅうににち", "Romaji": "juuninichi", "English": "12th" }, { "Japanese": "じゅうさんにち", "Romaji": "juusannichi", "English": "13th" }, { "Japanese": "じゅうよっか", "Romaji": "juuyokka", "English": "14th" }, { "Japanese": "じゅうごにち", "Romaji": "juugonichi", "English": "15th" }, { "Japanese": "じゅうろくにち", "Romaji": "juurokunichi", "English": "16th" }, { "Japanese": "じゅうしちにち", "Romaji": "juushichinichi", "English": "17th" }, { "Japanese": "じゅうはちにち", "Romaji": "juuhachinichi", "English": "18th" }, { "Japanese": "じゅうくにち", "Romaji": "juukunichi", "English": "19th" }, { "Japanese": "はつか", "Romaji": "hatsuka", "English": "20th" }, { "Japanese": "にじゅういちにち", "Romaji": "nijuuichinichi", "English": "21st" }, { "Japanese": "にじゅうににち", "Romaji": "nijuuninichi", "English": "22nd" }, { "Japanese": "にじゅうさんにち", "Romaji": "nijuusannichi", "English": "23rd" }, { "Japanese": "にじゅうよっか", "Romaji": "nijuuyokka", "English": "24th" }, { "Japanese": "にじゅごにち", "Romaji": "nijuugonichi", "English": "25th" }, { "Japanese": "にじゅうろくにち", "Romaji": "nijuurokunichi", "English": "26th" }, { "Japanese": "にじゅうしちにち", "Romaji": "nijuushichinichi", "English": "27th" }, { "Japanese": "にじゅうはちにち", "Romaji": "nijuuhachinichi", "English": "28th" }, { "Japanese": "にじゅうきゅうにち", "Romaji": "nijuukyuunichi", "English": "29th" }, { "Japanese": "さんじゅうにち", "Romaji": "sanjuunichi", "English": "30th" }, { "Japanese": "さんじゅういちにち", "Romaji": "sanjuuichinichi", "English": "31st" }, { "Japanese": "なんにち", "Romaji": "nannichi", "English": "What day?" }], "Colors": [{ "Japanese": "あかい/あか", "Romaji": "akai/aka", "English": "Red" }, { "Japanese": "あおい/あお", "Romaji": "aoi/ao", "English": "Blue" }, { "Japanese": "しろい/しろ", "Romaji": "shiroi/shiro", "English": "White" }, { "Japanese": "くろい/くろ", "Romaji": "kuroi/kuro", "English": "Black" }, { "Japanese": "ちゃいろ", "Romaji": "chairo", "English": "Brown" }, { "Japanese": "みどり", "Romaji": "midori", "English": "Green" }, { "Japanese": "むらさき", "Romaji": "murasaki", "English": "Purple" }, { "Japanese": "きいろ", "Romaji": "kiiro", "English": "Yellow" }, { "Japanese": "きん", "Romaji": "kin", "English": "Gold" }, { "Japanese": "ぎん", "Romaji": "gin", "English": "Silver" }, { "Japanese": "はいいろ", "Romaji": "haiiro", "English": "Grey" }, { "Japanese": "こんいろ", "Romaji": "koniro", "English": "Navy Blue" }, { "Japanese": "ピンク", "Romaji": "pinku", "English": "Pink" }, { "Japanese": "オレンジ", "Romaji": "orenji", "English": "Orange" }], "Position": [{ "Japanese": "うえ", "Romaji": "ue", "English": "Up/Above" }, { "Japanese": "した", "Romaji": "shita", "English": "Down/Under" }, { "Japanese": "まえ", "Romaji": "mae", "English": "Front/Before" }, { "Japanese": "うしろ", "Romaji": "ushiro", "English": "Behind/Back" }, { "Japanese": "あいだ", "Romaji": "aida", "English": "Between" }, { "Japanese": "ちかい", "Romaji": "chikai", "English": "Near" }, { "Japanese": "とおい", "Romaji": "tooi", "English": "Far" }, { "Japanese": "なか", "Romaji": "naka", "English": "Inside" }, { "Japanese": "そと", "Romaji": "soto", "English": "Outside" }, { "Japanese": "みぎ", "Romaji": "migi", "English": "Right" }, { "Japanese": "ひだり", "Romaji": "hidari", "English": "Left" }], "Directions": [{ "Japanese": "きた", "Romaji": "kita", "English": "North" }, { "Japanese": "みなみ", "Romaji": "minami", "English": "South" }, { "Japanese": "ひがし", "Romaji": "higashi", "English": "East" }, { "Japanese": "にし", "Romaji": "nishi", "English": "West" }], "Seasons": [{ "Japanese": "なつ", "Romaji": "natsu", "English": "Summer" }, { "Japanese": "あき", "Romaji": "aki", "English": "Autumn" }, { "Japanese": "ふゆ", "Romaji": "fuyu", "English": "Winter" }, { "Japanese": "はる", "Romaji": "haru", "English": "Spring" }], "Weather": [{ "Japanese": "あめ", "Romaji": "ame", "English": "Rain" }, { "Japanese": "ゆき", "Romaji": "yuki", "English": "Snow" }, { "Japanese": "くもり", "Romaji": "kumori", "English": "Cloudy" }, { "Japanese": "はれ", "Romaji": "hare", "English": "Clear" }], "Family": [{ "Japanese": "そふ", "Romaji": "sofu", "English": "Grandfather" }, { "Japanese": "そぼ", "Romaji": "sobo", "English": "Grandmother" }, { "Japanese": "ちち", "Romaji": "chichi", "English": "Father" }, { "Japanese": "はは", "Romaji": "haha", "English": "Mother" }, { "Japanese": "あに", "Romaji": "ani", "English": "Elder brother" }, { "Japanese": "あね", "Romaji": "ane", "English": "Elder sister" }, { "Japanese": "おとうと", "Romaji": "otouto", "English": "Younger brother" }, { "Japanese": "いもうと", "Romaji": "imouto", "English": "Younger sister" }, { "Japanese": "おじ", "Romaji": "oji", "English": "Uncle" }, { "Japanese": "おば", "Romaji": "oba", "English": "Aunt" }, { "Japanese": "むすこ", "Romaji": "musuko", "English": "Son" }, { "Japanese": "むすめ", "Romaji": "musume", "English": "Daughter" }, { "Japanese": "おっと/しゅじん", "Romaji": "otto/shujin", "English": "Husband" }, { "Japanese": "つま/かない", "Romaji": "tsuma/kanai", "English": "Wife" }, { "Japanese": "りょうしん", "Romaji": "ryoushin", "English": "Parents" }, { "Japanese": "こども", "Romaji": "kodomo", "English": "Children" }, { "Japanese": "ともだち", "Romaji": "tomodachi", "English": "Friend" }, { "Japanese": "しんせき", "Romaji": "shinseki", "English": "Relative" }, { "Japanese": "まご", "Romaji": "mago", "English": "Grandchild" }, { "Japanese": "あかちゃん", "Romaji": "akachan", "English": "Baby" }, { "Japanese": "きょうだい", "Romaji": "kyoudai", "English": "Siblings" }, { "Japanese": "しまい", "Romaji": "shimai", "English": "Sisters" }, { "Japanese": "いとこ", "Romaji": "itoko", "English": "Cousin" }], "Other_Family": [{ "Japanese": "おじいさん", "Romaji": "ojiisan", "English": "Grandfather" }, { "Japanese": "おばあさん", "Romaji": "obaasan", "English": "Grandmother" }, { "Japanese": "おとうさん", "Romaji": "otousan", "English": "Father" }, { "Japanese": "おかあさん", "Romaji": "okaasan", "English": "Mother" }, { "Japanese": "おにいさん", "Romaji": "oniisan", "English": "Elder brother" }, { "Japanese": "おねえさん", "Romaji": "oneesan", "English": "Elder sister" }, { "Japanese": "おとうとさん", "Romaji": "otoutosan", "English": "Younger brother" }, { "Japanese": "いもうとさん", "Romaji": "imoutosan", "English": "Younger sister" }, { "Japanese": "おじさん", "Romaji": "ojisan", "English": "Uncle" }, { "Japanese": "おばさん", "Romaji": "obasan", "English": "Aunt" }, { "Japanese": "むすこさん", "Romaji": "musukosan", "English": "Son" }, { "Japanese": "むすめさん", "Romaji": "musumesan", "English": "Daughter" }, { "Japanese": "ごしゅじん", "Romaji": "goshujin", "English": "Husband" }, { "Japanese": "おくさん", "Romaji": "okusan", "English": "Wife" }, { "Japanese": "ごりょうしん", "Romaji": "goryoushin", "English": "Parents" }, { "Japanese": "こども", "Romaji": "kodomo", "English": "Children" }, { "Japanese": "ともだち", "Romaji": "tomodachi", "English": "Friend" }, { "Japanese": "しんせき", "Romaji": "shinseki", "English": "Relative" }, { "Japanese": "ごまご", "Romaji": "gomago", "English": "Grandchild" }, { "Japanese": "あかちゃん", "Romaji": "akachan", "English": "Baby" }, { "Japanese": "ごきょうだい", "Romaji": "gokyoudai", "English": "Siblings" }, { "Japanese": "ごしまい", "Romaji": "goshimai", "English": "Sisters" }, { "Japanese": "いとこ", "Romaji": "itoko", "English": "Cousin" }], "Body_Parts": [{ "Japanese": "あたま", "Romaji": "atama", "English": "Head" }, { "Japanese": "ひたい", "Romaji": "hitai", "English": "Forehead" }, { "Japanese": "め", "Romaji": "me", "English": "Eye" }, { "Japanese": "みみ", "Romaji": "mimi", "English": "Ear" }, { "Japanese": "はな", "Romaji": "hana", "English": "Nose" }, { "Japanese": "くち", "Romaji": "kuchi", "English": "Mouth" }, { "Japanese": "あご", "Romaji": "ago", "English": "Chin" }, { "Japanese": "かた", "Romaji": "kata", "English": "Shoulder" }, { "Japanese": "うで", "Romaji": "ude", "English": "Arm" }, { "Japanese": "ほね", "Romaji": "hone", "English": "Bone" }, { "Japanese": "て", "Romaji": "te", "English": "Hand" }, { "Japanese": "ゆび", "Romaji": "yubi", "English": "Fingers" }, { "Japanese": "てくび", "Romaji": "tekubi", "English": "Wrist" }, { "Japanese": "まゆ", "Romaji": "mayu", "English": "Eyebrow" }, { "Japanese": "まつげ", "Romaji": "matsuge", "English": "Eyelashes" }, { "Japanese": "からだ", "Romaji": "karada", "English": "Body" }, { "Japanese": "あし", "Romaji": "ashi", "English": "Leg" }, { "Japanese": "あしくび", "Romaji": "ashikubi", "English": "Ankle" }, { "Japanese": "こし", "Romaji": "koshi", "English": "Waist" }, { "Japanese": "はだ", "Romaji": "hada", "English": "Skin" }, { "Japanese": "つめ", "Romaji": "tsume", "English": "Nail" }, { "Japanese": "ほほ", "Romaji": "hoho", "English": "Cheek" }, { "Japanese": "くび", "Romaji": "kubi", "English": "Neck" }, { "Japanese": "むね", "Romaji": "mune", "English": "Chest" }, { "Japanese": "おなか", "Romaji": "onaka", "English": "Stomach" }, { "Japanese": "は", "Romaji": "ha", "English": "Teeth" }, { "Japanese": "くちびる", "Romaji": "kuchibiru", "English": "Lips" }, { "Japanese": "かみ", "Romaji": "kami", "English": "Hair" }], "Daily_Phrases": [{ "Japanese": "ごちゅうもんは", "Romaji": "gochuumon wa", "English": "Placing an order" }, { "Japanese": "かしこまりました", "Romaji": "kashikomarimashita", "English": "Confirming an order" }, { "Japanese": "いただきます", "Romaji": "itadakimasu", "English": "Thank you for the food (Before eating)" }, { "Japanese": "ごちそうさまでした", "Romaji": "gochisousama deshita", "English": "Thank you for the food (After eating)" }, { "Japanese": "ただいま", "Romaji": "tadaima", "English": "I am home/I’m back" }, { "Japanese": "おかえりなさい", "Romaji": "okaerinasai", "English": "Welcome back" }, { "Japanese": "いってきます", "Romaji": "ittekimasu", "English": "I will go and come" }, { "Japanese": "いってらっしゃい", "Romaji": "itterasshai", "English": "Yes, you go and come" }, { "Japanese": "いらっしゃい", "Romaji": "irasshai", "English": "Welcome" }, { "Japanese": "いらっしゃいませ", "Romaji": "irasshaimase", "English": "Welcome (To customers in a shop, store, etc.)" }, { "Japanese": "ごめんください", "Romaji": "gomenkudasai", "English": "May I come in?" }, { "Japanese": "どうぞ おあがりください", "Romaji": "douzo oagari kudasai", "English": "Yes, you may come in" }, { "Japanese": "いっしょに いかがですか", "Romaji": "issho ni ikaga desu ka", "English": "Won’t you join us?" }, { "Japanese": "いいえ、ちょっと", "Romaji": "iie, chotto", "English": "It’s a bit difficult" }, { "Japanese": "だめですか", "Romaji": "dame desu ka", "English": "So, you can’t come?" }, { "Japanese": "また こんど おねがいします", "Romaji": "mata kondo onegaishimasu", "English": "Please ask me some other time" }, { "Japanese": "もういっぱい いかがですか", "Romaji": "mou ippai ikaga desu ka", "English": "Would you like to have one more cup?" }, { "Japanese": "いいえ、けっこう です", "Romaji": "iie, kekkou desu", "English": "Polite way of refusing" }, { "Japanese": "もういちど おねがいします", "Romaji": "mou ichido onegaishimasu", "English": "Can you repeat one more time?" }, { "Japanese": "そろそろ しつれいします", "Romaji": "sorosoro shitsurei shimasu", "English": "I’m leaving before you" }, { "Japanese": "おげんきですか", "Romaji": "ogenki desu ka", "English": "How are you?" }, { "Japanese": "いいでんきですね", "Romaji": "ii denki desu ne", "English": "Nice weather" }] }]
 
         function renderFlashcards() {
             const accordionContainer = $('#accordionExample');
@@ -1342,6 +1113,7 @@
             // Function to generate card HTML for any dataset
             function generateCards(flashcards, title, datasetType, mode) {
                 debugger
+                console.log(title)
                 let cardsHtml = `
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="heading${title}">
@@ -1361,11 +1133,7 @@
                             aria-labelledby="heading${title}"
                             data-bs-parent="#accordionExample">
                             <div class="accordion-body">
-                                <div class=${(
-                                    datasetType === 'hiragananumbers') || (datasetType === 'hiraganamonth') || (datasetType === 'hiraganaweek') || (datasetType === 'hiraganahour') || (datasetType === 'hiraganaminute') || (datasetType === 'hiraganatime' ||
-                                    
-                                    datasetType === 'katakananumbers') || (datasetType === 'katakanamonth') || (datasetType === 'katakanaweek') || (datasetType === 'katakanahour') || (datasetType === 'katakanaminute') || (datasetType === 'katakanatime') ? `threerow-flashcard-container` : 'kanji-flashcard-container'
-                                    }>`;
+                                <div class="${mode === 4 ? title : 'kanji-flashcard-container'}">`
                 if (mode == 1) {
                     flashcards.forEach((card, index) => {
                         cardsHtml += `
@@ -1399,7 +1167,6 @@
                         `;
                     });
                 } else if (mode == 3) {
-                    debugger
                     flashcards.forEach((card, index) => {
                         cardsHtml += card?.others ? `
                         <div id="carouselExample${index}" class="carousel slide" data-bs-touch="true">
@@ -1445,6 +1212,20 @@
                             ;
                     });
 
+                }else if (mode == 4) {
+                    flashcards.forEach((card, index) => {
+                        cardsHtml += `
+                        <div class=${datasetType === 'kanji' ? `kanji-card` : 'kanji-card2'}>
+                            <div class="kanji-card-header">
+                                ${card.Japanese}
+                            </div>
+                            <div class="kanji-card-body">
+                                <div class="kanji-romaji">${card.Romaji}</div>
+                                <div class="kanji-romaji">${card.English}</div>
+                            </div>
+                        </div>
+                        `;
+                    });
                 }
 
                 cardsHtml += `
@@ -1501,20 +1282,12 @@
             accordionContainer.append(generateCards(shuffleArray(shuffleArray(orderedhiraganaCards.filter(a => a.character != '-'))), 'Hiragana-Quiz', 'hiragana', 2));
             accordionContainer.append(generateCards(shuffleArray(shuffleArray([...katakanaFlashcards.Basic, ...katakanaFlashcards.With_Maru, ...katakanaFlashcards.With_Tenten, ...katakanaFlashcards.Combination_without_Tenten])), 'Katagana-Quiz', 'katagana', 2));
 
-            accordionContainer.append(generateCards(h_numbers, 'Hiragana-Numbers', 'hiragananumbers', 1));
-            accordionContainer.append(generateCards(h_week_dataset, 'Hiragana-Week', 'hiraganaweek', 1));
-            accordionContainer.append(generateCards(h_month_dataset, 'Hiragana-Month', 'hiraganamonth', 1));
-            accordionContainer.append(generateCards(h_hour_dataset, 'Hiragana-Hour', 'hiraganahour', 1));
-            accordionContainer.append(generateCards(h_minute_dataset, 'Hiragana-Minute', 'hiraganaminute', 1));
-            accordionContainer.append(generateCards(h_time_related_dataset, 'Hiragana-Time', 'hiraganatime', 1));
-
-            accordionContainer.append(generateCards(k_numbers, 'Katakana-Numbers', 'katakananumbers', 1));
-            accordionContainer.append(generateCards(k_week_dataset, 'Katakana-Week', 'katakanaweek', 1));
-            accordionContainer.append(generateCards(k_month_dataset, 'Katakana-Month', 'katakanamonth', 1));
-            accordionContainer.append(generateCards(k_hour_dataset, 'Katakana-Hour', 'katakanahour', 1));
-            accordionContainer.append(generateCards(k_minute_dataset, 'Katakana-Minute', 'katakanaminute', 1));
-            accordionContainer.append(generateCards(k_time_related_dataset, 'Katakana-Time', 'katakanatime', 1));
-
+            for (const [category, items] of Object.entries(japanese_dataset[0])) {
+                debugger
+                // const card = createCard(category, items);
+                // $container.append(card);
+                accordionContainer.append(generateCards(items, category, category, 4));
+            }
 
             $('.qzm2-card').on('click', function () {
                 $(this).toggleClass('flipped');
