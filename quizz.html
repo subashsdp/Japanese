@@ -151,30 +151,12 @@
         .QuestionTypes,
         .DaysOfTheWeek,
         .Days,
-        .Daily_Phrases {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(115px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-            padding: 0 10px;
-            width: 100%;
-            box-sizing: border-box;
-        }
-
+        .Daily_Phrases ,
         .ClassroomInstructions,
         .PluralTypes,
         .Year,
         .Month,
-        .Week {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(115px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-            padding: 0 10px;
-            width: 100%;
-            box-sizing: border-box;
-        }
-
+        .Week ,
         .Numbers-Basic,
         .MultiplesOf10,
         .Time,
@@ -193,9 +175,9 @@
         .Ten-Thousands,
         .Thousands,
         .Tens,
-        .Hundreds {
+        .Hundreds{
             display: grid;
-            grid-template-columns: repeat(4, minmax(115px, 1fr));
+            grid-template-columns: repeat(auto, minmax(115px, 1fr));
             gap: 20px;
             margin-top: 20px;
             padding: 0 10px;
@@ -1305,108 +1287,81 @@
                 return cardsHtml;
             }
 
-            // let orderedhiraganaCards = [
-            //     ...hiraganaFlashcards.Basic.slice(0, 10),
-            //     ...hiraganaFlashcards.Combination_without_Tenten.slice(0, 5),
-            //     ...hiraganaFlashcards.With_Tenten.slice(0, 5),
-            //     ...hiraganaFlashcards.Combination_with_Tenten.slice(0, 5),
+            let orderedhiraganaCards = [
+                 ...hiraganaFlashcards.Basic.slice(0, 10),
+                 ...hiraganaFlashcards.Combination_without_Tenten.slice(0, 5),
+                 ...hiraganaFlashcards.With_Tenten.slice(0, 5),
+                 ...hiraganaFlashcards.Combination_with_Tenten.slice(0, 5),
 
-            //     ...hiraganaFlashcards.Basic.slice(10, 15),
-            //     ...hiraganaFlashcards.Combination_without_Tenten.slice(5, 10),
-            //     ...hiraganaFlashcards.With_Tenten.slice(5, 10),
-            //     ...hiraganaFlashcards.Combination_with_Tenten.slice(5, 10),
+                 ...hiraganaFlashcards.Basic.slice(10, 15),
+                 ...hiraganaFlashcards.Combination_without_Tenten.slice(5, 10),
+                 ...hiraganaFlashcards.With_Tenten.slice(5, 10),
+                 ...hiraganaFlashcards.Combination_with_Tenten.slice(5, 10),
 
-            //     ...hiraganaFlashcards.Basic.slice(15, 20),
-            //     ...hiraganaFlashcards.Combination_without_Tenten.slice(10, 15),
-            //     ...hiraganaFlashcards.With_Tenten.slice(10, 15),
+                 ...hiraganaFlashcards.Basic.slice(15, 20),
+                 ...hiraganaFlashcards.Combination_without_Tenten.slice(10, 15),
+                 ...hiraganaFlashcards.With_Tenten.slice(10, 15),
 
-            //     ...hiraganaFlashcards.Basic.slice(20, 25),
-            //     ...hiraganaFlashcards.Combination_without_Tenten.slice(15, 20),
+                 ...hiraganaFlashcards.Basic.slice(20, 25),
+                 ...hiraganaFlashcards.Combination_without_Tenten.slice(15, 20),
 
-            //     ...hiraganaFlashcards.Basic.slice(25, 30),
-            //     ...hiraganaFlashcards.Combination_without_Tenten.slice(20, 25),
-            //     ...hiraganaFlashcards.With_Tenten.slice(15, 20),
-            //     ...hiraganaFlashcards.Combination_with_Tenten.slice(10, 15),
-            //     ...hiraganaFlashcards.With_Maru,
-            //     ...hiraganaFlashcards.Combination_with_Maru,
+                 ...hiraganaFlashcards.Basic.slice(25, 30),
+                 ...hiraganaFlashcards.Combination_without_Tenten.slice(20, 25),
+                 ...hiraganaFlashcards.With_Tenten.slice(15, 20),
+                 ...hiraganaFlashcards.Combination_with_Tenten.slice(10, 15),
+                 ...hiraganaFlashcards.With_Maru,
+                 ...hiraganaFlashcards.Combination_with_Maru,
 
-            //     ...hiraganaFlashcards.Basic.slice(30, 35),
-            //     ...hiraganaFlashcards.Combination_without_Tenten.slice(25, 30),
+                 ...hiraganaFlashcards.Basic.slice(30, 35),
+                 ...hiraganaFlashcards.Combination_without_Tenten.slice(25, 30),
 
-            //     ...hiraganaFlashcards.Basic.slice(35, 40),
-            //     ...hiraganaFlashcards.Basic.slice(40, 45),
-            //     ...hiraganaFlashcards.Combination_without_Tenten.slice(30, 35),
+                 ...hiraganaFlashcards.Basic.slice(35, 40),
+                 ...hiraganaFlashcards.Basic.slice(40, 45),
+                 ...hiraganaFlashcards.Combination_without_Tenten.slice(30, 35),
+            
+                 ...hiraganaFlashcards.Basic.slice(45, 50)
+             ];
+             let orderedkataganaCards = [
+                 ...katakanaFlashcards.Basic.slice(0, 10),
+                 ...katakanaFlashcards.Combination_without_Tenten.slice(0, 5),
+                 ...katakanaFlashcards.With_Tenten.slice(0, 5),
+                 ...katakanaFlashcards.Combination_with_Tenten.slice(0, 5),
 
-            //     ...hiraganaFlashcards.Basic.slice(45, 50)
-            // ]
-            const hiraganaToKatakana = (hiragana) => {
-                return String.fromCharCode(hiragana.charCodeAt(0) + 0x60);
-            };
+                 ...katakanaFlashcards.Basic.slice(10, 15),
+                 ...katakanaFlashcards.Combination_without_Tenten.slice(5, 10),
+                 ...katakanaFlashcards.With_Tenten.slice(5, 10),
+                 ...katakanaFlashcards.Combination_with_Tenten.slice(5, 10),
 
-            const groupFlashcards = (flashcards, groupings, toKatakana = false) => {
-                debugger
-                const result = [];
+                 ...katakanaFlashcards.Basic.slice(15, 20),
+                 ...katakanaFlashcards.Combination_without_Tenten.slice(10, 15),
+                 ...katakanaFlashcards.With_Tenten.slice(10, 15),
 
-                groupings.forEach(({ category, start, end }) => {
-                    if (flashcards[category]) {
-                        const group = flashcards[category]
-                            .slice(start, end)
-                            .map(item => ({
-                                character: toKatakana && item.character !== '-' ? hiraganaToKatakana(item.character) : item.character,
-                                romaji: item.romaji
-                            }));
-                        result.push(...group);
-                    }
-                });
+                 ...katakanaFlashcards.Basic.slice(20, 25),
+                 ...katakanaFlashcards.Combination_without_Tenten.slice(15, 20),
 
-                return result;
-            };
+                 ...katakanaFlashcards.Basic.slice(25, 30),
+                 ...katakanaFlashcards.Combination_without_Tenten.slice(20, 25),
+                 ...katakanaFlashcards.With_Tenten.slice(15, 20),
+                 ...katakanaFlashcards.Combination_with_Tenten.slice(10, 15),
+                 ...katakanaFlashcards.With_Maru,
+                 ...katakanaFlashcards.Combination_with_Maru,
 
-            // Define the grouping pattern
-            const groupings = [
-                { category: "Basic", start: 0, end: 10 },
-                { category: "Combination_without_Tenten", start: 0, end: 5 },
-                { category: "With_Tenten", start: 0, end: 5 },
-                { category: "Combination_with_Tenten", start: 0, end: 5 },
+                 ...katakanaFlashcards.Basic.slice(30, 35),
+                 ...katakanaFlashcards.Combination_without_Tenten.slice(25, 30),
 
-                { category: "Basic", start: 10, end: 15 },
-                { category: "Combination_without_Tenten", start: 5, end: 10 },
-                { category: "With_Tenten", start: 5, end: 10 },
-                { category: "Combination_with_Tenten", start: 5, end: 10 },
-
-                { category: "Basic", start: 15, end: 20 },
-                { category: "Combination_without_Tenten", start: 10, end: 15 },
-                { category: "With_Tenten", start: 10, end: 15 },
-
-                { category: "Basic", start: 20, end: 25 },
-                { category: "Combination_without_Tenten", start: 15, end: 20 },
-
-                { category: "Basic", start: 25, end: 30 },
-                { category: "Combination_without_Tenten", start: 20, end: 25 },
-                { category: "With_Tenten", start: 15, end: 20 },
-                { category: "Combination_with_Tenten", start: 10, end: 15 },
-                { category: "With_Maru", start: 0, end: 5 },
-                { category: "Combination_with_Maru", start: 0, end: 5 },
-
-                { category: "Basic", start: 30, end: 35 },
-                { category: "Combination_without_Tenten", start: 25, end: 30 },
-
-                { category: "Basic", start: 35, end: 40 },
-                { category: "Basic", start: 40, end: 45 },
-                { category: "Combination_without_Tenten", start: 30, end: 35 },
-
-                { category: "Basic", start: 45, end: 50 },
-            ];
-
-            const groupedHiraganaFlashcards = groupFlashcards(hiraganaFlashcards, groupings);
-            const groupedKatakanaFlashcards = groupFlashcards(katakanaFlashcards, groupings, true);
-
+                 ...katakanaFlashcards.Basic.slice(35, 40),
+                 ...katakanaFlashcards.Basic.slice(40, 45),
+                 ...katakanaFlashcards.Combination_without_Tenten.slice(30, 35),
+            
+                 ...katakanaFlashcards.Basic.slice(45, 50)
+             ]
+            
             accordionContainer.append(generateCards(combinedhiraganakatakana_dataset, 'Hiragana-Katagana', 'hiraganakatagana', 3));
-            accordionContainer.append(generateCards(groupedHiraganaFlashcards, 'Hiragana', 'hiragana', 1));
-            accordionContainer.append(generateCards(groupedKatakanaFlashcards, 'Katakana', 'katakana', 1));
+            accordionContainer.append(generateCards(orderedhiraganaCards, 'Hiragana', 'hiragana', 1));
+            accordionContainer.append(generateCards(orderedkataganaCards, 'Katakana', 'katakana', 1));
             accordionContainer.append(generateCards(kanjiFlashcards, 'Kanji', 'kanji', 1));
-            accordionContainer.append(generateCards(shuffleArray(shuffleArray(groupedHiraganaFlashcards.filter(a => a.character != '-'))), 'Hiragana-Quiz', 'hiragana', 2));
-            accordionContainer.append(generateCards(shuffleArray(shuffleArray(groupedKatakanaFlashcards.filter(a => a.character != '-'))), 'Katagana-Quiz', 'katagana', 2));
+            accordionContainer.append(generateCards(shuffleArray(shuffleArray(orderedhiraganaCards.filter(a => a.character != '-'))), 'Hiragana-Quiz', 'hiragana', 2));
+            accordionContainer.append(generateCards(shuffleArray(shuffleArray(orderedkataganaCards.filter(a => a.character != '-'))), 'Katagana-Quiz', 'katagana', 2));
 
             for (const [category, items] of Object.entries(japanese_dataset[0])) {
                 
