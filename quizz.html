@@ -1191,7 +1191,7 @@
                                         <i class="bi bi-eye-slash-fill")></i>
                                     </button>
                                 </div>` : '' }
-                                <div class="${mode === 4 ? title : 'kanji-flashcard-container'}">`
+                                <div class="${mode === 4 || mode === 5 ? title.replace('-Quiz','') : 'kanji-flashcard-container'}">`
                 if (mode == 1) {
                     flashcards.forEach((card, index) => {
                         cardsHtml += `
@@ -1284,6 +1284,21 @@
                         </div>
                         `;
                     });
+                } else if (mode == 5) {
+                    flashcards.forEach((card, index) => {
+                        cardsHtml += `
+                        <div class="qzm2-card">
+                            <div class="qzm2-card-inner">
+                                <div class="qzm2-card-front">
+                                    <div class="kanji-card-header">${card.English}</div>
+                                </div>
+                                <div class="qzm2-card-back">
+                                    <div class="kanji-card-header">${card.Japanese}</div>
+                                </div>
+                            </div>
+                        </div>
+                        `;
+                    });
                 }
 
                 cardsHtml += `
@@ -1367,17 +1382,16 @@
 
             accordionContainer.append(generateCards(combinedhiraganakatakana_dataset, 'Hiragana-Katagana', 'hiraganakatagana', 3));
             accordionContainer.append(generateCards(orderedhiraganaCards, 'Hiragana', 'hiragana', 1));
-            accordionContainer.append(generateCards(orderedkataganaCards, 'Katakana', 'katakana', 1));
-            accordionContainer.append(generateCards(kanjiFlashcards, 'Kanji', 'kanji', 1));
             accordionContainer.append(generateCards(shuffleArray(shuffleArray(orderedhiraganaCards.filter(a => a.character != '-'))), 'Hiragana-Quiz', 'hiragana', 2));
+            accordionContainer.append(generateCards(orderedkataganaCards, 'Katakana', 'katakana', 1));
             accordionContainer.append(generateCards(shuffleArray(shuffleArray(orderedkataganaCards.filter(a => a.character != '-'))), 'Katagana-Quiz', 'katagana', 2));
-
+            
             for (const [category, items] of Object.entries(japanese_dataset[0])) {
-
-                // const card = createCard(category, items);
-                // $container.append(card);
                 accordionContainer.append(generateCards(items, category, category, 4));
+                accordionContainer.append(generateCards(items, `${category}-Quiz`, category, 5));
             }
+            
+            accordionContainer.append(generateCards(kanjiFlashcards, 'Kanji', 'kanji', 1));
 
             $('.qzm2-card').on('click', function () {
                 $(this).toggleClass('flipped');
