@@ -3,7 +3,7 @@
 ## Overview  
 This is a lightweight web application designed to help users learn Japanese through interactive quizzes, reference resources, and a history table to track their progress. The application is simple to use and can be executed locally without any complex setup.  
 
-[**Click here to view the live site**](https://raw.githack.com/subashsdp/Japanese/main/quizz.html)  
+[**Click here to view the live site**](https://yenjapan.netlify.app/)  
 
 ## Features  
 - **Quizzes**: Test your Japanese language skills with engaging quizzes.  
