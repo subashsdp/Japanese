@@ -1,0 +1,1492 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yen Japan</title>
+    <link rel="icon" type="image/x-icon"
+        href="https://img.icons8.com/?size=100&id=APFJafQJJSrb&format=png&color=000000">
+
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/bootstrap-table@1.21.1/dist/bootstrap-table.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-table@1.24.0/dist/bootstrap-table.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(45deg, #f7c0ec, #a7bdea);
+            height: 100vh;
+            background-size: cover;
+            /* Ensures the gradient covers the entire viewport */
+            background-repeat: no-repeat;
+            /* Prevents repeating */
+            background-attachment: fixed;
+        }
+
+
+        .quiz-app {
+            margin: 0 auto;
+            padding: 25px 0px 0px 0px;
+            border-radius: 10px;
+            width: 750px;
+        }
+
+        .quiz-app #quiz-container,
+        #input-container {
+            margin: 0 auto;
+            padding: 25px;
+            border-radius: 10px;
+            width: 600px;
+        }
+
+        h3 {
+            font-size: 5rem;
+        }
+
+        button {
+            margin: 10px 5px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            position: relative;
+        }
+
+        #input-container {
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .card-header {
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+
+        /* Spin effect and meaning display */
+        .option {
+            display: inline-block;
+            width: 150px;
+            text-align: center;
+            background-color: #e5e8eb;
+            font-size: 1.25rem;
+            text-transform: uppercase;
+        }
+
+        /* .option .meaning {
+            display: none;
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 5px;
+            border-radius: 5px;
+        } */
+
+        /* .option:hover .meaning {
+            display: block;
+        } */
+
+        .hiraganasubgrp {
+            display: inline !important;
+        }
+
+        .hiraganasubgrp label {
+            padding: 0px 10px;
+            margin: 5px 1px;
+            border-radius: 15px;
+            font-size: 0.90rem
+        }
+
+        .custom-radio-label {
+            background-color: white;
+            /* Unchecked background */
+            transition: background-color 0.3s, color 0.3s;
+            /* Smooth transition */
+        }
+
+        .btn-check:checked+.custom-radio-label {
+            background-color: #0d6efd;
+            /* Primary color when checked */
+            color: white;
+            /* Text color when checked */
+        }
+
+        .btn-check:not(:checked)+.custom-radio-label:hover {
+            background-color: white;
+            /* Light gray for hover */
+            color: #0d6efd;
+            /* Retain text color on hover */
+        }
+
+        /* New styles for Kanji Flashcards */
+        .kanji-flashcard-container {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(115px, 1fr));
+            /* Automatically adjust columns */
+            gap: 20px;
+            margin-top: 20px;
+            padding: 0 10px;
+            width: 100%;
+            /* Ensure full width utilization */
+            box-sizing: border-box;
+            /* Prevent overflow */
+        }
+
+        .Greetings,
+        .QuestionTypes,
+        .DaysOfTheWeek,
+        .Days,
+        .Daily_Phrases,
+        .ClassroomInstructions,
+        .PluralTypes,
+        .Year,
+        .Month,
+        .Week,
+        .Numbers-Basic,
+        .MultiplesOf10,
+        .Time,
+        .Minutes,
+        .Months,
+        .Days_of_the_Month,
+        .Colors,
+        .Position,
+        .Directions,
+        .Seasons,
+        .Weather,
+        .Family,
+        .Other_Family,
+        .Body_Parts,
+        .One-Lac,
+        .Ten-Thousands,
+        .Thousands,
+        .Tens,
+        .Hundreds {
+            display: grid;
+            grid-template-columns: repeat(auto, minmax(115px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+            padding: 0 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .kanji-card {
+            width: 100%;
+            height: 150px;
+            background-color: #ffffff;
+            border: 2px solid #0d6efd;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            overflow: hidden;
+            user-select: none;
+            /* Disable text selection */
+            -webkit-user-select: none;
+            /* Safari */
+            -moz-user-select: none;
+            /* Firefox */
+            -ms-user-select: none;
+            /* Internet Explorer/Edge */
+            /* Prevent content overflow */
+        }
+
+        .kanji-card2 {
+            width: 100%;
+            /* height: 115px; */
+            background-color: #ffffff;
+            border: 2px solid #0d6efd;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            overflow: hidden;
+            user-select: none;
+            /* Disable text selection */
+            -webkit-user-select: none;
+            /* Safari */
+            -moz-user-select: none;
+            /* Firefox */
+            -ms-user-select: none;
+            /* Internet Explorer/Edge */
+            /* Prevent content overflow */
+        }
+
+        .kanji-card:hover,
+        .kanji-card2:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            background-color: #0d6efd;
+        }
+
+        .kanji-card-header {
+            font-size: 45px;
+            font-weight: bold;
+            color: #333;
+            text-align: center;
+        }
+
+        .kanji-card:hover .kanji-card-header,
+        .kanji-card:hover .kanji-romaji,
+        .kanji-card:hover .kanji-meaning,
+        .kanji-card2:hover .kanji-card-header,
+        .kanji-card2:hover .kanji-romaji,
+        .kanji-card2:hover .kanji-meaning {
+            color: white;
+        }
+
+        .kanji-card-body {
+            text-align: center;
+        }
+
+        .kanji-romaji {
+            font-size: 16px;
+            color: #0d6efd;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .kanji-meaning {
+            font-size: 14px;
+            color: #555;
+            text-align: center;
+        }
+
+        /* @media (max-width: 2000px) {
+            .accordion-body {
+                max-height: 600px;
+            }
+        } */
+
+        /* @media (max-width: 1180px) {
+            .accordion-body {
+                max-height: 450px;
+            }
+        } */
+
+        /* Responsive layout for small screens */
+        @media (max-width: 768px) {
+
+            .kanji-flashcard-container {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                /* For smaller screens */
+            }
+
+            .kanji-card-header {
+                font-size: 45px;
+                /* Adjust font size for small screens */
+            }
+
+            /* 
+            .accordion-body {
+                max-height: 900px;
+            } */
+        }
+
+        @media (max-width: 480px) {
+
+            .kanji-flashcard-container {
+                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+                /* For very small screens */
+            }
+
+            .kanji-card-header {
+                font-size: 25px;
+                /* Adjust font size further for tiny screens */
+            }
+
+            .kanji-card-body {
+                font-size: 12px;
+                /* Reduce font size for better readability on very small screens */
+            }
+        }
+
+        .accordion-header button {
+            margin: 0px 0px;
+        }
+
+        .accordion-button:not(.collapsed) {
+            color: #0d6efd !important;
+            background-color: none !important;
+            box-shadow: none !important;
+        }
+
+        .accordion {
+            --bs-accordion-border-color: none !important;
+            max-height: 900px;
+            overflow-y: auto;
+        }
+
+        .accordion-button:focus {
+            --bs-accordion-border-color: none !important;
+            border: none !important;
+            --bs-accordion-btn-focus-border-color: none !important
+        }
+
+        .accordion-collapse {
+            transition: 0.7s ease-in-out;
+        }
+
+        .toggle-pronunciation-container {
+            margin-top: 10px;
+            position: relative;
+            text-align: right;
+            /* Aligns the button to the right */
+        }
+
+        .toggle-pronunciation {
+            display: inline-block;
+            margin-right: 5px;
+            cursor: pointer;
+        }
+
+        .toggle-pronunciation i {
+            font-size: 16px;
+            /* Adjust the icon size as needed */
+        }
+
+        .circular-chart {
+            display: inline-block;
+            max-width: 100px;
+            max-height: 100px;
+        }
+
+        .circle-bg {
+            fill: none;
+            stroke: #eee;
+            stroke-width: 3.8;
+        }
+
+        .circle {
+            fill: none;
+            stroke-width: 2.8;
+            stroke: #4caf50;
+            stroke-linecap: round;
+            animation: progress 1s ease-out forwards;
+        }
+
+        .percentage {
+            font-size: 0.5em;
+            text-anchor: middle;
+            fill: #4caf50;
+            font-weight: bold;
+        }
+
+        @keyframes progress {
+            0% {
+                stroke-dasharray: 0, 100;
+            }
+        }
+
+        .meaningClass {
+            font-size: 0.6em;
+            /* color: #666; */
+            /* A duller color */
+            margin-top: 5px;
+            display: block;
+            /* Ensure it appears on a new line */
+        }
+
+        .options .btn-danger .meaningClass {
+            color: white
+        }
+
+        .accordion-body {
+            overflow-y: auto;
+        }
+
+        .quizTableDiv {
+            width: 800px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .qzm2-card {
+            width: 100%;
+            height: 115px;
+            /* background-color: #ffffff; */
+            border: 2px solid #0d6efd;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            /* padding: 10px; */
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            overflow: hidden;
+            user-select: none;
+            /* Disable text selection */
+            -webkit-user-select: none;
+            /* Safari */
+            -moz-user-select: none;
+            /* Firefox */
+            -ms-user-select: none;
+            /* Internet Explorer/Edge */
+            /* Prevent content overflow */
+        }
+
+        .qzm2-card-inner {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+        }
+
+        .qzm2-card.flipped .qzm2-card-inner {
+            transform: rotateY(180deg);
+
+        }
+
+        .qzm2-card-front,
+        .qzm2-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+        }
+
+        .qzm2-card-front {
+            text-transform: uppercase;
+        }
+
+        .qzm2-card-back {
+            transform: rotateY(180deg);
+            background-color: #0d6efd;
+        }
+
+        .qzm2-card-header {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .qzm2-card-back div {
+            color: white;
+        }
+
+        .qzm2-card-body {
+            font-size: 18px;
+            color: #555;
+        }
+
+        .card2 {
+            width: 100%;
+            height: 115px;
+            background-color: #ffffff;
+            border: 2px solid #0d6efd;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+            overflow: hidden;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        .card2:hover {
+            background-color: #0d6efd;
+            /*transform: translateY(-5px);*/
+
+        }
+
+        .carousel {
+            border-radius: 10px;
+        }
+
+        .card2:hover .character,
+        .card2:hover .pronunciation {
+            color: #ffffff;
+        }
+
+
+        .card2 .character {
+            font-size: 25px;
+            font-weight: bold;
+            color: black;
+            text-align: center;
+        }
+
+        .card2 .pronunciation {
+            font-size: 15px;
+            color: #0d6efd;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .carousel-inner,
+        .carousel-item {
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="quiz-app">
+        <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+            <input type="radio" class="btn-check" name="page-type" id="btnradio111" autocomplete="off" checked
+                onclick=onclick_pagetype_radio(1)>
+            <label class="btn btn-outline-primary custom-radio-label" for="btnradio111">Quiz</label>
+
+            <input type="radio" class="btn-check" name="page-type" id="btnradio112" autocomplete="off"
+                onclick=onclick_pagetype_radio(2)>
+            <label class="btn btn-outline-primary custom-radio-label" for="btnradio112">Reference</label>
+
+            <input type="radio" class="btn-check" name="page-type" id="btnradio113" autocomplete="off"
+                onclick=onclick_pagetype_radio(3)>
+            <label class="btn btn-outline-primary custom-radio-label" for="btnradio113">History</label>
+        </div>
+        <br><br>
+        <div id="input-container" class="card">
+            <div class="card-header">Select Quiz Type and Number of Questions</div>
+            <div class="card-body">
+
+                <p>Select Quiz Type:</p>
+                <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                    <input type="radio" class="btn-check" name="quiz-type" id="btnradio1" autocomplete="off" checked
+                        onclick=onclick_language_radio(1)>
+                    <label class="btn btn-outline-primary" for="btnradio1">Hiragana</label>
+
+                    <input type="radio" class="btn-check" name="quiz-type" id="btnradio2" autocomplete="off"
+                        onclick=onclick_language_radio(2)>
+                    <label class="btn btn-outline-primary" for="btnradio2">Katakana</label>
+
+                    <input type="radio" class="btn-check" name="quiz-type" id="btnradio3" autocomplete="off"
+                        onclick=onclick_language_radio(3)>
+                    <label class="btn btn-outline-primary" for="btnradio3">Kanji</label>
+                </div>
+                <br><br>
+                <div id="hiraganasubmenu">
+                    <div class="hiraganasubgrp">
+                        <input type="checkbox" class="btn-check" name="hiragana-type" id="btnradio11" autocomplete="off"
+                            checked>
+                        <label class="btn btn-outline-primary" for="btnradio11">Basic</label>
+                    </div>
+                    <div class="hiraganasubgrp">
+                        <input type="checkbox" class="btn-check" name="hiragana-type" id="btnradio12"
+                            autocomplete="off">
+                        <label class="btn btn-outline-primary" for="btnradio12">With Tenten</label>
+                    </div>
+                    <div class="hiraganasubgrp">
+                        <input type="checkbox" class="btn-check" name="hiragana-type" id="btnradio13"
+                            autocomplete="off">
+                        <label class="btn btn-outline-primary" for="btnradio13">With Maru</label>
+                    </div>
+                    <div class="hiraganasubgrp">
+                        <input type="checkbox" class="btn-check" name="hiragana-type" id="btnradio14"
+                            autocomplete="off">
+                        <label class="btn btn-outline-primary" for="btnradio14">Combination without Tenten</label>
+                    </div>
+                    <div class="hiraganasubgrp">
+                        <input type="checkbox" class="btn-check" name="hiragana-type" id="btnradio15"
+                            autocomplete="off">
+                        <label class="btn btn-outline-primary" for="btnradio15">Combination with Tenten</label>
+                    </div>
+                    <div class="hiraganasubgrp">
+                        <input type="checkbox" class="btn-check" name="hiragana-type" id="btnradio16"
+                            autocomplete="off">
+                        <label class="btn btn-outline-primary" for="btnradio16">Combination with Maru</label>
+                    </div>
+                    <div class="hiraganasubgrp">
+                        <input type="checkbox" class="btn-check" name="hiragana-type" id="btnradio17"
+                            autocomplete="off">
+                        <label class="btn btn-outline-primary" for="btnradio17">All</label>
+                    </div>
+
+                </div>
+
+                <br><br>
+                <div class="row">
+                    <div class="col">
+                        <label for="num-questions">Number of Questions: </label>
+                        <input type="number" id="num-questions" class="form-control" min="1" value="46">
+                    </div>
+                    <br>
+                    <div class="col">
+                        <label for="timerInput">Set Timer (seconds):</label>
+                        <input type="number" id="timerInput" class="form-control" min="5" max="30" value="5">
+                    </div>
+                </div>
+                <br>
+                <div class="d-grid gap-2">
+                    <button id="start-quiz" class="btn btn-primary">Start Quiz</button>
+                </div>
+            </div>
+        </div>
+        <div id="quiz-container"></div>
+        <div>
+            <div class="accordion" id="accordionExample"></div>
+        </div>
+
+    </div>
+    <div>
+        <div class="container quizTableDiv" id="quizTableDiv">
+            <table id="quizTable" class="table table-bordered table-striped" data-search="true" data-sortable="true"
+                data-height="460" data-fixed-scroll="true">
+                <thead class="table-light">
+                    <tr>
+                        <th data-field="quiztype" data-sortable="true">Quiz Type</th>
+                        <th data-field="character" data-sortable="true">Character</th>
+                        <th data-field="romaji" data-sortable="true">Romaji</th>
+                        <th data-field="answered" data-sortable="true">Answered</th>
+                        <th data-field="trailcount" data-sortable="true">Trail Count</th>
+                        <th data-field="status" data-sortable="true">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.21.1/dist/bootstrap-table.min.js"></script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap-table@1.24.0/dist/extensions/mobile/bootstrap-table-mobile.min.js"></script>
+    <script>
+        let quizType = "";
+        let flashcards = [];
+        let shuffledFlashcards = [];
+        let hiraganaType = [];
+        let currentQuestion = 0;
+        let score = 0;
+        let totalQuestions = 5;  // Default number of questions
+        let timer;
+        let timeLeft = 0; // 10 seconds for each question
+        let pagevalue = 1;
+        let history_dataset = []
+        let databindonreference = 0;
+        let trailcount = 0;
+
+
+        function shuffleArray(array) {
+
+            return array.sort(() => Math.random() - 0.5);
+        }
+
+        function generateOptions(correctAnswer) {
+
+            const options = new Set([correctAnswer]);
+            const meanings = {};  // Store the meaning for each romaji
+            // Add meanings to the options set
+            while (options.size < Math.min(flashcards.length, 6)) {
+                const randomOption = flashcards[Math.floor(Math.random() * flashcards.length)].romaji;
+                options.add(randomOption);
+            }
+            shuffleArray([...options]);
+            // Prepare the meanings map
+            flashcards.forEach(flashcard => {
+                meanings[flashcard.romaji] = flashcard.meaning || ''; // Store meaning for each romaji
+            });
+            if (quizType === "Kanji") {
+                return shuffleArray([...options]).map(option => {
+                    const meaning = meanings[option] || '';
+                    // return `<button class="option btn btn-light"  data-bs-toggle="tooltip" data-bs-title="${meaning}" >${option}</button>`;
+                    return `<button class="option btn btn-light">${option}<span class="invisible">|</span><span class="meaningClass">${meaning}</span></button>`;
+                }).join('');
+            }
+            else {
+
+                return shuffleArray([...options]).map(option => {
+                    return `<button class="option btn btn-light">${option}</button>`;
+                }).join('');
+            }
+            // Convert Set to array and shuffle the options
+
+        }
+
+        function renderQuiz() {
+
+            const $container = $('#quiz-container');
+            if (currentQuestion >= totalQuestions) {
+                clearInterval(timer); // Stop the timer when the quiz ends
+                $container.html(`
+            <div class="card"  id="quiz_card">
+                <div class="card-header">Your Score</div>
+                <div class="card-body text-center">
+                    <svg height="120" width="120" viewBox="0 0 36 36" class="circular-chart green">
+                        <path class="circle-bg" d="M18 2.0845
+                    a 15.9155 15.9155 0 0 1 0 31.831
+                    a 15.9155 15.9155 0 0 1 0 -31.831" />
+                        <path class="circle" stroke-dasharray="${score / (totalQuestions / 100)}, 100" d="M18 2.0845
+                        a 15.9155 15.9155 0 0 1 0 31.831
+                        a 15.9155 15.9155 0 0 1 0 -31.831" />
+                        <text x="18" y="20.35" class="percentage">${Math.round((score) / (totalQuestions / 100))}%</text>
+                    </svg>
+                    <br>
+                    <h3>${score} / ${totalQuestions}</h3>
+                    <div class="d-grid gap-2">
+                    <button class="btn btn-primary" onclick="retryQuiz(1)">Retry Quiz</button>
+                    </div>
+                </div>
+            </div>
+        `);
+                if (score == totalQuestions && totalQuestions > 0) {
+                    var duration = 3 * 1000;
+                    var animationEnd = Date.now() + duration;
+                    var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+
+                    function randomInRange(min, max) {
+                        return Math.random() * (max - min) + min;
+                    }
+
+                    var interval = setInterval(function () {
+                        var timeLeft = animationEnd - Date.now();
+
+                        if (timeLeft <= 0) {
+                            return clearInterval(interval);
+                        }
+
+                        var particleCount = 50 * (timeLeft / duration);
+                        // since particles fall down, start a bit higher than random
+                        confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } });
+                        confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } });
+                    }, 250);
+                }
+                return;
+            }
+
+            const currentCharacter = shuffledFlashcards[currentQuestion];
+            const optionsHtml = generateOptions(currentCharacter.romaji);
+            const percentage = (currentQuestion) / (totalQuestions / 100);
+            $container.html(`
+        <div class="card" id="quiz_card">
+            <div class="card-header">
+                Question ${currentQuestion + 1} / ${totalQuestions}
+                <div id="timer" class="float-end">Time Left: ${timeLeft} seconds</div>
+            </div>
+            <div class="card-body">
+                <h3>${currentCharacter.character}</h3>
+                <div id="options-container">${optionsHtml}</div>
+            </div>
+            <br><br>
+            <div class="d-grid gap-2">
+                <button class="btn btn-danger" type="button" onclick="stopQuiz()">STOP</button>
+            </div>
+            <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="${currentQuestion + 1}" aria-valuemin="0" aria-valuemax="${totalQuestions}">
+                <div class="progress-bar" style="width: ${percentage}%"></div>
+            </div>
+        </div>
+    `);
+            startTimer(); // Start the timer for the current question
+        }
+        function startTimer() {
+
+            clearInterval(timer); // Clear any existing timer
+            timeLeft = parseInt($('#timerInput').val(), 10); // Get value from user input
+            if (isNaN(timeLeft) || timeLeft <= 0) {
+                timeLeft = 10; // Default to 10 seconds if input is invalid
+            }
+
+            $('#timer').text(`Time Left: ${timeLeft} seconds`);
+
+            timer = setInterval(() => {
+                timeLeft--;
+                $('#timer').text(`Time Left: ${timeLeft} seconds`);
+
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    currentQuestion++; // Automatically move to the next question
+                    renderQuiz();
+                }
+            }, 1000); // Decrement every second
+        }
+
+
+
+        function handleAnswerOptionClick(option) {
+
+            clearInterval(timer); // Stop the timer when an option is selected
+
+            const currentCharacter = shuffledFlashcards[currentQuestion];
+            let status = currentCharacter.romaji === option ? "Correct" : "Incorrect";
+            let new_arr = { "quiztype": quizType, "trailcount": trailcount, "character": currentCharacter.character, "romaji": currentCharacter.romaji, "answered": option, "status": status };
+            history_dataset.push(new_arr);
+            adddatatohistorytable(new_arr);
+            const $optionsContainer = $('#options-container');
+
+            $optionsContainer.children().each(function () {
+                const $button = $(this);
+                const isCorrect = $button.text().split('|')[0] === currentCharacter.romaji;
+
+                // Add correct/incorrect class based on the answer
+                if (isCorrect) {
+                    $button.removeClass('btn-light').addClass('btn-success');
+                } else {
+                    $button.removeClass('btn-light').addClass('btn-danger');
+                }
+
+                $button.prop('disabled', true); // Disable all options after selection
+            });
+
+            // Increase score if the answer is correct
+            if (option === currentCharacter.romaji) {
+                score++;
+            }
+
+            setTimeout(() => {
+                currentQuestion++;
+                renderQuiz();
+            }, 1500); // Pause for 1 second before moving to the next question
+        }
+
+
+        function retryQuiz(value) {
+            clearInterval(timer); // Stop the timer
+            shuffledFlashcards = shuffleArray([...flashcards]);
+            currentQuestion = 0;
+            score = 0;
+            hiraganaType = [];
+            if (value == 1) {
+                $('#input-container').slideDown();
+                $('#quiz-container').slideUp();
+            }
+        }
+
+        function getSelectedRadioValue() {
+
+            const radios = document.querySelectorAll('input[name="quiz-type"]');
+            let selectedValue = null;
+
+            radios.forEach((radio) => {
+                if (radio.checked) {
+
+                    // Get the associated label text
+                    const label = document.querySelector(`label[for="${radio.id}"]`);
+                    selectedValue = label ? label.textContent : null;
+                }
+            });
+
+            return selectedValue;
+        }
+        function getSelectedKanjiValue() {
+
+            const checkboxes = document.querySelectorAll('input[name="hiragana-type"]');
+            let selectedValue = null;
+            checkboxes.forEach((ck) => {
+                if (ck.checked) {
+                    // Get the associated label text
+                    const label = document.querySelector(`label[for="${ck.id}"]`);
+                    selectedValue = label ? label.textContent : null;
+                    hiraganaType.push(selectedValue);
+                }
+            });
+            return hiraganaType;
+        }
+        function startQuiz() {
+
+            const numQuestions = parseInt($('#num-questions').val(), 10);
+            const timerDuration = parseInt($('#timerInput').val(), 10);
+
+            // Validate the inputs
+            if (isNaN(numQuestions) || numQuestions < 1) {
+                alert('Please enter a valid number of questions.');
+                return;
+            }
+            if (isNaN(timerDuration) || timerDuration < 5 || timerDuration > 30) {
+                alert('Please enter a valid timer duration between 5 and 30 seconds.');
+                return;
+            }
+
+            // Set up quiz with these values
+            totalQuestions = numQuestions;
+            timeLeft = timerDuration;
+
+
+            totalQuestions = parseInt($('#num-questions').val());
+            quizType = getSelectedRadioValue();
+
+            flashcards = []
+            // Set the flashcards based on the quiz type
+            switch (quizType) {
+                case 'Hiragana':
+                    hiraganaType = getSelectedKanjiValue();
+                    if (hiraganaType.length == 0) {
+                        alert(`Please select minimum one Hiragana Type`);
+                        return;
+                    } else {
+                        //flashcards = hiraganaFlashcards;
+                        if (hiraganaType.includes('All') || hiraganaType.includes('Basic')) {
+                            flashcards.push(...hiraganaFlashcards.Basic.filter(a => a.character != '-'))
+                        }
+                        if (hiraganaType.includes('All') || hiraganaType.includes('With Tenten')) {
+                            flashcards.push(...hiraganaFlashcards.With_Tenten.filter(a => a.character != '-'))
+                        }
+                        if (hiraganaType.includes('All') || hiraganaType.includes('With Maru')) {
+                            flashcards.push(...hiraganaFlashcards.With_Maru.filter(a => a.character != '-'))
+                        }
+                        if (hiraganaType.includes('All') || hiraganaType.includes('Combination without Tenten')) {
+                            flashcards.push(...hiraganaFlashcards.Combination_without_Tenten.filter(a => a.character != '-'))
+                        }
+                        if (hiraganaType.includes('All') || hiraganaType.includes('Combination with Tenten')) {
+                            flashcards.push(...hiraganaFlashcards.Combination_with_Tenten.filter(a => a.character != '-'))
+                        }
+                        if (hiraganaType.includes('All') || hiraganaType.includes('Combination with Maru')) {
+                            flashcards.push(...hiraganaFlashcards.Combination_with_Maru.filter(a => a.character != '-'))
+                        }
+                    }
+                    break;
+                case 'Katakana':
+
+                    hiraganaType = getSelectedKanjiValue();
+                    if (hiraganaType.length == 0) {
+                        alert(`Please select minimum one Hiragana Type`);
+                        return;
+                    } else {
+
+                        if (hiraganaType.includes('All') || hiraganaType.includes('Basic')) {
+                            flashcards.push(...katakanaFlashcards.Basic.filter(a => a.character != '-'))
+                        }
+                        if (hiraganaType.includes('All') || hiraganaType.includes('With Tenten')) {
+                            flashcards.push(...katakanaFlashcards.With_Tenten.filter(a => a.character != '-'))
+                        }
+                        if (hiraganaType.includes('All') || hiraganaType.includes('With Maru')) {
+                            flashcards.push(...katakanaFlashcards.With_Maru.filter(a => a.character != '-'))
+                        }
+                        if (hiraganaType.includes('All') || hiraganaType.includes('Combination without Tenten')) {
+                            flashcards.push(...katakanaFlashcards.Combination_without_Tenten.filter(a => a.character != '-'))
+                        }
+                        if (hiraganaType.includes('All') || hiraganaType.includes('Combination with Tenten')) {
+                            flashcards.push(...katakanaFlashcards.Combination_with_Tenten.filter(a => a.character != '-'))
+                        }
+                        if (hiraganaType.includes('All') || hiraganaType.includes('Combination with Maru')) {
+                            flashcards.push(...katakanaFlashcards.Combination_with_Maru.filter(a => a.character != '-'))
+                        }
+                    }
+                    break;
+                case 'Kanji':
+                    flashcards = kanjiFlashcards;
+                    break;
+            }
+
+            const maxQuestions = flashcards.length;
+
+            // Validate the number of questions
+            if (totalQuestions < 1 || totalQuestions > maxQuestions) {
+                alert(`Please choose a number between 1 and ${maxQuestions}.`);
+                return;
+            }
+
+            shuffledFlashcards = shuffleArray([...flashcards]);
+            currentQuestion = 0;
+            score = 0;
+            hiraganaType = [];
+            trailcount++;
+            $('#input-container').slideUp();
+            $('#quiz-container').slideDown();
+            renderQuiz();
+        }
+
+        $(document).ready(function () {
+            $('#start-quiz').on('click', startQuiz);
+            $('#quizTableDiv').hide();
+            $(document).on('click', '#options-container .option', function () {
+
+                const option = $(this).text();
+
+                handleAnswerOptionClick(option.split('|')[0]);
+            });
+
+            $('#btnradio17').change(function () {
+                const isChecked = $(this).is(':checked');
+                // Check or uncheck all checkboxes except the "All" checkbox
+                $('input[name="hiragana-type"]').not(this).prop('checked', isChecked);
+            });
+
+            // Update the "All" checkbox state
+            $('input[name="hiragana-type"]').not('#btnradio17').change(function () {
+                const allChecked = $('input[name="hiragana-type"]:not(#btnradio17)').length ===
+                    $('input[name="hiragana-type"]:not(#btnradio17):checked').length;
+                $('#btnradio17').prop('checked', allChecked);
+            });
+            $('input[name="hiragana-type"]').change(function () {
+
+                let lettervalue = 0; let noofselect = 0
+                $('input[name="hiragana-type"]').map((a) => {
+
+                    if ($('input[name="hiragana-type"]')[a].checked == true) {
+                        if (a == 0) {
+                            lettervalue += 46
+                            noofselect++
+                        }
+                        if (a == 1) {
+                            lettervalue += 20
+                            noofselect++
+                        }
+                        if (a == 2) {
+                            lettervalue += 5
+                            noofselect++
+                        }
+                        if (a == 3) {
+                            lettervalue += 21
+                            noofselect++
+                        }
+                        if (a == 4) {
+                            lettervalue += 9
+                            noofselect++
+                        }
+                        if (a == 5) {
+                            lettervalue += 3
+                            noofselect++
+                        }
+                        if (a == 6) {
+                            lettervalue = 104
+                            noofselect++
+                        }
+                    }
+                });
+                $('#num-questions').val(lettervalue)
+                if (noofselect == 0) {
+                    $('#btnradio11').prop('checked', true)
+                    $('#num-questions').val(46)
+                }
+            });
+
+            let key = 'history_quiz'
+            if (sessionStorage.getItem(key) !== null) {
+                let dataset = JSON.parse(sessionStorage.getItem(key))
+                if (dataset.length > 0 && history_dataset.length == 0) {
+                    history_dataset = dataset;
+                }
+            }
+
+            let grp = Object.groupBy((history_dataset.filter(a => a.status != 'Correct')), ({ romaji }) => romaji)
+            let new_dataset = [];
+            Object.entries(grp).map(([key, value]) => {
+                new_dataset.push({
+                    quiztype: value[0].quiztype,
+                    trailcount: value.length,
+                    character: value[0].character,
+                    romaji: value[0].romaji,
+                    answered: value[0].answered,
+                    status: value[0].status
+                });
+            });
+            $('#quizTable').bootstrapTable({ data: new_dataset })
+
+        });
+        function stopQuiz() {
+            onclick_pagetype_radio(1);
+        }
+        function onclick_language_radio(value) {
+
+            if (value == 1 || value == 2) {
+                $('#hiraganasubmenu').slideDown();
+            }
+            else {
+                $('#hiraganasubmenu').slideUp();
+            }
+        }
+        function onclick_pagetype_radio(value) {
+            debugger
+            if (value == 1) {
+                pagevalue = value;
+                $('#input-container').slideDown();
+                $('#quiz-container').slideUp();
+                $('#accordionExample').slideUp();
+                $('#quizTableDiv').slideUp();
+                retryQuiz(2)
+            } else if (value == 2) {
+                if (databindonreference == 0) {
+                    renderFlashcards();
+                }
+                retryQuiz(2)
+                $('#quiz-container').slideUp();
+                $('#input-container').slideUp();
+                $('#quizTableDiv').slideUp();
+                $('#accordionExample').slideDown();
+            } else if (value == 3) {
+                $('#quiz-container').slideUp();
+                $('#input-container').slideUp();
+                $('#accordionExample').slideUp();
+                $('#quizTableDiv').slideDown();
+            }
+        }
+        function customSearch(data, text) {
+            return data.filter(function (row) {
+                return row.romaji.indexOf(text) > -1
+            })
+        }
+
+        const kanjiFlashcards = [{ "character": "一", "romaji": "ichi", "meaning": "one" }, { "character": "二", "romaji": "ni", "meaning": "two" }, { "character": "三", "romaji": "san", "meaning": "three" }, { "character": "四", "romaji": "shi/yon", "meaning": "four" }, { "character": "五", "romaji": "go", "meaning": "five" }, { "character": "六", "romaji": "roku", "meaning": "six" }, { "character": "七", "romaji": "shichi/nana", "meaning": "seven" }, { "character": "八", "romaji": "hachi", "meaning": "eight" }, { "character": "九", "romaji": "kyuu/ku", "meaning": "nine" }, { "character": "十", "romaji": "juu", "meaning": "ten" }, { "character": "百", "romaji": "hyaku", "meaning": "hundred" }, { "character": "千", "romaji": "sen", "meaning": "thousand" }, { "character": "万", "romaji": "man", "meaning": "ten thousand" }, { "character": "円", "romaji": "en", "meaning": "yen, circle" }, { "character": "口", "romaji": "kuchi", "meaning": "mouth" }, { "character": "目", "romaji": "me", "meaning": "eye" }, { "character": "耳", "romaji": "mimi", "meaning": "ear" }, { "character": "手", "romaji": "te", "meaning": "hand" }, { "character": "足", "romaji": "ashi", "meaning": "foot, leg" }, { "character": "力", "romaji": "chikara", "meaning": "power, strength" }, { "character": "男", "romaji": "otoko", "meaning": "man" }, { "character": "女", "romaji": "onna", "meaning": "woman" }, { "character": "子", "romaji": "ko", "meaning": "child" }, { "character": "山", "romaji": "yama", "meaning": "mountain" }, { "character": "川", "romaji": "kawa", "meaning": "river" }, { "character": "田", "romaji": "ta", "meaning": "rice field" }, { "character": "休", "romaji": "kyuu", "meaning": "rest" }, { "character": "先", "romaji": "saki", "meaning": "ahead, previous" }, { "character": "生", "romaji": "sei", "meaning": "life, birth" }, { "character": "学", "romaji": "gaku", "meaning": "study, learning" }, { "character": "校", "romaji": "kou", "meaning": "school" }, { "character": "書", "romaji": "kaku", "meaning": "write" }, { "character": "読む", "romaji": "yomu", "meaning": "read" }, { "character": "食", "romaji": "taberu", "meaning": "eat" }, { "character": "飲", "romaji": "nomu", "meaning": "drink" }, { "character": "行", "romaji": "iku", "meaning": "go" }, { "character": "来", "romaji": "kuru", "meaning": "come" }, { "character": "見", "romaji": "miru", "meaning": "see" }, { "character": "言", "romaji": "iu", "meaning": "say" }, { "character": "話", "romaji": "hanasu", "meaning": "talk, speak" }, { "character": "聞", "romaji": "kiku", "meaning": "ask, hear" }, { "character": "買", "romaji": "kau", "meaning": "buy" }, { "character": "売", "romaji": "uru", "meaning": "sell" }, { "character": "出", "romaji": "deru", "meaning": "exit, leave" }, { "character": "入", "romaji": "hairu", "meaning": "enter" }, { "character": "大", "romaji": "dai/oo", "meaning": "big, large" }, { "character": "小", "romaji": "shou", "meaning": "small" }, { "character": "長", "romaji": "naga", "meaning": "long" }, { "character": "早", "romaji": "haya", "meaning": "early, fast" }, { "character": "古", "romaji": "furui", "meaning": "old" }, { "character": "新", "romaji": "shin", "meaning": "new" }, { "character": "白", "romaji": "shiro", "meaning": "white" }, { "character": "黒", "romaji": "kuro", "meaning": "black" }, { "character": "青", "romaji": "ao", "meaning": "blue, green" }, { "character": "赤", "romaji": "aka", "meaning": "red" }, { "character": "色", "romaji": "iro", "meaning": "color" }, { "character": "金", "romaji": "kin", "meaning": "gold, money" }, { "character": "銀", "romaji": "gin", "meaning": "silver" }, { "character": "土", "romaji": "tsuchi", "meaning": "earth, soil" }, { "character": "天", "romaji": "ten", "meaning": "heaven" }, { "character": "雨", "romaji": "ame", "meaning": "rain" }, { "character": "電", "romaji": "den", "meaning": "electricity" }, { "character": "車", "romaji": "kuruma", "meaning": "car, vehicle" }, { "character": "音", "romaji": "on", "meaning": "sound" }, { "character": "楽", "romaji": "raku", "meaning": "music, comfort" }, { "character": "校", "romaji": "kou", "meaning": "school" }]
+
+        const katakanaFlashcards = { "Basic": [{ "character": "ア", "romaji": "a" }, { "character": "イ", "romaji": "i" }, { "character": "ウ", "romaji": "u" }, { "character": "エ", "romaji": "e" }, { "character": "オ", "romaji": "o" }, { "character": "カ", "romaji": "ka" }, { "character": "キ", "romaji": "ki" }, { "character": "ク", "romaji": "ku" }, { "character": "ケ", "romaji": "ke" }, { "character": "コ", "romaji": "ko" }, { "character": "サ", "romaji": "sa" }, { "character": "シ", "romaji": "shi" }, { "character": "ス", "romaji": "su" }, { "character": "セ", "romaji": "se" }, { "character": "ソ", "romaji": "so" }, { "character": "タ", "romaji": "ta" }, { "character": "チ", "romaji": "chi" }, { "character": "ツ", "romaji": "tsu" }, { "character": "テ", "romaji": "te" }, { "character": "ト", "romaji": "to" }, { "character": "ナ", "romaji": "na" }, { "character": "ニ", "romaji": "ni" }, { "character": "ヌ", "romaji": "nu" }, { "character": "ネ", "romaji": "ne" }, { "character": "ノ", "romaji": "no" }, { "character": "ハ", "romaji": "ha" }, { "character": "ヒ", "romaji": "hi" }, { "character": "フ", "romaji": "fu" }, { "character": "ヘ", "romaji": "he" }, { "character": "ホ", "romaji": "ho" }, { "character": "マ", "romaji": "ma" }, { "character": "ミ", "romaji": "mi" }, { "character": "ム", "romaji": "mu" }, { "character": "メ", "romaji": "me" }, { "character": "モ", "romaji": "mo" }, { "character": "ヤ", "romaji": "ya" }, { "character": "-", "romaji": "-" }, { "character": "ユ", "romaji": "yu" }, { "character": "-", "romaji": "-" }, { "character": "ヨ", "romaji": "yo" }, { "character": "ラ", "romaji": "ra" }, { "character": "リ", "romaji": "ri" }, { "character": "ル", "romaji": "ru" }, { "character": "レ", "romaji": "re" }, { "character": "ロ", "romaji": "ro" }, { "character": "ワ", "romaji": "wa" }, { "character": "-", "romaji": "-" }, { "character": "ヲ", "romaji": "wo" }, { "character": "-", "romaji": "-" }, { "character": "ン", "romaji": "n" }], "With_Tenten": [{ "character": "ガ", "romaji": "ga" }, { "character": "ギ", "romaji": "gi" }, { "character": "グ", "romaji": "gu" }, { "character": "ゲ", "romaji": "ge" }, { "character": "ゴ", "romaji": "go" }, { "character": "ザ", "romaji": "za" }, { "character": "ジ", "romaji": "ji" }, { "character": "ズ", "romaji": "zu" }, { "character": "ゼ", "romaji": "ze" }, { "character": "ゾ", "romaji": "zo" }, { "character": "ダ", "romaji": "da" }, { "character": "ヂ", "romaji": "ji" }, { "character": "ヅ", "romaji": "zu" }, { "character": "デ", "romaji": "de" }, { "character": "ド", "romaji": "do" }, { "character": "バ", "romaji": "ba" }, { "character": "ビ", "romaji": "bi" }, { "character": "ブ", "romaji": "bu" }, { "character": "ベ", "romaji": "be" }, { "character": "ボ", "romaji": "bo" }], "With_Maru": [{ "character": "パ", "romaji": "pa" }, { "character": "ピ", "romaji": "pi" }, { "character": "プ", "romaji": "pu" }, { "character": "ペ", "romaji": "pe" }, { "character": "ポ", "romaji": "po" }], "Combination_without_Tenten": [{ "character": "-", "romaji": "-" }, { "character": "キャ", "romaji": "kya" }, { "character": "キュ", "romaji": "kyu" }, { "character": "キョ", "romaji": "kyo" }, { "character": "-", "romaji": "-" }, { "character": "-", "romaji": "-" }, { "character": "シャ", "romaji": "sha" }, { "character": "シュ", "romaji": "shu" }, { "character": "ショ", "romaji": "sho" }, { "character": "-", "romaji": "-" }, { "character": "-", "romaji": "-" }, { "character": "チャ", "romaji": "cha" }, { "character": "チュ", "romaji": "chu" }, { "character": "チョ", "romaji": "cho" }, { "character": "-", "romaji": "-" }, { "character": "-", "romaji": "-" }, { "character": "ニャ", "romaji": "nya" }, { "character": "ニュ", "romaji": "nyu" }, { "character": "ニョ", "romaji": "nyo" }, { "character": "-", "romaji": "-" }, { "character": "-", "romaji": "-" }, { "character": "ヒャ", "romaji": "hya" }, { "character": "ヒュ", "romaji": "hyu" }, { "character": "ヒョ", "romaji": "hyo" }, { "character": "-", "romaji": "-" }, { "character": "-", "romaji": "-" }, { "character": "ミャ", "romaji": "mya" }, { "character": "ミュ", "romaji": "myu" }, { "character": "ミョ", "romaji": "myo" }, { "character": "-", "romaji": "-" }, { "character": "-", "romaji": "-" }, { "character": "リャ", "romaji": "rya" }, { "character": "リュ", "romaji": "ryu" }, { "character": "リョ", "romaji": "ryo" }, { "character": "-", "romaji": "-" }], "Combination_with_Tenten": [{ "character": "-", "romaji": "-" }, { "character": "ギャ", "romaji": "gya" }, { "character": "ギュ", "romaji": "gyu" }, { "character": "ギョ", "romaji": "gyo" }, { "character": "-", "romaji": "-" }, { "character": "-", "romaji": "-" }, { "character": "ジャ", "romaji": "ja" }, { "character": "ジュ", "romaji": "ju" }, { "character": "ジョ", "romaji": "jo" }, { "character": "-", "romaji": "-" }, { "character": "-", "romaji": "-" }, { "character": "ビャ", "romaji": "bya" }, { "character": "ビュ", "romaji": "byu" }, { "character": "ビョ", "romaji": "byo" }, { "character": "-", "romaji": "-" }], "Combination_with_Maru": [{ "character": "-", "romaji": "-" }, { "character": "ピャ", "romaji": "pya" }, { "character": "ピュ", "romaji": "pyu" }, { "character": "ピョ", "romaji": "pyo" }, { "character": "-", "romaji": "-" }] }
+
+
+        const hiraganaFlashcards = { "Basic": [{ "character": "あ", "romaji": "a" }, { "character": "い", "romaji": "i" }, { "character": "う", "romaji": "u" }, { "character": "え", "romaji": "e" }, { "character": "お", "romaji": "o" }, { "character": "か", "romaji": "ka" }, { "character": "き", "romaji": "ki" }, { "character": "く", "romaji": "ku" }, { "character": "け", "romaji": "ke" }, { "character": "こ", "romaji": "ko" }, { "character": "さ", "romaji": "sa" }, { "character": "し", "romaji": "shi" }, { "character": "す", "romaji": "su" }, { "character": "せ", "romaji": "se" }, { "character": "そ", "romaji": "so" }, { "character": "た", "romaji": "ta" }, { "character": "ち", "romaji": "chi" }, { "character": "つ", "romaji": "tsu" }, { "character": "て", "romaji": "te" }, { "character": "と", "romaji": "to" }, { "character": "な", "romaji": "na" }, { "character": "に", "romaji": "ni" }, { "character": "ぬ", "romaji": "nu" }, { "character": "ね", "romaji": "ne" }, { "character": "の", "romaji": "no" }, { "character": "は", "romaji": "ha" }, { "character": "ひ", "romaji": "hi" }, { "character": "ふ", "romaji": "fu" }, { "character": "へ", "romaji": "he" }, { "character": "ほ", "romaji": "ho" }, { "character": "ま", "romaji": "ma" }, { "character": "み", "romaji": "mi" }, { "character": "む", "romaji": "mu" }, { "character": "め", "romaji": "me" }, { "character": "も", "romaji": "mo" }, { "character": "や", "romaji": "ya" }, { "character": "-", "romaji": "-" }, { "character": "ゆ", "romaji": "yu" }, { "character": "-", "romaji": "-" }, { "character": "よ", "romaji": "yo" }, { "character": "ら", "romaji": "ra" }, { "character": "り", "romaji": "ri" }, { "character": "る", "romaji": "ru" }, { "character": "れ", "romaji": "re" }, { "character": "ろ", "romaji": "ro" }, { "character": "わ", "romaji": "wa" }, { "character": "-", "romaji": "-" }, { "character": "を", "romaji": "wo" }, { "character": "-", "romaji": "-" }, { "character": "ん", "romaji": "n" }], "With_Tenten": [{ "character": "が", "romaji": "ga" }, { "character": "ぎ", "romaji": "gi" }, { "character": "ぐ", "romaji": "gu" }, { "character": "げ", "romaji": "ge" }, { "character": "ご", "romaji": "go" }, { "character": "ざ", "romaji": "za" }, { "character": "じ", "romaji": "ji" }, { "character": "ず", "romaji": "zu" }, { "character": "ぜ", "romaji": "ze" }, { "character": "ぞ", "romaji": "zo" }, { "character": "だ", "romaji": "da" }, { "character": "ぢ", "romaji": "ji" }, { "character": "づ", "romaji": "zu" }, { "character": "で", "romaji": "de" }, { "character": "ど", "romaji": "do" }, { "character": "ば", "romaji": "ba" }, { "character": "び", "romaji": "bi" }, { "character": "ぶ", "romaji": "bu" }, { "character": "べ", "romaji": "be" }, { "character": "ぼ", "romaji": "bo" }], "With_Maru": [{ "character": "ぱ", "romaji": "pa" }, { "character": "ぴ", "romaji": "pi" }, { "character": "ぷ", "romaji": "pu" }, { "character": "ぺ", "romaji": "pe" }, { "character": "ぽ", "romaji": "po" }], "Combination_without_Tenten": [{ "character": "-", "romaji": "-" }, { "character": "きゃ", "romaji": "kya" }, { "character": "きゅ", "romaji": "kyu" }, { "character": "きょ", "romaji": "kyo" }, { "character": "-", "romaji": "-" }, { "character": "-", "romaji": "-" }, { "character": "しゃ", "romaji": "sha" }, { "character": "しゅ", "romaji": "shu" }, { "character": "しょ", "romaji": "sho" }, { "character": "-", "romaji": "-" }, { "character": "-", "romaji": "-" }, { "character": "ちゃ", "romaji": "cha" }, { "character": "ちゅ", "romaji": "chu" }, { "character": "ちょ", "romaji": "cho" }, { "character": "-", "romaji": "-" }, { "character": "-", "romaji": "-" }, { "character": "にゃ", "romaji": "nya" }, { "character": "にゅ", "romaji": "nyu" }, { "character": "にょ", "romaji": "nyo" }, { "character": "-", "romaji": "-" }, { "character": "-", "romaji": "-" }, { "character": "ひゃ", "romaji": "hya" }, { "character": "ひゅ", "romaji": "hyu" }, { "character": "ひょ", "romaji": "hyo" }, { "character": "-", "romaji": "-" }, { "character": "-", "romaji": "-" }, { "character": "みゃ", "romaji": "mya" }, { "character": "みゅ", "romaji": "myu" }, { "character": "みょ", "romaji": "myo" }, { "character": "-", "romaji": "-" }, { "character": "-", "romaji": "-" }, { "character": "りゃ", "romaji": "rya" }, { "character": "りゅ", "romaji": "ryu" }, { "character": "りょ", "romaji": "ryo" }, { "character": "-", "romaji": "-" }], "Combination_with_Tenten": [{ "character": "-", "romaji": "-" }, { "character": "ぎゃ", "romaji": "gya" }, { "character": "ぎゅ", "romaji": "gyu" }, { "character": "ぎょ", "romaji": "gyo" }, { "character": "-", "romaji": "-" }, { "character": "-", "romaji": "-" }, { "character": "じゃ", "romaji": "ja" }, { "character": "じゅ", "romaji": "ju" }, { "character": "じょ", "romaji": "jo" }, { "character": "-", "romaji": "-" }, { "character": "-", "romaji": "-" }, { "character": "びゃ", "romaji": "bya" }, { "character": "びゅ", "romaji": "byu" }, { "character": "びょ", "romaji": "byo" }, { "character": "-", "romaji": "-" }], "Combination_with_Maru": [{ "character": "-", "romaji": "-" }, { "character": "ぴゃ", "romaji": "pya" }, { "character": "ぴゅ", "romaji": "pyu" }, { "character": "ぴょ", "romaji": "pyo" }, { "character": "-", "romaji": "-" }] }
+
+        const combinedhiraganakatakana_dataset = [{ "character": "あ | ア", "romaji": "a" }, { "character": "い | イ", "romaji": "i" }, { "character": "う | ウ", "romaji": "u" }, { "character": "え | エ", "romaji": "e" }, { "character": "お | オ", "romaji": "o" }, { "character": "か | カ", "romaji": "ka | ga", "others": [{ "character": "か | カ", "romaji": "ka" }, { "character": "が | ガ", "romaji": "ga" }] }, { "character": "き | キ", "romaji": "ki | gi", "others": [{ "character": "き | キ", "romaji": "ki" }, { "character": "ぎ | ギ", "romaji": "gi" }] }, { "character": "く | ク", "romaji": "ku | gu", "others": [{ "character": "く | ク", "romaji": "ku" }, { "character": "ぐ | グ", "romaji": "gu" }] }, { "character": "け | ケ", "romaji": "ke | ge", "others": [{ "character": "け | ケ", "romaji": "ke" }, { "character": "げ | ゲ", "romaji": "ge" }] }, { "character": "こ | コ", "romaji": "ko | go", "others": [{ "character": "こ | コ", "romaji": "ko" }, { "character": "ご | ゴ", "romaji": "go" }] }, { "character": "さ | サ", "romaji": "sa | za", "others": [{ "character": "さ | サ", "romaji": "sa" }, { "character": "ざ | ザ", "romaji": "za" }] }, { "character": "し | シ", "romaji": "shi | ji", "others": [{ "character": "し | シ", "romaji": "shi" }, { "character": "じ | ジ", "romaji": "ji" }] }, { "character": "す | ス", "romaji": "su | zu", "others": [{ "character": "す | ス", "romaji": "su" }, { "character": "ず | ズ", "romaji": "zu" }] }, { "character": "せ | セ", "romaji": "se | ze", "others": [{ "character": "せ | セ", "romaji": "se" }, { "character": "ぜ | ゼ", "romaji": "ze" }] }, { "character": "そ | ソ", "romaji": "so | zo", "others": [{ "character": "そ | ソ", "romaji": "so" }, { "character": "ぞ | ゾ", "romaji": "zo" }] }, { "character": "た | タ", "romaji": "ta | da", "others": [{ "character": "た | タ", "romaji": "ta" }, { "character": "だ | ダ", "romaji": "da" }] }, { "character": "ち | チ", "romaji": "chi | ji", "others": [{ "character": "ち | チ", "romaji": "chi" }, { "character": "ぢ | ヂ", "romaji": "ji" }] }, { "character": "つ | ツ", "romaji": "tsu | zu", "others": [{ "character": "つ | ツ", "romaji": "tsu" }, { "character": "づ | ヅ", "romaji": "zu" }] }, { "character": "て | テ", "romaji": "te | de", "others": [{ "character": "て | テ", "romaji": "te" }, { "character": "で | デ", "romaji": "de" }] }, { "character": "と | ト", "romaji": "to | do", "others": [{ "character": "と | ト", "romaji": "to" }, { "character": "ど | ド", "romaji": "do" }] }, { "character": "な | ナ", "romaji": "na" }, { "character": "に | ニ", "romaji": "ni" }, { "character": "ぬ | ヌ", "romaji": "nu" }, { "character": "ね | ネ", "romaji": "ne" }, { "character": "の | ノ", "romaji": "no" }, { "character": "は | ハ", "romaji": "ha | ba | pa", "others": [{ "character": "は | ハ", "romaji": "ha" }, { "character": "ば | バ", "romaji": "ba" }, { "character": "ぱ | パ", "romaji": "pa" }] }, { "character": "ひ | ヒ", "romaji": "hi | bi | pi", "others": [{ "character": "ひ | ヒ", "romaji": "hi" }, { "character": "び | ビ", "romaji": "bi" }, { "character": "ぴ | ピ", "romaji": "pi" }] }, { "character": "ふ | フ", "romaji": "fu | bu | pu", "others": [{ "character": "ふ | フ", "romaji": "fu" }, { "character": "ぶ | ブ", "romaji": "bu" }, { "character": "ぷ | プ", "romaji": "pu" }] }, { "character": "へ", "romaji": "he |be | pe", "others": [{ "character": "へ", "romaji": "he" }, { "character": "べ", "romaji": "be" }, { "character": "ぺ", "romaji": "pe" }] }, { "character": "ほ | ホ", "romaji": "ho | bo | po", "others": [{ "character": "ほ | ホ", "romaji": "ho" }, { "character": "ぼ | ボ", "romaji": "bo" }, { "character": "ぽ | ポ", "romaji": "po" }] }, { "character": "ま | マ", "romaji": "ma" }, { "character": "み | ミ", "romaji": "mi" }, { "character": "む | ム", "romaji": "mu" }, { "character": "め | メ", "romaji": "me" }, { "character": "も | モ", "romaji": "mo" }, { "character": "や | ヤ", "romaji": "ya" }, { "character": "-", "romaji": "-" }, { "character": "ゆ | ユ", "romaji": "yu" }, { "character": "-", "romaji": "-" }, { "character": "よ | ヨ", "romaji": "yo" }, { "character": "ら | ラ", "romaji": "ra" }, { "character": "り | リ", "romaji": "ri" }, { "character": "る | ル", "romaji": "ru" }, { "character": "れ | レ", "romaji": "re" }, { "character": "ろ | ロ", "romaji": "ro" }, { "character": "わ | ワ", "romaji": "wa" }, { "character": "-", "romaji": "-" }, { "character": "を | ヲ", "romaji": "wo" }, { "character": "-", "romaji": "-" }, { "character": "ん | ン", "romaji": "n" }]
+
+        const japanese_dataset = [{ "Greetings": [{ "Japanese": "おはよう ございます", "Romaji": "ohayou gozaimasu", "English": "Good morning" }, { "Japanese": "こんにちは", "Romaji": "konnichiwa", "English": "Good afternoon / Hello / Hi" }, { "Japanese": "おやすみなさい", "Romaji": "oyasuminasai", "English": "Good Night" }, { "Japanese": "すみません", "Romaji": "sumimasen", "English": "Sorry / Excuse me / Thank you" }, { "Japanese": "ごめんなさい", "Romaji": "gomennasai", "English": "Sorry" }, { "Japanese": "みなさん", "Romaji": "minasan", "English": "Everyone" }, { "Japanese": "ありがとう ございます", "Romaji": "arigatou gozaimasu", "English": "Thank you" }, { "Japanese": "どういたしまして", "Romaji": "douitashimashite", "English": "You are welcome" }, { "Japanese": "じゃまた", "Romaji": "ja mata", "English": "See you again" }, { "Japanese": "さようなら", "Romaji": "sayounara", "English": "Goodbye" }, { "Japanese": "こんばんは", "Romaji": "konbanwa", "English": "Good evening" }, { "Japanese": "おねがいします", "Romaji": "onegaishimasu", "English": "Please (while asking a favor)" }, { "Japanese": "どうぞ", "Romaji": "douzo", "English": "Please (while offering something)" }, { "Japanese": "ください", "Romaji": "kudasai", "English": "Please" }, { "Japanese": "おめでとうございます", "Romaji": "omedetou gozaimasu", "English": "Congratulations" }, { "Japanese": "だいじょうぶです", "Romaji": "daijoubu desu", "English": "It’s ok / Alright" }, { "Japanese": "たんじょうび", "Romaji": "tanjoubi", "English": "Birthday" }], "ClassroomInstructions": [{ "Japanese": "はじめます", "Romaji": "hajimemasu", "English": "To start" }, { "Japanese": "わかります", "Romaji": "wakarimasu", "English": "To understand" }, { "Japanese": "やすみます", "Romaji": "yasumimasu", "English": "To take a break/rest" }, { "Japanese": "おわります", "Romaji": "owarimasu", "English": "To finish" }], "QuestionTypes": [{ "Japanese": "はじめましょうか", "Romaji": "hajimemashou ka", "English": "Shall we start?" }, { "Japanese": "やすみましょうか", "Romaji": "yasumimashou ka", "English": "Shall we take a break?" }, { "Japanese": "おわりましょうか", "Romaji": "owarimashou ka", "English": "Shall we finish?" }, { "Japanese": "わかりますか", "Romaji": "wakarimasu ka", "English": "Do you understand?" }], "PluralTypes": [{ "Japanese": "はじめましょう", "Romaji": "hajimemashou", "English": "Let’s start" }, { "Japanese": "やすみましょう", "Romaji": "yasumimashou", "English": "Let’s take a break" }, { "Japanese": "おわりましょう", "Romaji": "owarimashou", "English": "Let’s finish" }], "DaysOfTheWeek": [{ "Japanese": "にちようび", "Romaji": "nichiyoubi", "English": "Sunday (Sun)" }, { "Japanese": "げつようび", "Romaji": "getsuyoubi", "English": "Monday (Moon)" }, { "Japanese": "かようび", "Romaji": "kayoubi", "English": "Tuesday (Fire)" }, { "Japanese": "すいようび", "Romaji": "suiyoubi", "English": "Wednesday (Water)" }, { "Japanese": "もくようび", "Romaji": "mokuyoubi", "English": "Thursday (Tree/Wood)" }, { "Japanese": "きんようび", "Romaji": "kinyoubi", "English": "Friday (Gold)" }, { "Japanese": "どようび", "Romaji": "doyoubi", "English": "Saturday (Soil/Earth)" }, { "Japanese": "なんようび ですか", "Romaji": "nanyoubi desu ka", "English": "What day?" }, { "Japanese": "きょうは なんようび ですか？", "Romaji": "kyou wa nanyoubi desu ka?", "English": "What is the day today?" }], "Days": [{ "Japanese": "おととい", "Romaji": "ototoi", "English": "Day before yesterday" }, { "Japanese": "きのう/さくじつ", "Romaji": "kinou/sakujitsu", "English": "Yesterday" }, { "Japanese": "きょう/ほんじつ", "Romaji": "kyou/honjitsu", "English": "Today" }, { "Japanese": "あした/あす/よくじつ", "Romaji": "ashita/asu/yokujitsu", "English": "Tomorrow" }, { "Japanese": "あさって", "Romaji": "asatte", "English": "Day after tomorrow" }], "Year": [{ "Japanese": "おととし", "Romaji": "ototoshi", "English": "Year before last" }, { "Japanese": "きょねん", "Romaji": "kyonen", "English": "Last year" }, { "Japanese": "ことし", "Romaji": "kotoshi", "English": "This year" }, { "Japanese": "らいねん", "Romaji": "rainen", "English": "Next year" }, { "Japanese": "さらいねん", "Romaji": "sarainen", "English": "Year after next" }], "Month": [{ "Japanese": "せんせんげつ", "Romaji": "sensengestu", "English": "Month before last" }, { "Japanese": "せんげつ", "Romaji": "sengetsu", "English": "Last month" }, { "Japanese": "こんげつ", "Romaji": "kongetsu", "English": "This month" }, { "Japanese": "らいげつ", "Romaji": "raigetsu", "English": "Next month" }, { "Japanese": "さらいげつ", "Romaji": "saraigetsu", "English": "Month after next" }], "Week": [{ "Japanese": "せんせんしゅう", "Romaji": "sensenshuu", "English": "Week before last" }, { "Japanese": "せんしゅう", "Romaji": "senshuu", "English": "Last week" }, { "Japanese": "こんしゅう", "Romaji": "konshuu", "English": "This week" }, { "Japanese": "らいしゅう", "Romaji": "raishuu", "English": "Next week" }, { "Japanese": "さらいしゅう", "Romaji": "saraishuu", "English": "Week after next" }], "Numbers-Basic": [{ "Japanese": "いち", "Romaji": "ichi", "English": "1" }, { "Japanese": "に", "Romaji": "ni", "English": "2" }, { "Japanese": "さん", "Romaji": "san", "English": "3" }, { "Japanese": "よん/よ/し", "Romaji": "yon/yo/shi", "English": "4" }, { "Japanese": "ご", "Romaji": "go", "English": "5" }, { "Japanese": "ろく", "Romaji": "roku", "English": "6" }, { "Japanese": "なな/しち", "Romaji": "nana/shichi", "English": "7" }, { "Japanese": "はち", "Romaji": "hachi", "English": "8" }, { "Japanese": "きゅう/く", "Romaji": "kyuu/ku", "English": "9" }, { "Japanese": "じゅう", "Romaji": "juu", "English": "10" }], "Tens": [{ "Japanese": "じゅういち", "Romaji": "juuichi", "English": "11" }, { "Japanese": "じゅうに", "Romaji": "juuni", "English": "12" }, { "Japanese": "じゅうさん", "Romaji": "juusan", "English": "13" }, { "Japanese": "じゅうよん", "Romaji": "juuyon", "English": "14" }, { "Japanese": "じゅうご", "Romaji": "juugo", "English": "15" }, { "Japanese": "じゅうろく", "Romaji": "juuroku", "English": "16" }, { "Japanese": "じゅうなな", "Romaji": "juunana", "English": "17" }, { "Japanese": "じゅうはち", "Romaji": "juuhachi", "English": "18" }, { "Japanese": "じゅうきゅう", "Romaji": "juukyuu", "English": "19" }], "MultiplesOf10": [{ "Japanese": "にじゅう", "Romaji": "nijuu", "English": "20" }, { "Japanese": "にじゅういち", "Romaji": "nijuuichi", "English": "21" }], "Hundreds": [{ "Japanese": "ひゃく", "Romaji": "hyaku", "English": "100" }, { "Japanese": "にひゃく", "Romaji": "nihyaku", "English": "200" }, { "Japanese": "さんびゃく", "Romaji": "sanbyaku", "English": "300" }, { "Japanese": "よんひゃく", "Romaji": "yonhyaku", "English": "400" }, { "Japanese": "ごひゃく", "Romaji": "gohyaku", "English": "500" }, { "Japanese": "ろっぴゃく", "Romaji": "roppyaku", "English": "600" }, { "Japanese": "ななひゃく", "Romaji": "nanahyaku", "English": "700" }, { "Japanese": "はっぴゃく", "Romaji": "happyaku", "English": "800" }, { "Japanese": "きゅうひゃく", "Romaji": "kyuuhyaku", "English": "900" }], "Thousands": [{ "Japanese": "せん/いっせん", "Romaji": "sen/issen", "English": "1000" }, { "Japanese": "にせん", "Romaji": "nisen", "English": "2000" }, { "Japanese": "さんぜん", "Romaji": "sanzen", "English": "3000" }, { "Japanese": "よんせん", "Romaji": "yonsen", "English": "4000" }, { "Japanese": "ごせん", "Romaji": "gosen", "English": "5000" }, { "Japanese": "ろくせん", "Romaji": "rokusen", "English": "6000" }, { "Japanese": "ななせん", "Romaji": "nanasen", "English": "7000" }, { "Japanese": "はっせん", "Romaji": "hassen", "English": "8000" }, { "Japanese": "きゅうせん", "Romaji": "kyuusen", "English": "9000" }], "Ten-Thousands": [{ "Japanese": "いちまん", "Romaji": "ichiman", "English": "10,000" }, { "Japanese": "にまん", "Romaji": "niman", "English": "20,000" }, { "Japanese": "さんまん", "Romaji": "sanman", "English": "30,000" }, { "Japanese": "よんまん", "Romaji": "yonman", "English": "40,000" }, { "Japanese": "ごまん", "Romaji": "goman", "English": "50,000" }, { "Japanese": "ろくまん", "Romaji": "rokuman", "English": "60,000" }, { "Japanese": "ななまん", "Romaji": "nanaman", "English": "70,000" }, { "Japanese": "はちまん", "Romaji": "hachiman", "English": "80,000" }, { "Japanese": "きゅうまん", "Romaji": "kyuuman", "English": "90,000" }, { "Japanese": "じゅうまん", "Romaji": "juuman", "English": "One-Lac" }], "Time": [{ "Japanese": "ごぜん", "Romaji": "gozen", "English": "a.m." }, { "Japanese": "ごご", "Romaji": "gogo", "English": "p.m." }, { "Japanese": "いちじ", "Romaji": "ichiji", "English": "1 o’clock" }, { "Japanese": "にじ", "Romaji": "niji", "English": "2 o’clock" }, { "Japanese": "さんじ", "Romaji": "sanji", "English": "3 o’clock" }, { "Japanese": "よじ", "Romaji": "yoji", "English": "4 o’clock" }, { "Japanese": "ごじ", "Romaji": "goji", "English": "5 o’clock" }, { "Japanese": "ろくじ", "Romaji": "rokuji", "English": "6 o’clock" }, { "Japanese": "しちじ", "Romaji": "shichiji", "English": "7 o’clock" }, { "Japanese": "はちじ", "Romaji": "hachiji", "English": "8 o’clock" }, { "Japanese": "くじ", "Romaji": "kuji", "English": "9 o’clock" }, { "Japanese": "じゅうじ", "Romaji": "juuji", "English": "10 o’clock" }, { "Japanese": "じゅういちじ", "Romaji": "juuichiji", "English": "11 o’clock" }, { "Japanese": "じゅうにじ", "Romaji": "juuniji", "English": "12 o’clock" }, { "Japanese": "いまなんじですか？", "Romaji": "ima nanji desu ka?", "English": "What is the time now?" }], "Minutes": [{ "Japanese": "いっぷん", "Romaji": "ippun", "English": "1 minute" }, { "Japanese": "にふん", "Romaji": "nifun", "English": "2 minutes" }, { "Japanese": "さんぷん", "Romaji": "sanpun", "English": "3 minutes" }, { "Japanese": "よんぷん", "Romaji": "yonpun", "English": "4 minutes" }, { "Japanese": "ごふん", "Romaji": "gofun", "English": "5 minutes" }, { "Japanese": "ろっぷん", "Romaji": "roppun", "English": "6 minutes" }, { "Japanese": "ななふん", "Romaji": "nanafun", "English": "7 minutes" }, { "Japanese": "はっぷん", "Romaji": "happun", "English": "8 minutes" }, { "Japanese": "きゅうふん", "Romaji": "kyuufun", "English": "9 minutes" }, { "Japanese": "じゅっぷん/じっぷん", "Romaji": "juppun/jippun", "English": "10 minutes" }, { "Japanese": "じゅういっぷん", "Romaji": "juuippun", "English": "11 minutes" }, { "Japanese": "じゅうにふん", "Romaji": "juunifun", "English": "12 minutes" }, { "Japanese": "じゅうさんぷん", "Romaji": "juusanpun", "English": "13 minutes" }, { "Japanese": "じゅうきゅうふん", "Romaji": "juukyuufun", "English": "19 minutes" }, { "Japanese": "にじゅっぷん", "Romaji": "nijuppun", "English": "20 minutes" }, { "Japanese": "さんじゅっぷん/はん", "Romaji": "sanjuppun/han", "English": "30 minutes/half past" }, { "Japanese": "よんじゅっぷん", "Romaji": "yonjuppun", "English": "40 minutes" }, { "Japanese": "ごじゅっぷん", "Romaji": "gojuppun", "English": "50 minutes" }, { "Japanese": "ごじゅうきゅうふん", "Romaji": "gojuukyuu fun", "English": "59 minutes" }, { "Japanese": "なんぷん", "Romaji": "nanpun", "English": "What minute?" }], "Months": [{ "Japanese": "しょうがつ", "Romaji": "shougatsu", "English": "New Year" }, { "Japanese": "いちがつ", "Romaji": "ichigatsu", "English": "1st Month (January)" }, { "Japanese": "にがつ", "Romaji": "nigatsu", "English": "2nd Month (February)" }, { "Japanese": "さんがつ", "Romaji": "sangatsu", "English": "3rd Month (March)" }, { "Japanese": "しがつ", "Romaji": "shigatsu", "English": "4th Month (April)" }, { "Japanese": "ごがつ", "Romaji": "gogatsu", "English": "5th Month (May)" }, { "Japanese": "ろくがつ", "Romaji": "rokugatsu", "English": "6th Month (June)" }, { "Japanese": "しちがつ", "Romaji": "shichigatsu", "English": "7th Month (July)" }, { "Japanese": "はちがつ", "Romaji": "hachigatsu", "English": "8th Month (August)" }, { "Japanese": "くがつ", "Romaji": "kugatsu", "English": "9th Month (September)" }, { "Japanese": "じゅうがつ", "Romaji": "juugatsu", "English": "10th Month (October)" }, { "Japanese": "じゅういちがつ", "Romaji": "juuichigatsu", "English": "11th Month (November)" }, { "Japanese": "じゅうにがつ", "Romaji": "juunigatsu", "English": "12th Month (December)" }, { "Japanese": "なんがつ", "Romaji": "nangatsu", "English": "What month?" }], "Days_of_the_Month": [{ "Japanese": "ついたち", "Romaji": "tsuitachi", "English": "1st" }, { "Japanese": "ふつか", "Romaji": "futsuka", "English": "2nd" }, { "Japanese": "みっか", "Romaji": "mikka", "English": "3rd" }, { "Japanese": "よっか", "Romaji": "yokka", "English": "4th" }, { "Japanese": "いつか", "Romaji": "itsuka", "English": "5th" }, { "Japanese": "むいか", "Romaji": "muika", "English": "6th" }, { "Japanese": "なのか", "Romaji": "nanoka", "English": "7th" }, { "Japanese": "ようか", "Romaji": "youka", "English": "8th" }, { "Japanese": "ここのか", "Romaji": "kokonoka", "English": "9th" }, { "Japanese": "とおか", "Romaji": "tooka", "English": "10th" }, { "Japanese": "じゅういちにち", "Romaji": "juuichinichi", "English": "11th" }, { "Japanese": "じゅうににち", "Romaji": "juuninichi", "English": "12th" }, { "Japanese": "じゅうさんにち", "Romaji": "juusannichi", "English": "13th" }, { "Japanese": "じゅうよっか", "Romaji": "juuyokka", "English": "14th" }, { "Japanese": "じゅうごにち", "Romaji": "juugonichi", "English": "15th" }, { "Japanese": "じゅうろくにち", "Romaji": "juurokunichi", "English": "16th" }, { "Japanese": "じゅうしちにち", "Romaji": "juushichinichi", "English": "17th" }, { "Japanese": "じゅうはちにち", "Romaji": "juuhachinichi", "English": "18th" }, { "Japanese": "じゅうくにち", "Romaji": "juukunichi", "English": "19th" }, { "Japanese": "はつか", "Romaji": "hatsuka", "English": "20th" }, { "Japanese": "にじゅういちにち", "Romaji": "nijuuichinichi", "English": "21st" }, { "Japanese": "にじゅうににち", "Romaji": "nijuuninichi", "English": "22nd" }, { "Japanese": "にじゅうさんにち", "Romaji": "nijuusannichi", "English": "23rd" }, { "Japanese": "にじゅうよっか", "Romaji": "nijuuyokka", "English": "24th" }, { "Japanese": "にじゅごにち", "Romaji": "nijuugonichi", "English": "25th" }, { "Japanese": "にじゅうろくにち", "Romaji": "nijuurokunichi", "English": "26th" }, { "Japanese": "にじゅうしちにち", "Romaji": "nijuushichinichi", "English": "27th" }, { "Japanese": "にじゅうはちにち", "Romaji": "nijuuhachinichi", "English": "28th" }, { "Japanese": "にじゅうきゅうにち", "Romaji": "nijuukyuunichi", "English": "29th" }, { "Japanese": "さんじゅうにち", "Romaji": "sanjuunichi", "English": "30th" }, { "Japanese": "さんじゅういちにち", "Romaji": "sanjuuichinichi", "English": "31st" }, { "Japanese": "なんにち", "Romaji": "nannichi", "English": "What day?" }], "Colors": [{ "Japanese": "あかい/あか", "Romaji": "akai/aka", "English": "Red" }, { "Japanese": "あおい/あお", "Romaji": "aoi/ao", "English": "Blue" }, { "Japanese": "しろい/しろ", "Romaji": "shiroi/shiro", "English": "White" }, { "Japanese": "くろい/くろ", "Romaji": "kuroi/kuro", "English": "Black" }, { "Japanese": "ちゃいろ", "Romaji": "chairo", "English": "Brown" }, { "Japanese": "みどり", "Romaji": "midori", "English": "Green" }, { "Japanese": "むらさき", "Romaji": "murasaki", "English": "Purple" }, { "Japanese": "きいろ", "Romaji": "kiiro", "English": "Yellow" }, { "Japanese": "きん", "Romaji": "kin", "English": "Gold" }, { "Japanese": "ぎん", "Romaji": "gin", "English": "Silver" }, { "Japanese": "はいいろ", "Romaji": "haiiro", "English": "Grey" }, { "Japanese": "こんいろ", "Romaji": "koniro", "English": "Navy Blue" }, { "Japanese": "ピンク", "Romaji": "pinku", "English": "Pink" }, { "Japanese": "オレンジ", "Romaji": "orenji", "English": "Orange" }], "Position": [{ "Japanese": "うえ", "Romaji": "ue", "English": "Up/Above" }, { "Japanese": "した", "Romaji": "shita", "English": "Down/Under" }, { "Japanese": "まえ", "Romaji": "mae", "English": "Front/Before" }, { "Japanese": "うしろ", "Romaji": "ushiro", "English": "Behind/Back" }, { "Japanese": "あいだ", "Romaji": "aida", "English": "Between" }, { "Japanese": "ちかい", "Romaji": "chikai", "English": "Near" }, { "Japanese": "とおい", "Romaji": "tooi", "English": "Far" }, { "Japanese": "なか", "Romaji": "naka", "English": "Inside" }, { "Japanese": "そと", "Romaji": "soto", "English": "Outside" }, { "Japanese": "みぎ", "Romaji": "migi", "English": "Right" }, { "Japanese": "ひだり", "Romaji": "hidari", "English": "Left" }], "Directions": [{ "Japanese": "きた", "Romaji": "kita", "English": "North" }, { "Japanese": "みなみ", "Romaji": "minami", "English": "South" }, { "Japanese": "ひがし", "Romaji": "higashi", "English": "East" }, { "Japanese": "にし", "Romaji": "nishi", "English": "West" }], "Seasons": [{ "Japanese": "なつ", "Romaji": "natsu", "English": "Summer" }, { "Japanese": "あき", "Romaji": "aki", "English": "Autumn" }, { "Japanese": "ふゆ", "Romaji": "fuyu", "English": "Winter" }, { "Japanese": "はる", "Romaji": "haru", "English": "Spring" }], "Weather": [{ "Japanese": "あめ", "Romaji": "ame", "English": "Rain" }, { "Japanese": "ゆき", "Romaji": "yuki", "English": "Snow" }, { "Japanese": "くもり", "Romaji": "kumori", "English": "Cloudy" }, { "Japanese": "はれ", "Romaji": "hare", "English": "Clear" }], "Family": [{ "Japanese": "そふ", "Romaji": "sofu", "English": "Grandfather" }, { "Japanese": "そぼ", "Romaji": "sobo", "English": "Grandmother" }, { "Japanese": "ちち", "Romaji": "chichi", "English": "Father" }, { "Japanese": "はは", "Romaji": "haha", "English": "Mother" }, { "Japanese": "あに", "Romaji": "ani", "English": "Elder brother" }, { "Japanese": "あね", "Romaji": "ane", "English": "Elder sister" }, { "Japanese": "おとうと", "Romaji": "otouto", "English": "Younger brother" }, { "Japanese": "いもうと", "Romaji": "imouto", "English": "Younger sister" }, { "Japanese": "おじ", "Romaji": "oji", "English": "Uncle" }, { "Japanese": "おば", "Romaji": "oba", "English": "Aunt" }, { "Japanese": "むすこ", "Romaji": "musuko", "English": "Son" }, { "Japanese": "むすめ", "Romaji": "musume", "English": "Daughter" }, { "Japanese": "おっと/しゅじん", "Romaji": "otto/shujin", "English": "Husband" }, { "Japanese": "つま/かない", "Romaji": "tsuma/kanai", "English": "Wife" }, { "Japanese": "りょうしん", "Romaji": "ryoushin", "English": "Parents" }, { "Japanese": "こども", "Romaji": "kodomo", "English": "Children" }, { "Japanese": "ともだち", "Romaji": "tomodachi", "English": "Friend" }, { "Japanese": "しんせき", "Romaji": "shinseki", "English": "Relative" }, { "Japanese": "まご", "Romaji": "mago", "English": "Grandchild" }, { "Japanese": "あかちゃん", "Romaji": "akachan", "English": "Baby" }, { "Japanese": "きょうだい", "Romaji": "kyoudai", "English": "Siblings" }, { "Japanese": "しまい", "Romaji": "shimai", "English": "Sisters" }, { "Japanese": "いとこ", "Romaji": "itoko", "English": "Cousin" }], "Other_Family": [{ "Japanese": "おじいさん", "Romaji": "ojiisan", "English": "Grandfather" }, { "Japanese": "おばあさん", "Romaji": "obaasan", "English": "Grandmother" }, { "Japanese": "おとうさん", "Romaji": "otousan", "English": "Father" }, { "Japanese": "おかあさん", "Romaji": "okaasan", "English": "Mother" }, { "Japanese": "おにいさん", "Romaji": "oniisan", "English": "Elder brother" }, { "Japanese": "おねえさん", "Romaji": "oneesan", "English": "Elder sister" }, { "Japanese": "おとうとさん", "Romaji": "otoutosan", "English": "Younger brother" }, { "Japanese": "いもうとさん", "Romaji": "imoutosan", "English": "Younger sister" }, { "Japanese": "おじさん", "Romaji": "ojisan", "English": "Uncle" }, { "Japanese": "おばさん", "Romaji": "obasan", "English": "Aunt" }, { "Japanese": "むすこさん", "Romaji": "musukosan", "English": "Son" }, { "Japanese": "むすめさん", "Romaji": "musumesan", "English": "Daughter" }, { "Japanese": "ごしゅじん", "Romaji": "goshujin", "English": "Husband" }, { "Japanese": "おくさん", "Romaji": "okusan", "English": "Wife" }, { "Japanese": "ごりょうしん", "Romaji": "goryoushin", "English": "Parents" }, { "Japanese": "こども", "Romaji": "kodomo", "English": "Children" }, { "Japanese": "ともだち", "Romaji": "tomodachi", "English": "Friend" }, { "Japanese": "しんせき", "Romaji": "shinseki", "English": "Relative" }, { "Japanese": "ごまご", "Romaji": "gomago", "English": "Grandchild" }, { "Japanese": "あかちゃん", "Romaji": "akachan", "English": "Baby" }, { "Japanese": "ごきょうだい", "Romaji": "gokyoudai", "English": "Siblings" }, { "Japanese": "ごしまい", "Romaji": "goshimai", "English": "Sisters" }, { "Japanese": "いとこ", "Romaji": "itoko", "English": "Cousin" }], "Body_Parts": [{ "Japanese": "あたま", "Romaji": "atama", "English": "Head" }, { "Japanese": "ひたい", "Romaji": "hitai", "English": "Forehead" }, { "Japanese": "め", "Romaji": "me", "English": "Eye" }, { "Japanese": "みみ", "Romaji": "mimi", "English": "Ear" }, { "Japanese": "はな", "Romaji": "hana", "English": "Nose" }, { "Japanese": "くち", "Romaji": "kuchi", "English": "Mouth" }, { "Japanese": "あご", "Romaji": "ago", "English": "Chin" }, { "Japanese": "かた", "Romaji": "kata", "English": "Shoulder" }, { "Japanese": "うで", "Romaji": "ude", "English": "Arm" }, { "Japanese": "ほね", "Romaji": "hone", "English": "Bone" }, { "Japanese": "て", "Romaji": "te", "English": "Hand" }, { "Japanese": "ゆび", "Romaji": "yubi", "English": "Fingers" }, { "Japanese": "てくび", "Romaji": "tekubi", "English": "Wrist" }, { "Japanese": "まゆ", "Romaji": "mayu", "English": "Eyebrow" }, { "Japanese": "まつげ", "Romaji": "matsuge", "English": "Eyelashes" }, { "Japanese": "からだ", "Romaji": "karada", "English": "Body" }, { "Japanese": "あし", "Romaji": "ashi", "English": "Leg" }, { "Japanese": "あしくび", "Romaji": "ashikubi", "English": "Ankle" }, { "Japanese": "こし", "Romaji": "koshi", "English": "Waist" }, { "Japanese": "はだ", "Romaji": "hada", "English": "Skin" }, { "Japanese": "つめ", "Romaji": "tsume", "English": "Nail" }, { "Japanese": "ほほ", "Romaji": "hoho", "English": "Cheek" }, { "Japanese": "くび", "Romaji": "kubi", "English": "Neck" }, { "Japanese": "むね", "Romaji": "mune", "English": "Chest" }, { "Japanese": "おなか", "Romaji": "onaka", "English": "Stomach" }, { "Japanese": "は", "Romaji": "ha", "English": "Teeth" }, { "Japanese": "くちびる", "Romaji": "kuchibiru", "English": "Lips" }, { "Japanese": "かみ", "Romaji": "kami", "English": "Hair" }], "Daily_Phrases": [{ "Japanese": "ごちゅうもんは", "Romaji": "gochuumon wa", "English": "Placing an order" }, { "Japanese": "かしこまりました", "Romaji": "kashikomarimashita", "English": "Confirming an order" }, { "Japanese": "いただきます", "Romaji": "itadakimasu", "English": "Thank you for the food (Before eating)" }, { "Japanese": "ごちそうさまでした", "Romaji": "gochisousama deshita", "English": "Thank you for the food (After eating)" }, { "Japanese": "ただいま", "Romaji": "tadaima", "English": "I am home/I’m back" }, { "Japanese": "おかえりなさい", "Romaji": "okaerinasai", "English": "Welcome back" }, { "Japanese": "いってきます", "Romaji": "ittekimasu", "English": "I will go and come" }, { "Japanese": "いってらっしゃい", "Romaji": "itterasshai", "English": "Yes, you go and come" }, { "Japanese": "いらっしゃい", "Romaji": "irasshai", "English": "Welcome" }, { "Japanese": "いらっしゃいませ", "Romaji": "irasshaimase", "English": "Welcome (To customers in a shop, store, etc.)" }, { "Japanese": "ごめんください", "Romaji": "gomenkudasai", "English": "May I come in?" }, { "Japanese": "どうぞ おあがりください", "Romaji": "douzo oagari kudasai", "English": "Yes, you may come in" }, { "Japanese": "いっしょに いかがですか", "Romaji": "issho ni ikaga desu ka", "English": "Won’t you join us?" }, { "Japanese": "いいえ、ちょっと", "Romaji": "iie, chotto", "English": "It’s a bit difficult" }, { "Japanese": "だめですか", "Romaji": "dame desu ka", "English": "So, you can’t come?" }, { "Japanese": "また こんど おねがいします", "Romaji": "mata kondo onegaishimasu", "English": "Please ask me some other time" }, { "Japanese": "もういっぱい いかがですか", "Romaji": "mou ippai ikaga desu ka", "English": "Would you like to have one more cup?" }, { "Japanese": "いいえ、けっこう です", "Romaji": "iie, kekkou desu", "English": "Polite way of refusing" }, { "Japanese": "もういちど おねがいします", "Romaji": "mou ichido onegaishimasu", "English": "Can you repeat one more time?" }, { "Japanese": "そろそろ しつれいします", "Romaji": "sorosoro shitsurei shimasu", "English": "I’m leaving before you" }, { "Japanese": "おげんきですか", "Romaji": "ogenki desu ka", "English": "How are you?" }, { "Japanese": "いいでんきですね", "Romaji": "ii denki desu ne", "English": "Nice weather" }] }]
+
+        function renderFlashcards() {
+            debugger
+            const accordionContainer = $('#accordionExample');
+            accordionContainer.empty(); // Clear existing accordion content before rendering
+
+            // Function to generate card HTML for any dataset
+            function generateCards(flashcards, title, datasetType, mode) {
+                let cardsHtml = `
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading${title}">
+                            <button
+                                class="accordion-button collapsed"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#collapse${title}"
+                                aria-expanded="false"
+                                aria-controls="collapse${title}">
+                                ${title}
+                                ${mode == 2 ? `<span class="badge rounded-pill text-bg-primary" id="score${title}" style="margin-left: 5px;"></span>` : ''}
+                            </button>
+                        </h2>
+                        <div id="collapse${title}"
+                            class="accordion-collapse collapse"
+                            aria-labelledby="heading${title}"
+                            data-bs-parent="#accordionExample">
+                            <div class="accordion-body" id="collapse${title}id">
+                                ${mode == 4
+                                ? `<div class="toggle-pronunciation-container text-end">
+                                    <button
+                                        class="btn btn-primary btn-sm toggle-pronunciation"
+                                        data-target="#collapse ${title}"
+                                        style="display: none;">
+                                        <i class="bi bi-eye-slash-fill")></i>
+                                    </button>
+                                </div>` : '' }
+                                <div class="${mode === 4 || mode === 5 ? title.replace('-Quiz','') : 'kanji-flashcard-container'}">`
+                if (mode == 1) {
+                    flashcards.forEach((card, index) => {
+                        cardsHtml += `
+                        <div class=${datasetType === 'kanji' ? `kanji-card` : 'kanji-card2'}>
+                            <div class="kanji-card-header">
+                                ${card.character}
+                            </div>
+                            <div class="kanji-card-body">
+                                <div class="kanji-romaji">${card.romaji}</div>
+                                ${datasetType === 'kanji'
+                                ? `<div class="kanji-meaning">${card.meaning}</div>`
+                                : ''
+                            }
+                            </div>
+                        </div>
+                        `;
+                    });
+                } else if (mode == 2) {
+                    flashcards.forEach((card, index) => {
+                        cardsHtml += `
+                        <div class="qzm2-card">
+                            <div class="qzm2-card-inner">
+                                <div class="qzm2-card-front">
+                                    <div class="kanji-card-header">${card.romaji}</div>
+                                </div>
+                                <div class="qzm2-card-back">
+                                    <div class="kanji-card-header">${card.character}</div>
+                                </div>
+                            </div>
+                        </div>
+                        `;
+                    });
+                } else if (mode == 3) {
+                    flashcards.forEach((card, index) => {
+                        cardsHtml += card?.others ? `
+                        <div id="carouselExample${index}" class="carousel slide" data-bs-touch="true">
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <div class="card2">
+                                        <div class="character">
+                                            <span>${card.character}</span>
+                                        </div>
+                                        <div class="pronunciation">
+                                            ${card.romaji}
+                                        </div>
+                                    </div>
+                                </div>
+                                ${card?.others ? card.others.map((item, index) => `
+                                <div class="carousel-item">
+                                    <div class="card2">
+                                        <div class="character">
+                                            <span>${item.character}</span>
+                                        </div>
+                                        <div class="pronunciation">
+                                            ${item.romaji}
+                                        </div>
+                                    </div>
+                                </div>
+                                `).join('') : ''}
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample${index}" data-bs-slide="prev">
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample${index}" data-bs-slide="next">
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>` :
+                            `<div class="card2">
+                            <div class="character">
+                                <span>${card.character}</span>
+                            </div>
+                            <div class="pronunciation">
+                                ${card.romaji}
+                            </div>
+                        </div>`
+                            ;
+                    });
+
+                } else if (mode == 4) {
+                    flashcards.forEach((card, index) => {
+                        cardsHtml += `
+                        <div class=${datasetType === 'kanji' ? `kanji-card` : 'kanji-card2'}>
+                            <div class="kanji-card-header">
+                                ${card.Japanese}
+                            </div>
+                            <div class="kanji-card-body">
+                                <div class="kanji-romaji dupprono">${card.Romaji}</div>
+                                <div class="kanji-romaji dupmeaning">${card.English}</div>
+                            </div>
+                        </div>
+                        `;
+                    });
+                } else if (mode == 5) {
+                    flashcards.forEach((card, index) => {
+                        cardsHtml += `
+                        <div class="qzm2-card">
+                            <div class="qzm2-card-inner">
+                                <div class="qzm2-card-front">
+                                    <div class="kanji-card-header">${card.English}</div>
+                                </div>
+                                <div class="qzm2-card-back">
+                                    <div class="kanji-card-header">${card.Japanese}</div>
+                                </div>
+                            </div>
+                        </div>
+                        `;
+                    });
+                }
+
+                cardsHtml += `
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    `;
+                databindonreference = 1;
+                return cardsHtml;
+            }
+
+            let orderedhiraganaCards = [
+                ...hiraganaFlashcards.Basic.slice(0, 10),
+                ...hiraganaFlashcards.Combination_without_Tenten.slice(0, 5),
+                ...hiraganaFlashcards.With_Tenten.slice(0, 5),
+                ...hiraganaFlashcards.Combination_with_Tenten.slice(0, 5),
+
+                ...hiraganaFlashcards.Basic.slice(10, 15),
+                ...hiraganaFlashcards.Combination_without_Tenten.slice(5, 10),
+                ...hiraganaFlashcards.With_Tenten.slice(5, 10),
+                ...hiraganaFlashcards.Combination_with_Tenten.slice(5, 10),
+
+                ...hiraganaFlashcards.Basic.slice(15, 20),
+                ...hiraganaFlashcards.Combination_without_Tenten.slice(10, 15),
+                ...hiraganaFlashcards.With_Tenten.slice(10, 15),
+
+                ...hiraganaFlashcards.Basic.slice(20, 25),
+                ...hiraganaFlashcards.Combination_without_Tenten.slice(15, 20),
+
+                ...hiraganaFlashcards.Basic.slice(25, 30),
+                ...hiraganaFlashcards.Combination_without_Tenten.slice(20, 25),
+                ...hiraganaFlashcards.With_Tenten.slice(15, 20),
+                ...hiraganaFlashcards.Combination_with_Tenten.slice(10, 15),
+                ...hiraganaFlashcards.With_Maru,
+                ...hiraganaFlashcards.Combination_with_Maru,
+
+                ...hiraganaFlashcards.Basic.slice(30, 35),
+                ...hiraganaFlashcards.Combination_without_Tenten.slice(25, 30),
+
+                ...hiraganaFlashcards.Basic.slice(35, 40),
+                ...hiraganaFlashcards.Basic.slice(40, 45),
+                ...hiraganaFlashcards.Combination_without_Tenten.slice(30, 35),
+
+                ...hiraganaFlashcards.Basic.slice(45, 50)
+            ];
+            let orderedkataganaCards = [
+                ...katakanaFlashcards.Basic.slice(0, 10),
+                ...katakanaFlashcards.Combination_without_Tenten.slice(0, 5),
+                ...katakanaFlashcards.With_Tenten.slice(0, 5),
+                ...katakanaFlashcards.Combination_with_Tenten.slice(0, 5),
+
+                ...katakanaFlashcards.Basic.slice(10, 15),
+                ...katakanaFlashcards.Combination_without_Tenten.slice(5, 10),
+                ...katakanaFlashcards.With_Tenten.slice(5, 10),
+                ...katakanaFlashcards.Combination_with_Tenten.slice(5, 10),
+
+                ...katakanaFlashcards.Basic.slice(15, 20),
+                ...katakanaFlashcards.Combination_without_Tenten.slice(10, 15),
+                ...katakanaFlashcards.With_Tenten.slice(10, 15),
+
+                ...katakanaFlashcards.Basic.slice(20, 25),
+                ...katakanaFlashcards.Combination_without_Tenten.slice(15, 20),
+
+                ...katakanaFlashcards.Basic.slice(25, 30),
+                ...katakanaFlashcards.Combination_without_Tenten.slice(20, 25),
+                ...katakanaFlashcards.With_Tenten.slice(15, 20),
+                ...katakanaFlashcards.Combination_with_Tenten.slice(10, 15),
+                ...katakanaFlashcards.With_Maru,
+                ...katakanaFlashcards.Combination_with_Maru,
+
+                ...katakanaFlashcards.Basic.slice(30, 35),
+                ...katakanaFlashcards.Combination_without_Tenten.slice(25, 30),
+
+                ...katakanaFlashcards.Basic.slice(35, 40),
+                ...katakanaFlashcards.Basic.slice(40, 45),
+                ...katakanaFlashcards.Combination_without_Tenten.slice(30, 35),
+
+                ...katakanaFlashcards.Basic.slice(45, 50)
+            ]
+
+            accordionContainer.append(generateCards(combinedhiraganakatakana_dataset, 'Hiragana-Katagana', 'hiraganakatagana', 3));
+            accordionContainer.append(generateCards(orderedhiraganaCards, 'Hiragana', 'hiragana', 1));
+            accordionContainer.append(generateCards(shuffleArray(shuffleArray(orderedhiraganaCards.filter(a => a.character != '-'))), 'Hiragana-Quiz', 'hiragana', 2));
+            accordionContainer.append(generateCards(orderedkataganaCards, 'Katakana', 'katakana', 1));
+            accordionContainer.append(generateCards(shuffleArray(shuffleArray(orderedkataganaCards.filter(a => a.character != '-'))), 'Katagana-Quiz', 'katagana', 2));
+            
+            for (const [category, items] of Object.entries(japanese_dataset[0])) {
+                accordionContainer.append(generateCards(items, category, category, 4));
+                accordionContainer.append(generateCards(items, `${category}-Quiz`, category, 5));
+            }
+            
+            accordionContainer.append(generateCards(kanjiFlashcards, 'Kanji', 'kanji', 1));
+
+            $('.qzm2-card').on('click', function () {
+                $(this).toggleClass('flipped');
+            });
+        }
+        // Ensure event is bound only once
+        $(document).off('click', '.toggle-pronunciation').on('click', '.toggle-pronunciation', function () {
+            const target = $(this).data('target'); // Get the target accordion
+            const romajiElements = $(`${target} .kanji-romaji`); // Select kanji-romaji elements within the target
+
+            if (romajiElements.is(':visible')) {
+                romajiElements.hide(); // Hide if visible
+                $(this).html('<i class="bi bi-eye-fill"></i>'); // Update button to "Show Pronunciation" icon
+            } else {
+                romajiElements.show(); // Show if hidden
+                $(this).html('<i class="bi bi-eye-slash-fill"></i>'); // Update button to "Hide Pronunciation" icon
+            }
+        });
+
+        // Accordion show/hide handlers to control button visibility
+        $(document).on('show.bs.collapse', function (e) {
+            const target = $(e.target); // Target accordion being opened
+            const button = target.find('.toggle-pronunciation'); // Find the button inside it
+            button.show(); // Show the button when accordion opens
+        });
+
+        $(document).on('hide.bs.collapse', function (e) {
+            const target = $(e.target); // Target accordion being closed
+            const button = target.find('.toggle-pronunciation'); // Find the button inside it
+            button.hide(); // Hide the button when accordion closes
+        });
+        function adddatatohistorytable(item) {
+
+            $('#quizTable').bootstrapTable('append', [item])
+            $('#quizTable').bootstrapTable('scrollTo', 'bottom')
+
+            let key = 'history_quiz'
+            if (sessionStorage.getItem(key) !== null) {
+                let dataset = JSON.parse(sessionStorage.getItem(key))
+                if (dataset.length > 0 && history_dataset.length == 0) {
+                    history_dataset = dataset;
+                }
+                sessionStorage.setItem(key, JSON.stringify(history_dataset));
+            } else {
+                sessionStorage.setItem(key, JSON.stringify(history_dataset));
+            }
+        }
+
+        $(document).on('click', '.qzm2-card', function () {
+            let HiraganaScore = $('#collapseHiragana-Quiz .accordion-body .kanji-flashcard-container .qzm2-card.flipped').length;
+            let KataganaScore = $('#collapseKatagana-Quiz .accordion-body .kanji-flashcard-container .qzm2-card.flipped').length;
+            if (HiraganaScore == 0) {
+                $('#scoreHiragana-Quiz').hide()
+            }
+            if (KataganaScore == 0) {
+                $('#scoreKatagana-Quiz').hide()
+            } if (HiraganaScore > 0) {
+                $('#scoreHiragana-Quiz').show()
+            }
+            if (KataganaScore > 0) {
+                $('#scoreKatagana-Quiz').show()
+            }
+            $('#scoreHiragana-Quiz').text(HiraganaScore)
+            $('#scoreKatagana-Quiz').text(KataganaScore)
+
+        });
+
+        $(document).off('click', '.toggle-pronunciation').on('click', '.toggle-pronunciation', function () {
+            const target = $(this).data('target').replace('#collapse ','.'); // Get the target accordion
+            const romajiElements = $(`${target} .dupprono`); // Select kanji-romaji elements within the target
+
+            if (romajiElements.is(':visible')) {
+                romajiElements.hide(500); // Hide if visible
+                $(this).html('<i class="bi bi-eye-fill"></i>'); // Update button to "Show Pronunciation" icon
+            } else {
+                romajiElements.show(500); // Show if hidden
+                $(this).html('<i class="bi bi-eye-slash-fill"></i>'); // Update button to "Hide Pronunciation" icon
+            }
+        });
+
+        // Accordion show/hide handlers to control button visibility
+        $(document).on('show.bs.collapse', function (e) {
+            const target = $(e.target); // Target accordion being opened
+            const button = target.find('.toggle-pronunciation'); // Find the button inside it
+            button.show(); // Show the button when accordion opens
+        });
+
+        $(document).on('hide.bs.collapse', function (e) {
+            const target = $(e.target); // Target accordion being closed
+            const button = target.find('.toggle-pronunciation'); // Find the button inside it
+            button.hide(); // Hide the button when accordion closes
+        });
+    </script>
+</body>
+
+</html>
