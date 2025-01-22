@@ -147,12 +147,8 @@
             /* Prevent overflow */
         }
 
-        .Greetings,.QuestionTypes,.DaysOfTheWeek,.Days,.Daily_Phrases,.ClassroomInstructions,.PluralTypes,.Year,
-        .Month,.Week,.Numbers-Basic,.MultiplesOf10,.Time,.Minutes,.Months,
-        .Days_of_the_Month,.Colors,.Position,.Directions,.Seasons,.Weather,.Family,.Other_Family,
-        .Body_Parts,.One-Lac,.Ten-Thousands,.Thousands,.Tens,.Hundreds,.Instructions,.PersonalPronouns, 
-        .Titles_n_Honorifics, .Professions_n_Roles, .Locations, .Miscellaneous, .BasicVocabulary_n_Phrases, 
-        .PoliteExpressions, .Self-IntroductionPhrases, .Countries, .FictitiousInstitutions {
+        .Lesson1,
+        .Basic {
             display: grid;
             grid-template-columns: repeat(auto, minmax(115px, 1fr));
             gap: 20px;
@@ -530,6 +526,13 @@
         .carousel-inner,
         .carousel-item {
             border-radius: 10px;
+        }
+
+        .dupsubtitle {
+            display: flex;
+            text-align: left;
+            font-size: 1rem;
+            font-weight: 600;
         }
     </style>
 </head>
@@ -1094,7 +1097,6 @@
             }
         }
         function onclick_pagetype_radio(value) {
-            debugger
             if (value == 1) {
                 pagevalue = value;
                 $('#input-container').slideDown();
@@ -1214,7 +1216,6 @@
         }]
 
         function renderFlashcards() {
-            debugger
             const accordionContainer = $('#accordionExample');
             accordionContainer.empty(); // Clear existing accordion content before rendering
 
@@ -1326,10 +1327,11 @@
                         </div>`
                             ;
                     });
-
                 } else if (mode == 4) {
-                    flashcards.forEach((card, index) => {
-                        cardsHtml += `
+                    for (const [category, items] of Object.entries(flashcards)) {
+                        cardsHtml += `<h4 class="dupsubtitle">${category.replace('&', '_n_')}</h4>`
+                        items.forEach((card, index) => {
+                            cardsHtml += `
                         <div class=${datasetType === 'kanji' ? `kanji-card` : 'kanji-card2'}>
                             <div class="kanji-card-header">
                                 ${card.Japanese}
@@ -1340,7 +1342,8 @@
                             </div>
                         </div>
                         `;
-                    });
+                        });
+                    }
                 } else if (mode == 5) {
                     flashcards.forEach((card, index) => {
                         cardsHtml += `
@@ -1443,17 +1446,8 @@
             accordionContainer.append(generateCards(orderedkataganaCards, 'Katakana', 'katakana', 1));
             accordionContainer.append(generateCards(shuffleArray(shuffleArray(orderedkataganaCards.filter(a => a.character != '-'))), 'Katagana-Quiz', 'katagana', 2));
 
-            for (const [category, items] of Object.entries(japanese_dataset[0])) {
-                accordionContainer.append(generateCards(items, category.replace('&','_n_'), category, 4));
-                //accordionContainer.append(generateCards(items, `${category}-Quiz`, category, 5));
-            }
-            var a = []
-            for (const [category, items] of Object.entries(japanese_dataset1[0])) {
-                accordionContainer.append(generateCards(items, category.replace('&','_n_'), category, 4));
-                a.push(category.replace('&','_n_'))
-                //accordionContainer.append(generateCards(items, `${category}-Quiz`, category, 5));
-            }
-            console.log(a)  
+            accordionContainer.append(generateCards(japanese_dataset[0], 'Basic', 'Basic', 4));
+            accordionContainer.append(generateCards(japanese_dataset1[0], 'Lesson1', 'Lesson1', 4));
 
             accordionContainer.append(generateCards(kanjiFlashcards, 'Kanji', 'kanji', 1));
 
