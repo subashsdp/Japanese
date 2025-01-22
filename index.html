@@ -147,36 +147,12 @@
             /* Prevent overflow */
         }
 
-        .Greetings,
-        .QuestionTypes,
-        .DaysOfTheWeek,
-        .Days,
-        .Daily_Phrases,
-        .ClassroomInstructions,
-        .PluralTypes,
-        .Year,
-        .Month,
-        .Week,
-        .Numbers-Basic,
-        .MultiplesOf10,
-        .Time,
-        .Minutes,
-        .Months,
-        .Days_of_the_Month,
-        .Colors,
-        .Position,
-        .Directions,
-        .Seasons,
-        .Weather,
-        .Family,
-        .Other_Family,
-        .Body_Parts,
-        .One-Lac,
-        .Ten-Thousands,
-        .Thousands,
-        .Tens,
-        .Hundreds,
-        .Instructions {
+        .Greetings,.QuestionTypes,.DaysOfTheWeek,.Days,.Daily_Phrases,.ClassroomInstructions,.PluralTypes,.Year,
+        .Month,.Week,.Numbers-Basic,.MultiplesOf10,.Time,.Minutes,.Months,
+        .Days_of_the_Month,.Colors,.Position,.Directions,.Seasons,.Weather,.Family,.Other_Family,
+        .Body_Parts,.One-Lac,.Ten-Thousands,.Thousands,.Tens,.Hundreds,.Instructions,.PersonalPronouns, 
+        .Titles_n_Honorifics, .Professions_n_Roles, .Locations, .Miscellaneous, .BasicVocabulary_n_Phrases, 
+        .PoliteExpressions, .Self-IntroductionPhrases, .Countries, .FictitiousInstitutions {
             display: grid;
             grid-template-columns: repeat(auto, minmax(115px, 1fr));
             gap: 20px;
@@ -1359,7 +1335,7 @@
                                 ${card.Japanese}
                             </div>
                             <div class="kanji-card-body">
-                                <div class="kanji-romaji dupprono">${card.Romaji}</div>
+                                <div class="kanji-romaji dupprono" style="display:none">${card.Romaji}</div>
                                 <div class="kanji-romaji dupmeaning">${card.English}</div>
                             </div>
                         </div>
@@ -1468,13 +1444,16 @@
             accordionContainer.append(generateCards(shuffleArray(shuffleArray(orderedkataganaCards.filter(a => a.character != '-'))), 'Katagana-Quiz', 'katagana', 2));
 
             for (const [category, items] of Object.entries(japanese_dataset[0])) {
-                accordionContainer.append(generateCards(items, category, category, 4));
+                accordionContainer.append(generateCards(items, category.replace('&','_n_'), category, 4));
                 //accordionContainer.append(generateCards(items, `${category}-Quiz`, category, 5));
             }
+            var a = []
             for (const [category, items] of Object.entries(japanese_dataset1[0])) {
-                accordionContainer.append(generateCards(items, category, category, 4));
+                accordionContainer.append(generateCards(items, category.replace('&','_n_'), category, 4));
+                a.push(category.replace('&','_n_'))
                 //accordionContainer.append(generateCards(items, `${category}-Quiz`, category, 5));
             }
+            console.log(a)  
 
             accordionContainer.append(generateCards(kanjiFlashcards, 'Kanji', 'kanji', 1));
 
