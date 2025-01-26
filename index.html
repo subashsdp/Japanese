@@ -551,7 +551,7 @@
 
             <input type="radio" class="btn-check" name="page-type" id="btnradio113" autocomplete="off"
                 onclick=onclick_pagetype_radio(3)>
-            <label class="btn btn-outline-primary custom-radio-label" for="btnradio113">History</label>
+            <label class="btn btn-outline-primary custom-radio-label" for="btnradio113">Quiz-History</label>
         </div>
         <br><br>
         <div id="input-container" class="card">
@@ -568,9 +568,9 @@
                         onclick=onclick_language_radio(2)>
                     <label class="btn btn-outline-primary" for="btnradio2">Katakana</label>
 
-                    <input type="radio" class="btn-check" name="quiz-type" id="btnradio3" autocomplete="off"
+                    <!-- <input type="radio" class="btn-check" name="quiz-type" id="btnradio3" autocomplete="off"
                         onclick=onclick_language_radio(3)>
-                    <label class="btn btn-outline-primary" for="btnradio3">Kanji</label>
+                    <label class="btn btn-outline-primary" for="btnradio3">Kanji</label> -->
                 </div>
                 <br><br>
                 <div id="hiraganasubmenu">
@@ -621,7 +621,7 @@
                     <br>
                     <div class="col">
                         <label for="timerInput">Set Timer (seconds):</label>
-                        <input type="number" id="timerInput" class="form-control" min="5" max="30" value="5">
+                        <input type="number" id="timerInput" class="form-control" min="5" max="30" value="10">
                     </div>
                 </div>
                 <br>
@@ -1387,7 +1387,7 @@
             accordionContainer.append(generateCards(lesson2[0], 'Lesson2', 'Lesson2', 4));
             accordionContainer.append(generateCards(lesson3[0], 'Lesson3', 'Lesson3', 4));
 
-            accordionContainer.append(generateCards(kanjiFlashcards, 'Kanji', 'kanji', 1));
+            //accordionContainer.append(generateCards(kanjiFlashcards, 'Kanji', 'kanji', 1));
 
             $('.qzm2-card').on('click', function () {
                 $(this).toggleClass('flipped');
