@@ -1253,18 +1253,18 @@
                     });
                 } else if (mode == 4) {
                     for (let [category, items] of Object.entries(flashcards)) {
-                        category = category.replace('&', '_n_').replaceAll(' ','').replaceAll('-','');
+                        let trimmed_category = category.replace('&', '_n_').replaceAll(' ','').replaceAll('-','');
                         cardsHtml += `
                             <div class="toggle-pronunciation-container text-end">
                                 <p class="dupsubtitle">${category}</p>
                                         <button
-                                            onClick="hidenshowromaji('${category}')"
+                                            onClick="hidenshowromaji('${trimmed_category}')"
                                             class="btn btn-primary btn-sm toggle-pronunciation"
                                             data-target="#collapse ${title}">
-                                            <i class="${category}Icon bi bi-eye-slash-fill")></i>
+                                            <i class="${trimmed_category}Icon bi bi-eye-slash-fill")></i>
                                         </button>
                             </div>
-                            <table id="${category}Table" class="table table-bordered table-striped">
+                            <table id="${trimmed_category}Table" class="table table-bordered table-striped">
                                 <thead class="table-light">
                                     <tr>
                                         <th data-field="Japanese">Japanese</th>
@@ -1396,20 +1396,16 @@
             const new_dataset = {};
             const mergeDatasets = (datasets) => {
                 datasets.forEach((dataset) => {
-                    debugger
                     Object.keys(dataset).forEach((key) => {
-                        debugger
                         if (!new_dataset[key]) {
                             new_dataset[key] = [];
                         }
                         new_dataset[key.replace('&', '_n_').replaceAll(' ','').replaceAll('-','')] = [...new_dataset[key], ...dataset[key]];
-                        $(`#${key.replace('&', '_n_').replaceAll(' ','').replaceAll('-','')}Table`).bootstrapTable({ data: [...new_dataset[key], ...dataset[key]] })
+                        $(`#${key.replace('&', '_n_').replaceAll(' ','').replaceAll('-','')}Table`).bootstrapTable({ data: new_dataset[key.replace('&', '_n_').replaceAll(' ','').replaceAll('-','')] })
                     });
                 });
             };
             mergeDatasets(master_dataset);
-            console.log(master_dataset)
-            console.log(new_dataset)
             //accordionContainer.append(generateCards(kanjiFlashcards, 'Kanji', 'kanji', 1));
 
             $('.qzm2-card').on('click', function () {
