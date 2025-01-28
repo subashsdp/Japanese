@@ -1397,9 +1397,7 @@
             const new_dataset = {};
             const mergeDatasets = (datasets) => {
                 datasets.forEach((dataset) => {
-                    debugger
                     Object.keys(dataset).forEach((key) => {
-                        debugger
                         if (!new_dataset[key]) {
                             new_dataset[key] = [];
                         }
@@ -1452,7 +1450,6 @@
         });
 
         function hidenshowromaji(classname) {
-            debugger
             if ($(`#${classname}Table`).bootstrapTable('getVisibleColumns').length == 3) {
                 $(`#${classname}Table`).bootstrapTable('hideColumn', 'Romaji');
                 $(`.${classname}Icon .bi .bi-eye-fill`).removeClass('bi-eye-fill').addClass('bi-eye-slash-fill');
