@@ -780,7 +780,6 @@ let quizType = "";
         });
 
         function hidenshowromaji(classname) {
-            debugger
             if ($(`#${classname}Table`).bootstrapTable('getVisibleColumns').length == 3) {
                 $(`#${classname}Table`).bootstrapTable('hideColumn', 'Romaji');
                 $(`.${classname}Icon`).removeClass('bi-eye-slash-fill').addClass('bi-eye-fill');
