@@ -185,6 +185,26 @@
                 page-break-inside: avoid;
             }
         }
+
+        #backToTop {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            display: none;
+            /* hidden by default */
+            z-index: 1000;
+        }
+
+        #backToTop:hover {
+            background: #0056b3;
+        }
     </style>
 </head>
 
@@ -213,6 +233,7 @@
             <p>© 2023 - For educational purposes only</p>
         </div>
     </div>
+    <button id="backToTop">↑ Top</button>
 
     <script>
         // Correctly formatted JSON data, as a single variable
@@ -2830,6 +2851,19 @@
                 });
 
                 lessonsContainer.append(lessonSection);
+            });
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 200) {
+                    $('#backToTop').fadeIn();
+                } else {
+                    $('#backToTop').fadeOut();
+                }
+            });
+
+            // Scroll to top when clicked
+            $('#backToTop').click(function () {
+                $('html, body').animate({ scrollTop: 0 }, 600); // 600ms smooth scroll
+                return false;
             });
         });
     </script>
