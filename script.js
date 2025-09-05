@@ -453,6 +453,8 @@ function onclick_pagetype_radio(value) {
         $('#input-container').slideUp();
         $('#accordionExample').slideUp();
         $('#quizTableDiv').slideDown();
+    }else if (value == 4) {
+        window.location.href = 'index2.html';
     }
 }
 function customSearch(data, text) {

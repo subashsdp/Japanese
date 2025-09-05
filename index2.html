@@ -1,0 +1,2838 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Japanese Language Learning Guide</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .book-container {
+            background: white;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 40px;
+            margin: 20px 0;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e63946;
+        }
+
+        h1 {
+            color: #1d3557;
+            font-size: 2.8em;
+            margin-bottom: 15px;
+        }
+
+        h2 {
+            color: #457b9d;
+            font-size: 1.8em;
+            margin: 30px 0 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #a8dadc;
+        }
+
+        h3 {
+            color: #e63946;
+            font-size: 1.4em;
+            margin: 25px 0 15px;
+        }
+
+        h4 {
+            color: #1d3557;
+            font-size: 1.2em;
+            margin: 20px 0 10px;
+        }
+
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        .intro {
+            font-size: 1.1em;
+            background: #f1faee;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        .toc {
+            background: #f1faee;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        .toc h2 {
+            text-align: center;
+            margin-top: 0;
+        }
+
+        .toc-list {
+            list-style-type: none;
+            column-count: 2;
+        }
+
+        .toc-list li {
+            margin-bottom: 8px;
+            break-inside: avoid;
+        }
+
+        .toc-list a {
+            text-decoration: none;
+            color: #457b9d;
+            display: block;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+
+        .toc-list a:hover {
+            background: #a8dadc;
+        }
+
+        .lesson {
+            margin-bottom: 40px;
+            page-break-inside: avoid;
+        }
+
+        .vocab-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .vocab-table th {
+            background-color: #1d3557;
+            color: white;
+            padding: 12px;
+            text-align: left;
+        }
+
+        .vocab-table td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .vocab-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        .vocab-table tr:hover {
+            background-color: #e9f5f5;
+        }
+
+        .japanese {
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #e63946;
+            color: #6c757d;
+            font-size: 0.9em;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .book-container {
+                box-shadow: none;
+                padding: 0;
+            }
+
+            .toc {
+                page-break-after: always;
+            }
+
+            .lesson {
+                page-break-inside: avoid;
+            }
+
+            h2 {
+                page-break-after: avoid;
+            }
+
+            .vocab-table {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="book-container">
+        <div class="header">
+            <h1>Complete Japanese Language Learning Guide</h1>
+            <p>A Comprehensive Resource for Japanese Vocabulary and Phrases</p>
+        </div>
+        <div class="intro">
+            <p>This guide contains vocabulary and phrases organized into lessons covering various topics from basic
+                greetings to more complex grammar and vocabulary. It is designed to be a comprehensive resource for
+                Japanese language learners of all levels.</p>
+            <p>Each lesson is structured with clear tables for easy reference and study. The content progresses from
+                fundamental greetings and expressions to more advanced vocabulary and sentence structures.</p>
+        </div>
+        <div class="toc">
+            <h2>Table of Contents</h2>
+            <ul class="toc-list" id="toc-list">
+            </ul>
+        </div>
+        <div id="lessons-container">
+        </div>
+        <div class="footer">
+            <p>Complete Japanese Language Learning Guide</p>
+            <p>© 2023 - For educational purposes only</p>
+        </div>
+    </div>
+
+    <script>
+        // Correctly formatted JSON data, as a single variable
+        var japanese_dataset = [
+            {
+                "japanese_dataset": [
+                    { "Greetings": [{ "Japanese": "おはよう ございます", "Romaji": "ohayou gozaimasu", "English": "Good morning" }, { "Japanese": "こんにちは", "Romaji": "konnichiwa", "English": "Good afternoon / Hello / Hi" }, { "Japanese": "おやすみなさい", "Romaji": "oyasuminasai", "English": "Good Night" }, { "Japanese": "すみません", "Romaji": "sumimasen", "English": "Sorry / Excuse me / Thank you" }, { "Japanese": "ごめんなさい", "Romaji": "gomennasai", "English": "Sorry" }, { "Japanese": "みなさん", "Romaji": "minasan", "English": "Everyone" }, { "Japanese": "ありがとう ございます", "Romaji": "arigatou gozaimasu", "English": "Thank you" }, { "Japanese": "どういたしまして", "Romaji": "douitashimashite", "English": "You are welcome" }, { "Japanese": "じゃまた", "Romaji": "ja mata", "English": "See you again" }, { "Japanese": "さようなら", "Romaji": "sayounara", "English": "Goodbye" }, { "Japanese": "こんばんは", "Romaji": "konbanwa", "English": "Good evening" }, { "Japanese": "おねがいします", "Romaji": "onegaishimasu", "English": "Please (while asking a favor)" }, { "Japanese": "どうぞ", "Romaji": "douzo", "English": "Please (while offering something)" }, { "Japanese": "ください", "Romaji": "kudasai", "English": "Please" }, { "Japanese": "おめでとうございます", "Romaji": "omedetou gozaimasu", "English": "Congratulations" }, { "Japanese": "だいじょうぶです", "Romaji": "daijoubu desu", "English": "It’s ok / Alright" }, { "Japanese": "たんじょうび", "Romaji": "tanjoubi", "English": "Birthday" }] },
+                    { "Instructions": [{ "Japanese": "はじめます", "Romaji": "hajimemasu", "English": "To start" }, { "Japanese": "はじめましょうか", "Romaji": "hajimemashou ka", "English": "Shall we start?" }, { "Japanese": "はじめましょう", "Romaji": "hajimemashou", "English": "Let’s start" }, { "Japanese": "やすみます", "Romaji": "yasumimasu", "English": "To take a break/rest" }, { "Japanese": "やすみましょうか", "Romaji": "yasumimashou ka", "English": "Shall we take a break?" }, { "Japanese": "やすみましょう", "Romaji": "yasumimashou", "English": "Let’s take a break" }, { "Japanese": "おわります", "Romaji": "owarimasu", "English": "To finish" }, { "Japanese": "おわりましょうか", "Romaji": "owarimashou ka", "English": "Shall we finish?" }, { "Japanese": "おわりましょう", "Romaji": "owarimashou", "English": "Let’s finish" }, { "Japanese": "わかります", "Romaji": "wakarimasu", "English": "To understand" }, { "Japanese": "わかりますか", "Romaji": "wakarimasu ka", "English": "Do you understand?" }] },
+                    { "DaysOfTheWeek": [{ "Japanese": "にちようび", "Romaji": "nichiyoubi", "English": "Sunday (Sun)" }, { "Japanese": "げつようび", "Romaji": "getsuyoubi", "English": "Monday (Moon)" }, { "Japanese": "かようび", "Romaji": "kayoubi", "English": "Tuesday (Fire)" }, { "Japanese": "すいようび", "Romaji": "suiyoubi", "English": "Wednesday (Water)" }, { "Japanese": "もくようび", "Romaji": "mokuyoubi", "English": "Thursday (Tree/Wood)" }, { "Japanese": "きんようび", "Romaji": "kinyoubi", "English": "Friday (Gold)" }, { "Japanese": "どようび", "Romaji": "doyoubi", "English": "Saturday (Soil/Earth)" }, { "Japanese": "なんようび ですか", "Romaji": "nanyoubi desu ka", "English": "What day?" }, { "Japanese": "きょうは なんようび ですか？", "Romaji": "kyou wa nanyoubi desu ka?", "English": "What is the day today?" }] },
+                    { "Days": [{ "Japanese": "おととい", "Romaji": "ototoi", "English": "Day before yesterday" }, { "Japanese": "おととし", "Romaji": "ototoshi", "English": "Year before last" }, { "Japanese": "せんせんげつ", "Romaji": "sensengestu", "English": "Month before last" }, { "Japanese": "せんせんしゅう", "Romaji": "sensenshuu", "English": "Week before last" }, { "Japanese": "きのう/さくじつ", "Romaji": "kinou/sakujitsu", "English": "Yesterday" }, { "Japanese": "きょねん", "Romaji": "kyonen", "English": "Last year" }, { "Japanese": "せんげつ", "Romaji": "sengetsu", "English": "Last month" }, { "Japanese": "せんしゅう", "Romaji": "senshuu", "English": "Last week" }, { "Japanese": "きょう/ほんじつ", "Romaji": "kyou/honjitsu", "English": "Today" }, { "Japanese": "ことし", "Romaji": "kotoshi", "English": "This year" }, { "Japanese": "こんげつ", "Romaji": "kongetsu", "English": "This month" }, { "Japanese": "こんしゅう", "Romaji": "konshuu", "English": "This week" }, { "Japanese": "あした/あす/よくじつ", "Romaji": "ashita/asu/yokujitsu", "English": "Tomorrow" }, { "Japanese": "らいねん", "Romaji": "rainen", "English": "Next year" }, { "Japanese": "らいげつ", "Romaji": "raigetsu", "English": "Next month" }, { "Japanese": "らいしゅう", "Romaji": "raishuu", "English": "Next week" }, { "Japanese": "あさって", "Romaji": "asatte", "English": "Day after tomorrow" }, { "Japanese": "さらいねん", "Romaji": "sarainen", "English": "Year after next" }, { "Japanese": "さらいげつ", "Romaji": "saraigetsu", "English": "Month after next" }, { "Japanese": "さらいしゅう", "Romaji": "saraishuu", "English": "Week after next" }] },
+                    { "Numbers_Basic": [{ "Japanese": "いち", "Romaji": "ichi", "English": "1" }, { "Japanese": "に", "Romaji": "ni", "English": "2" }, { "Japanese": "さん", "Romaji": "san", "English": "3" }, { "Japanese": "よん/よ/し", "Romaji": "yon/yo/shi", "English": "4" }, { "Japanese": "ご", "Romaji": "go", "English": "5" }, { "Japanese": "ろく", "Romaji": "roku", "English": "6" }, { "Japanese": "なな/しち", "Romaji": "nana/shichi", "English": "7" }, { "Japanese": "はち", "Romaji": "hachi", "English": "8" }, { "Japanese": "きゅう/く", "Romaji": "kyuu/ku", "English": "9" }, { "Japanese": "じゅう", "Romaji": "juu", "English": "10" }] },
+                    { "Tens": [{ "Japanese": "じゅういち", "Romaji": "juuichi", "English": "11" }, { "Japanese": "じゅうに", "Romaji": "juuni", "English": "12" }, { "Japanese": "じゅうさん", "Romaji": "juusan", "English": "13" }, { "Japanese": "じゅうよん", "Romaji": "juuyon", "English": "14" }, { "Japanese": "じゅうご", "Romaji": "juugo", "English": "15" }, { "Japanese": "じゅうろく", "Romaji": "juuroku", "English": "16" }, { "Japanese": "じゅうなな", "Romaji": "juunana", "English": "17" }, { "Japanese": "じゅうはち", "Romaji": "juuhachi", "English": "18" }, { "Japanese": "じゅうきゅう", "Romaji": "juukyuu", "English": "19" }] },
+                    { "MultiplesOf10": [{ "Japanese": "にじゅう", "Romaji": "nijuu", "English": "20" }, { "Japanese": "にじゅういち", "Romaji": "nijuuichi", "English": "21" }] },
+                    { "Hundreds": [{ "Japanese": "ひゃく", "Romaji": "hyaku", "English": "100" }, { "Japanese": "にひゃく", "Romaji": "nihyaku", "English": "200" }, { "Japanese": "さんびゃく", "Romaji": "sanbyaku", "English": "300" }, { "Japanese": "よんひゃく", "Romaji": "yonhyaku", "English": "400" }, { "Japanese": "ごひゃく", "Romaji": "gohyaku", "English": "500" }, { "Japanese": "ろっぴゃく", "Romaji": "roppyaku", "English": "600" }, { "Japanese": "ななひゃく", "Romaji": "nanahyaku", "English": "700" }, { "Japanese": "はっぴゃく", "Romaji": "happyaku", "English": "800" }, { "Japanese": "きゅうひゃく", "Romaji": "kyuuhyaku", "English": "900" }] },
+                    { "Thousands": [{ "Japanese": "せん/いっせん", "Romaji": "sen/issen", "English": "1000" }, { "Japanese": "にせん", "Romaji": "nisen", "English": "2000" }, { "Japanese": "さんぜん", "Romaji": "sanzen", "English": "3000" }, { "Japanese": "よんせん", "Romaji": "yonsen", "English": "4000" }, { "Japanese": "ごせん", "Romaji": "gosen", "English": "5000" }, { "Japanese": "ろくせん", "Romaji": "rokusen", "English": "6000" }, { "Japanese": "ななせん", "Romaji": "nanasen", "English": "7000" }, { "Japanese": "はっせん", "Romaji": "hassen", "English": "8000" }, { "Japanese": "きゅうせん", "Romaji": "kyuusen", "English": "9000" }] },
+                    { "Ten_Thousands": [{ "Japanese": "いちまん", "Romaji": "ichiman", "English": "10,000" }, { "Japanese": "にまん", "Romaji": "niman", "English": "20,000" }, { "Japanese": "さんまん", "Romaji": "sanman", "English": "30,000" }, { "Japanese": "よんまん", "Romaji": "yonman", "English": "40,000" }, { "Japanese": "ごまん", "Romaji": "goman", "English": "50,000" }, { "Japanese": "ろくまん", "Romaji": "rokuman", "English": "60,000" }, { "Japanese": "ななまん", "Romaji": "nanaman", "English": "70,000" }, { "Japanese": "はちまん", "Romaji": "hachiman", "English": "80,000" }, { "Japanese": "きゅうまん", "Romaji": "kyuuman", "English": "90,000" }, { "Japanese": "じゅうまん", "Romaji": "juuman", "English": "One-Lac" }] },
+                    { "Time": [{ "Japanese": "ごぜん", "Romaji": "gozen", "English": "a.m." }, { "Japanese": "ごご", "Romaji": "gogo", "English": "p.m." }, { "Japanese": "いちじ", "Romaji": "ichiji", "English": "1 o’clock" }, { "Japanese": "にじ", "Romaji": "niji", "English": "2 o’clock" }, { "Japanese": "さんじ", "Romaji": "sanji", "English": "3 o’clock" }, { "Japanese": "よじ", "Romaji": "yoji", "English": "4 o’clock" }, { "Japanese": "ごじ", "Romaji": "goji", "English": "5 o’clock" }, { "Japanese": "ろくじ", "Romaji": "rokuji", "English": "6 o’clock" }, { "Japanese": "しちじ", "Romaji": "shichiji", "English": "7 o’clock" }, { "Japanese": "はちじ", "Romaji": "hachiji", "English": "8 o’clock" }, { "Japanese": "くじ", "Romaji": "kuji", "English": "9 o’clock" }, { "Japanese": "じゅうじ", "Romaji": "juuji", "English": "10 o’clock" }, { "Japanese": "じゅういちじ", "Romaji": "juuichiji", "English": "11 o’clock" }, { "Japanese": "じゅうにじ", "Romaji": "juuniji", "English": "12 o’clock" }, { "Japanese": "いまなんじですか？", "Romaji": "ima nanji desu ka?", "English": "What is the time now?" }] },
+                    { "Minutes": [{ "Japanese": "いっぷん", "Romaji": "ippun", "English": "1 minute" }, { "Japanese": "にふん", "Romaji": "nifun", "English": "2 minutes" }, { "Japanese": "さんぷん", "Romaji": "sanpun", "English": "3 minutes" }, { "Japanese": "よんぷん", "Romaji": "yonpun", "English": "4 minutes" }, { "Japanese": "ごふん", "Romaji": "gofun", "English": "5 minutes" }, { "Japanese": "ろっぷん", "Romaji": "roppun", "English": "6 minutes" }, { "Japanese": "ななふん", "Romaji": "nanafun", "English": "7 minutes" }, { "Japanese": "はっぷん", "Romaji": "happun", "English": "8 minutes" }, { "Japanese": "きゅうふん", "Romaji": "kyuufun", "English": "9 minutes" }, { "Japanese": "じゅっぷん/じっぷん", "Romaji": "juppun/jippun", "English": "10 minutes" }, { "Japanese": "じゅういっぷん", "Romaji": "juuippun", "English": "11 minutes" }, { "Japanese": "じゅうにふん", "Romaji": "juunifun", "English": "12 minutes" }, { "Japanese": "じゅうさんぷん", "Romaji": "juusanpun", "English": "13 minutes" }, { "Japanese": "じゅうきゅうふん", "Romaji": "juukyuufun", "English": "19 minutes" }, { "Japanese": "にじゅっぷん", "Romaji": "nijuppun", "English": "20 minutes" }, { "Japanese": "さんじゅっぷん/はん", "Romaji": "sanjuppun/han", "English": "30 minutes/half past" }, { "Japanese": "よんじゅっぷん", "Romaji": "yonjuppun", "English": "40 minutes" }, { "Japanese": "ごじゅっぷん", "Romaji": "gojuppun", "English": "50 minutes" }, { "Japanese": "ごじゅうきゅうふん", "Romaji": "gojuukyuu fun", "English": "59 minutes" }, { "Japanese": "なんぷん", "Romaji": "nanpun", "English": "What minute?" }] },
+                    { "Months": [{ "Japanese": "しょうがつ", "Romaji": "shougatsu", "English": "New Year" }, { "Japanese": "いちがつ", "Romaji": "ichigatsu", "English": "1st Month (January)" }, { "Japanese": "にがつ", "Romaji": "nigatsu", "English": "2nd Month (February)" }, { "Japanese": "さんがつ", "Romaji": "sangatsu", "English": "3rd Month (March)" }, { "Japanese": "しがつ", "Romaji": "shigatsu", "English": "4th Month (April)" }, { "Japanese": "ごがつ", "Romaji": "gogatsu", "English": "5th Month (May)" }, { "Japanese": "ろくがつ", "Romaji": "rokugatsu", "English": "6th Month (June)" }, { "Japanese": "しちがつ", "Romaji": "shichigatsu", "English": "7th Month (July)" }, { "Japanese": "はちがつ", "Romaji": "hachigatsu", "English": "8th Month (August)" }, { "Japanese": "くがつ", "Romaji": "kugatsu", "English": "9th Month (September)" }, { "Japanese": "じゅうがつ", "Romaji": "juugatsu", "English": "10th Month (October)" }, { "Japanese": "じゅういちがつ", "Romaji": "juuichigatsu", "English": "11th Month (November)" }, { "Japanese": "じゅうにがつ", "Romaji": "juunigatsu", "English": "12th Month (December)" }, { "Japanese": "なんがつ", "Romaji": "nangatsu", "English": "What month?" }] },
+                    { "Days_of_the_Month": [{ "Japanese": "ついたち", "Romaji": "tsuitachi", "English": "1st" }, { "Japanese": "ふつか", "Romaji": "futsuka", "English": "2nd" }, { "Japanese": "みっか", "Romaji": "mikka", "English": "3rd" }, { "Japanese": "よっか", "Romaji": "yokka", "English": "4th" }, { "Japanese": "いつか", "Romaji": "itsuka", "English": "5th" }, { "Japanese": "むいか", "Romaji": "muika", "English": "6th" }, { "Japanese": "なのか", "Romaji": "nanoka", "English": "7th" }, { "Japanese": "ようか", "Romaji": "youka", "English": "8th" }, { "Japanese": "ここのか", "Romaji": "kokonoka", "English": "9th" }, { "Japanese": "とおか", "Romaji": "tooka", "English": "10th" }, { "Japanese": "じゅういちにち", "Romaji": "juuichinichi", "English": "11th" }, { "Japanese": "じゅうににち", "Romaji": "juuninichi", "English": "12th" }, { "Japanese": "じゅうさんにち", "Romaji": "juusannichi", "English": "13th" }, { "Japanese": "じゅうよっか", "Romaji": "juuyokka", "English": "14th" }, { "Japanese": "じゅうごにち", "Romaji": "juugonichi", "English": "15th" }, { "Japanese": "じゅうろくにち", "Romaji": "juurokunichi", "English": "16th" }, { "Japanese": "じゅうしちにち", "Romaji": "juushichinichi", "English": "17th" }, { "Japanese": "じゅうはちにち", "Romaji": "juuhachinichi", "English": "18th" }, { "Japanese": "じゅうくにち", "Romaji": "juukunichi", "English": "19th" }, { "Japanese": "はつか", "Romaji": "hatsuka", "English": "20th" }, { "Japanese": "にじゅういちにち", "Romaji": "nijuuichinichi", "English": "21st" }, { "Japanese": "にじゅうににち", "Romaji": "nijuuninichi", "English": "22nd" }, { "Japanese": "にじゅうさんにち", "Romaji": "nijuusannichi", "English": "23rd" }, { "Japanese": "にじゅうよっか", "Romaji": "nijuuyokka", "English": "24th" }, { "Japanese": "にじゅごにち", "Romaji": "nijuugonichi", "English": "25th" }, { "Japanese": "にじゅうろくにち", "Romaji": "nijuurokunichi", "English": "26th" }, { "Japanese": "にじゅうしちにち", "Romaji": "nijuushichinichi", "English": "27th" }, { "Japanese": "にじゅうはちにち", "Romaji": "nijuuhachinichi", "English": "28th" }, { "Japanese": "にじゅうきゅうにち", "Romaji": "nijuukyuunichi", "English": "29th" }, { "Japanese": "さんじゅうにち", "Romaji": "sanjuunichi", "English": "30th" }, { "Japanese": "さんじゅういちにち", "Romaji": "sanjuuichinichi", "English": "31st" }, { "Japanese": "なんにち", "Romaji": "nannichi", "English": "What day?" }] },
+                    { "Colors": [{ "Japanese": "あかい/あか", "Romaji": "akai/aka", "English": "Red" }, { "Japanese": "あおい/あお", "Romaji": "aoi/ao", "English": "Blue" }, { "Japanese": "しろい/しろ", "Romaji": "shiroi/shiro", "English": "White" }, { "Japanese": "くろい/くろ", "Romaji": "kuroi/kuro", "English": "Black" }, { "Japanese": "ちゃいろ", "Romaji": "chairo", "English": "Brown" }, { "Japanese": "みどり", "Romaji": "midori", "English": "Green" }, { "Japanese": "むらさき", "Romaji": "murasaki", "English": "Purple" }, { "Japanese": "きいろ", "Romaji": "kiiro", "English": "Yellow" }, { "Japanese": "きん", "Romaji": "kin", "English": "Gold" }, { "Japanese": "ぎん", "Romaji": "gin", "English": "Silver" }, { "Japanese": "はいいろ", "Romaji": "haiiro", "English": "Grey" }, { "Japanese": "こんいろ", "Romaji": "koniro", "English": "Navy Blue" }, { "Japanese": "ピンク", "Romaji": "pinku", "English": "Pink" }, { "Japanese": "オレンジ", "Romaji": "orenji", "English": "Orange" }] },
+                    { "Position": [{ "Japanese": "うえ", "Romaji": "ue", "English": "Up/Above" }, { "Japanese": "した", "Romaji": "shita", "English": "Down/Under" }, { "Japanese": "まえ", "Romaji": "mae", "English": "Front/Before" }, { "Japanese": "うしろ", "Romaji": "ushiro", "English": "Behind/Back" }, { "Japanese": "あいだ", "Romaji": "aida", "English": "Between" }, { "Japanese": "ちかい", "Romaji": "chikai", "English": "Near" }, { "Japanese": "とおい", "Romaji": "tooi", "English": "Far" }, { "Japanese": "なか", "Romaji": "naka", "English": "Inside" }, { "Japanese": "そと", "Romaji": "soto", "English": "Outside" }, { "Japanese": "みぎ", "Romaji": "migi", "English": "Right" }, { "Japanese": "ひだり", "Romaji": "hidari", "English": "Left" }] },
+                    { "Directions": [{ "Japanese": "きた", "Romaji": "kita", "English": "North" }, { "Japanese": "みなみ", "Romaji": "minami", "English": "South" }, { "Japanese": "ひがし", "Romaji": "higashi", "English": "East" }, { "Japanese": "にし", "Romaji": "nishi", "English": "West" }] },
+                    { "Seasons": [{ "Japanese": "なつ", "Romaji": "natsu", "English": "Summer" }, { "Japanese": "あき", "Romaji": "aki", "English": "Autumn" }, { "Japanese": "ふゆ", "Romaji": "fuyu", "English": "Winter" }, { "Japanese": "はる", "Romaji": "haru", "English": "Spring" }] },
+                    { "Weather": [{ "Japanese": "あめ", "Romaji": "ame", "English": "Rain" }, { "Japanese": "ゆき", "Romaji": "yuki", "English": "Snow" }, { "Japanese": "くもり", "Romaji": "kumori", "English": "Cloudy" }, { "Japanese": "はれ", "Romaji": "hare", "English": "Clear" }] },
+                    { "Family": [{ "Japanese": "そふ", "Romaji": "sofu", "English": "Grandfather" }, { "Japanese": "そぼ", "Romaji": "sobo", "English": "Grandmother" }, { "Japanese": "ちち", "Romaji": "chichi", "English": "Father" }, { "Japanese": "はは", "Romaji": "haha", "English": "Mother" }, { "Japanese": "あに", "Romaji": "ani", "English": "Elder brother" }, { "Japanese": "あね", "Romaji": "ane", "English": "Elder sister" }, { "Japanese": "おとうと", "Romaji": "otouto", "English": "Younger brother" }, { "Japanese": "いもうと", "Romaji": "imouto", "English": "Younger sister" }, { "Japanese": "おじ", "Romaji": "oji", "English": "Uncle" }, { "Japanese": "おば", "Romaji": "oba", "English": "Aunt" }, { "Japanese": "むすこ", "Romaji": "musuko", "English": "Son" }, { "Japanese": "むすめ", "Romaji": "musume", "English": "Daughter" }, { "Japanese": "おっと/しゅじん", "Romaji": "otto/shujin", "English": "Husband" }, { "Japanese": "つま/かない", "Romaji": "tsuma/kanai", "English": "Wife" }, { "Japanese": "りょうしん", "Romaji": "ryoushin", "English": "Parents" }, { "Japanese": "こども", "Romaji": "kodomo", "English": "Children" }, { "Japanese": "ともだち", "Romaji": "tomodachi", "English": "Friend" }, { "Japanese": "しんせき", "Romaji": "shinseki", "English": "Relative" }, { "Japanese": "まご", "Romaji": "mago", "English": "Grandchild" }, { "Japanese": "あかちゃん", "Romaji": "akachan", "English": "Baby" }, { "Japanese": "きょうだい", "Romaji": "kyoudai", "English": "Siblings" }, { "Japanese": "しまい", "Romaji": "shimai", "English": "Sisters" }, { "Japanese": "いとこ", "Romaji": "itoko", "English": "Cousin" }] },
+                    { "Other_Family": [{ "Japanese": "おじいさん", "Romaji": "ojiisan", "English": "Grandfather" }, { "Japanese": "おばあさん", "Romaji": "obaasan", "English": "Grandmother" }, { "Japanese": "おとうさん", "Romaji": "otousan", "English": "Father" }, { "Japanese": "おかあさん", "Romaji": "okaasan", "English": "Mother" }, { "Japanese": "おにいさん", "Romaji": "oniisan", "English": "Elder brother" }, { "Japanese": "おねえさん", "Romaji": "oneesan", "English": "Elder sister" }, { "Japanese": "おとうとさん", "Romaji": "otoutosan", "English": "Younger brother" }, { "Japanese": "いもうとさん", "Romaji": "imoutosan", "English": "Younger sister" }, { "Japanese": "おじさん", "Romaji": "ojisan", "English": "Uncle" }, { "Japanese": "おばさん", "Romaji": "obasan", "English": "Aunt" }, { "Japanese": "むすこさん", "Romaji": "musukosan", "English": "Son" }, { "Japanese": "むすめさん", "Romaji": "musumesan", "English": "Daughter" }, { "Japanese": "ごしゅじん", "Romaji": "goshujin", "English": "Husband" }, { "Japanese": "おくさん", "Romaji": "okusan", "English": "Wife" }, { "Japanese": "ごりょうしん", "Romaji": "goryoushin", "English": "Parents" }, { "Japanese": "こども", "Romaji": "kodomo", "English": "Children" }, { "Japanese": "ともだち", "Romaji": "tomodachi", "English": "Friend" }, { "Japanese": "しんせき", "Romaji": "shinseki", "English": "Relative" }, { "Japanese": "ごまご", "Romaji": "gomago", "English": "Grandchild" }, { "Japanese": "あかちゃん", "Romaji": "akachan", "English": "Baby" }, { "Japanese": "ごきょうだい", "Romaji": "gokyoudai", "English": "Siblings" }, { "Japanese": "ごしまい", "Romaji": "goshimai", "English": "Sisters" }, { "Japanese": "いとこ", "Romaji": "itoko", "English": "Cousin" }] },
+                    { "Body_Parts": [{ "Japanese": "あたま", "Romaji": "atama", "English": "Head" }, { "Japanese": "ひたい", "Romaji": "hitai", "English": "Forehead" }, { "Japanese": "め", "Romaji": "me", "English": "Eye" }, { "Japanese": "みみ", "Romaji": "mimi", "English": "Ear" }, { "Japanese": "はな", "Romaji": "hana", "English": "Nose" }, { "Japanese": "くち", "Romaji": "kuchi", "English": "Mouth" }, { "Japanese": "あご", "Romaji": "ago", "English": "Chin" }, { "Japanese": "かた", "Romaji": "kata", "English": "Shoulder" }] },
+                    { "Daily_Phrases": [{ "Japanese": "いってきます", "Romaji": "ittekimasu", "English": "I'm leaving / I'll be back" }, { "Japanese": "いってらっしゃい", "Romaji": "itterasshai", "English": "Go and come back" }, { "Japanese": "ただいま", "Romaji": "tadaima", "English": "I'm home" }, { "Japanese": "おかえりなさい", "Romaji": "okaerinasai", "English": "Welcome home" }, { "Japanese": "ごめんください", "Romaji": "gomen kudasai", "English": "Excuse me, anyone home?" }] },
+
+                ]
+            }
+        ];
+        var lessons_dataset = [{
+            "lesson1": [{
+                "Vocabulary": [{
+                    "Japanese": "わたし",
+                    "Romaji": "watashi",
+                    "English": "I (formal or neutral, gender-neutral)"
+                }, {
+                    "Japanese": "わたしたち",
+                    "Romaji": "watashitachi",
+                    "English": "We"
+                }, {
+                    "Japanese": "あなた",
+                    "Romaji": "anata",
+                    "English": "You (formal; used carefully as it can sound distant or impolite)"
+                }, {
+                    "Japanese": "あのひと",
+                    "Romaji": "ano hito",
+                    "English": "That person, he, she"
+                }, {
+                    "Japanese": "あのかた",
+                    "Romaji": "ano kata",
+                    "English": "That person (polite equivalent of あのひと)"
+                }, {
+                    "Japanese": "みなさん",
+                    "Romaji": "minasan",
+                    "English": "Everyone, ladies and gentlemen"
+                }, {
+                    "Japanese": "〜さん",
+                    "Romaji": "~san",
+                    "English": "Mr., Ms. (general title of respect)"
+                }, {
+                    "Japanese": "〜ちゃん",
+                    "Romaji": "~chan",
+                    "English": "Affectionate suffix for children or close friends"
+                }, {
+                    "Japanese": "〜くん",
+                    "Romaji": "~kun",
+                    "English": "Suffix for boys or male juniors"
+                }, {
+                    "Japanese": "〜じん",
+                    "Romaji": "~jin",
+                    "English": "Suffix meaning 'a national of' (e.g., アメリカじん : American)"
+                }, {
+                    "Japanese": "せんせい",
+                    "Romaji": "sensei",
+                    "English": "Teacher, instructor (not used for one’s own job)"
+                }, {
+                    "Japanese": "きょうし",
+                    "Romaji": "kyoushi",
+                    "English": "Teacher, instructor (used for one’s own job)"
+                }, {
+                    "Japanese": "がくせい",
+                    "Romaji": "gakusei",
+                    "English": "Student"
+                }, {
+                    "Japanese": "かいしゃいん",
+                    "Romaji": "kaishain",
+                    "English": "Company employee"
+                }, {
+                    "Japanese": "しゃいん",
+                    "Romaji": "shain",
+                    "English": "Employee of a specific company (e.g., IMCのしゃいん : Employee of IMC)"
+                }, {
+                    "Japanese": "ぎんこういん",
+                    "Romaji": "ginkouin",
+                    "English": "Bank employee"
+                }, {
+                    "Japanese": "いしゃ",
+                    "Romaji": "isha",
+                    "English": "Medical doctor"
+                }, {
+                    "Japanese": "けんきゅうしゃ",
+                    "Romaji": "kenkyuusha",
+                    "English": "Researcher, scholar"
+                }, {
+                    "Japanese": "エンジニア",
+                    "Romaji": "enjinia",
+                    "English": "Engineer"
+                }, {
+                    "Japanese": "だいがく",
+                    "Romaji": "daigaku",
+                    "English": "University"
+                }, {
+                    "Japanese": "びょういん",
+                    "Romaji": "byouin",
+                    "English": "Hospital"
+                }, {
+                    "Japanese": "でんき",
+                    "Romaji": "denki",
+                    "English": "Electricity, light"
+                }, {
+                    "Japanese": "だれ",
+                    "Romaji": "dare",
+                    "English": "Who (informal)"
+                }, {
+                    "Japanese": "どなた",
+                    "Romaji": "donata",
+                    "English": "Who (polite equivalent of だれ)"
+                }, {
+                    "Japanese": "〜さい",
+                    "Romaji": "~sai",
+                    "English": "~ years old (used for age, e.g., 25さい : 25 years old)"
+                }, {
+                    "Japanese": "なんさい",
+                    "Romaji": "nansai",
+                    "English": "How old? (informal)"
+                }, {
+                    "Japanese": "おいくつ",
+                    "Romaji": "oikutsu",
+                    "English": "How old? (polite equivalent of なんさい)"
+                }, {
+                    "Japanese": "はい",
+                    "Romaji": "hai",
+                    "English": "Yes"
+                }, {
+                    "Japanese": "いいえ",
+                    "Romaji": "iie",
+                    "English": "No"
+                }, {
+                    "Japanese": "しつれいですが",
+                    "Romaji": "shitsurei desu ga",
+                    "English": "Excuse me, but… (used politely when asking for information)"
+                }, {
+                    "Japanese": "おなまえは？",
+                    "Romaji": "o-namae wa?",
+                    "English": "May I have your name? (polite)"
+                }, {
+                    "Japanese": "はじめまして。",
+                    "Romaji": "hajimemashite",
+                    "English": "How do you do? (lit. I am meeting you for the first time; used at the start of a self-introduction)"
+                }, {
+                    "Japanese": "どうぞよろしく［おねがいします］。",
+                    "Romaji": "douzo yoroshiku [onegaishimasu]",
+                    "English": "Pleased to meet you. (lit. Please be nice to me; usually said at the end of a self-introduction)"
+                }, {
+                    "Japanese": "こちらは～さんです。",
+                    "Romaji": "kochira wa ~san desu.",
+                    "English": "This is Mr./Ms."
+                }, {
+                    "Japanese": "～からきました。",
+                    "Romaji": "~kara kimashita",
+                    "English": "I came from ~."
+                }, {
+                    "Japanese": "インドからきました。",
+                    "Romaji": "Indo kara kimashita",
+                    "English": "I came from India."
+                }, {
+                    "Japanese": "アメリカからきました。",
+                    "Romaji": "Amerika kara kimashita",
+                    "English": "I came from the USA."
+                }, {
+                    "Japanese": "アメリカ",
+                    "Romaji": "Amerika",
+                    "English": "U.S.A."
+                }, {
+                    "Japanese": "イギリス",
+                    "Romaji": "Igirisu",
+                    "English": "U.K."
+                }, {
+                    "Japanese": "インド",
+                    "Romaji": "Indo",
+                    "English": "India"
+                }, {
+                    "Japanese": "インドネシア",
+                    "Romaji": "Indoneshia",
+                    "English": "Indonesia"
+                }, {
+                    "Japanese": "韓国",
+                    "Romaji": "Kankoku",
+                    "English": "South Korea"
+                }, {
+                    "Japanese": "タイ",
+                    "Romaji": "Tai",
+                    "English": "Thailand"
+                }, {
+                    "Japanese": "中国",
+                    "Romaji": "Chuugoku",
+                    "English": "China"
+                }, {
+                    "Japanese": "ドイツ",
+                    "Romaji": "Doitsu",
+                    "English": "Germany"
+                }, {
+                    "Japanese": "日本",
+                    "Romaji": "Nihon",
+                    "English": "Japan"
+                }, {
+                    "Japanese": "フランス",
+                    "Romaji": "Furansu",
+                    "English": "France"
+                }, {
+                    "Japanese": "ブラジル",
+                    "Romaji": "Burajiru",
+                    "English": "Brazil"
+                }, {
+                    "Japanese": "さくら大学",
+                    "Romaji": "Sakura Daigaku",
+                    "English": "Sakura University"
+                }, {
+                    "Japanese": "富士大学",
+                    "Romaji": "Fuji Daigaku",
+                    "English": "Fuji University"
+                }, {
+                    "Japanese": "IMC",
+                    "Romaji": "IMC",
+                    "English": "IMC"
+                }, {
+                    "Japanese": "パワー電気",
+                    "Romaji": "Pawaa Denki",
+                    "English": "Power Electric"
+                }, {
+                    "Japanese": "ブラジルエアー",
+                    "Romaji": "Burajiru Ea",
+                    "English": "Brazil Air"
+                }, {
+                    "Japanese": "神戸病院",
+                    "Romaji": "Koube Byouin",
+                    "English": "Kobe Hospital"
+                }
+                ]
+            }
+            ],
+            "lesson2": [{
+                "Vocabulary": [{
+                    "Japanese": "これ",
+                    "Romaji": "kore",
+                    "English": "This (thing here, near the speaker)"
+                }, {
+                    "Japanese": "それ",
+                    "Romaji": "sore",
+                    "English": "That (thing near the listener)"
+                }, {
+                    "Japanese": "あれ",
+                    "Romaji": "are",
+                    "English": "That (thing over there, away from both speaker and listener)"
+                }, {
+                    "Japanese": "この〜",
+                    "Romaji": "kono~",
+                    "English": "This ~ (used with a noun, e.g., このほん : this book)"
+                }, {
+                    "Japanese": "その〜",
+                    "Romaji": "sono~",
+                    "English": "That ~ (used with a noun, e.g., そのかばん : that bag near you)"
+                }, {
+                    "Japanese": "あの〜",
+                    "Romaji": "ano~",
+                    "English": "That ~ (used with a noun, e.g., あのとけい : that watch over there)"
+                }, {
+                    "Japanese": "ほん",
+                    "Romaji": "hon",
+                    "English": "Book"
+                }, {
+                    "Japanese": "じしょ",
+                    "Romaji": "jisho",
+                    "English": "Dictionary"
+                }, {
+                    "Japanese": "ざっし",
+                    "Romaji": "zasshi",
+                    "English": "Magazine"
+                }, {
+                    "Japanese": "しんぶん",
+                    "Romaji": "shinbun",
+                    "English": "Newspaper"
+                }, {
+                    "Japanese": "ノート",
+                    "Romaji": "nooto",
+                    "English": "Notebook"
+                }, {
+                    "Japanese": "てちょう",
+                    "Romaji": "techou",
+                    "English": "Pocket notebook"
+                }, {
+                    "Japanese": "めいし",
+                    "Romaji": "meishi",
+                    "English": "Business card"
+                }, {
+                    "Japanese": "カード",
+                    "Romaji": "kaado",
+                    "English": "Card"
+                }, {
+                    "Japanese": "テレホンカード",
+                    "Romaji": "terehonkaado",
+                    "English": "Telephone card"
+                }, {
+                    "Japanese": "えんぴつ",
+                    "Romaji": "enpitsu",
+                    "English": "Pencil"
+                }, {
+                    "Japanese": "ボールペン",
+                    "Romaji": "boorupen",
+                    "English": "Ballpoint pen"
+                }, {
+                    "Japanese": "シャープペンシル",
+                    "Romaji": "shaapupenshiru",
+                    "English": "Mechanical pencil, propelling pencil"
+                }, {
+                    "Japanese": "かぎ",
+                    "Romaji": "kagi",
+                    "English": "Key"
+                }, {
+                    "Japanese": "とけい",
+                    "Romaji": "tokei",
+                    "English": "Watch, clock"
+                }, {
+                    "Japanese": "かさ",
+                    "Romaji": "kasa",
+                    "English": "Umbrella"
+                }, {
+                    "Japanese": "かばん",
+                    "Romaji": "kaban",
+                    "English": "Bag, briefcase"
+                }, {
+                    "Japanese": "［カセット］テープ",
+                    "Romaji": "[kasetto] teepu",
+                    "English": "[Cassette] tape"
+                }, {
+                    "Japanese": "テープレコーダー",
+                    "Romaji": "teepurekoodaa",
+                    "English": "Tape recorder"
+                }, {
+                    "Japanese": "テレビ",
+                    "Romaji": "terebi",
+                    "English": "Television"
+                }, {
+                    "Japanese": "ラジオ",
+                    "Romaji": "rajio",
+                    "English": "Radio"
+                }, {
+                    "Japanese": "カメラ",
+                    "Romaji": "kamera",
+                    "English": "Camera"
+                }, {
+                    "Japanese": "コンピューター",
+                    "Romaji": "konpyuutaa",
+                    "English": "Computer"
+                }, {
+                    "Japanese": "じどうしゃ",
+                    "Romaji": "jidousha",
+                    "English": "Automobile, car"
+                }, {
+                    "Japanese": "つくえ",
+                    "Romaji": "tsukue",
+                    "English": "Desk"
+                }, {
+                    "Japanese": "いす",
+                    "Romaji": "isu",
+                    "English": "Chair"
+                }, {
+                    "Japanese": "チョコレート",
+                    "Romaji": "chokoreeto",
+                    "English": "Chocolate"
+                }, {
+                    "Japanese": "コーヒー",
+                    "Romaji": "koohii",
+                    "English": "Coffee"
+                }, {
+                    "Japanese": "えいご",
+                    "Romaji": "eigo",
+                    "English": "The English language"
+                }, {
+                    "Japanese": "にほんご",
+                    "Romaji": "nihongo",
+                    "English": "The Japanese language"
+                }, {
+                    "Japanese": "〜ご",
+                    "Romaji": "~go",
+                    "English": "~ Language (e.g., フランスご : French language)"
+                }, {
+                    "Japanese": "なん",
+                    "Romaji": "nan",
+                    "English": "What"
+                }, {
+                    "Japanese": "そう",
+                    "Romaji": "sou",
+                    "English": "I see. / Yes."
+                }, {
+                    "Japanese": "ちがいます",
+                    "Romaji": "chigaimasu",
+                    "English": "No, it isn’t. / You are wrong."
+                }, {
+                    "Japanese": "そうですか",
+                    "Romaji": "sou desu ka",
+                    "English": "I see. / Is that so?"
+                }, {
+                    "Japanese": "あのう",
+                    "Romaji": "anou",
+                    "English": "Well… (used to show hesitation)"
+                }, {
+                    "Japanese": "ほんのきもちです",
+                    "Romaji": "hon no kimochi desu",
+                    "English": "It’s nothing. / It’s a token of my gratitude."
+                }, {
+                    "Japanese": "どうぞ",
+                    "Romaji": "douzo",
+                    "English": "Please. / Here you are. (used when offering something)"
+                }, {
+                    "Japanese": "どうも",
+                    "Romaji": "doumo",
+                    "English": "Well, thanks."
+                }, {
+                    "Japanese": "［どうも］ありがとう［ございます］",
+                    "Romaji": "[doumo] arigatou [gozaimasu]",
+                    "English": "Thank you [very much]."
+                }, {
+                    "Japanese": "これからおせわになります",
+                    "Romaji": "kore kara osewa ni narimasu",
+                    "English": "I hope for your kind assistance hereafter."
+                }, {
+                    "Japanese": "こちらこそよろしく",
+                    "Romaji": "kochira koso yoroshiku",
+                    "English": "I am pleased to meet you, too. (response to どうぞよろしく)"
+                }
+                ]
+            }
+            ],
+            "lesson3": [{
+                "Vocabulary": [{
+                    "Japanese": "ここ",
+                    "Romaji": "koko",
+                    "English": "Here, this place"
+                }, {
+                    "Japanese": "そこ",
+                    "Romaji": "soko",
+                    "English": "There, that place near you"
+                }, {
+                    "Japanese": "あそこ",
+                    "Romaji": "asoko",
+                    "English": "That place over there"
+                }, {
+                    "Japanese": "どこ",
+                    "Romaji": "doko",
+                    "English": "Where, what place"
+                }, {
+                    "Japanese": "こちら",
+                    "Romaji": "kochira",
+                    "English": "This way, this place (polite equivalent of ここ)"
+                }, {
+                    "Japanese": "そちら",
+                    "Romaji": "sochira",
+                    "English": "That way, that place near you (polite equivalent of そこ)"
+                }, {
+                    "Japanese": "あちら",
+                    "Romaji": "achira",
+                    "English": "That way, that place over there (polite equivalent of あそこ)"
+                }, {
+                    "Japanese": "どちら",
+                    "Romaji": "dochira",
+                    "English": "Which way, where (polite equivalent of どこ)"
+                }, {
+                    "Japanese": "きょうしつ",
+                    "Romaji": "kyoushitsu",
+                    "English": "Classroom"
+                }, {
+                    "Japanese": "しょくどう",
+                    "Romaji": "shokudou",
+                    "English": "Dining hall, canteen"
+                }, {
+                    "Japanese": "じむしょ",
+                    "Romaji": "jimusho",
+                    "English": "Office"
+                }, {
+                    "Japanese": "かいぎしつ",
+                    "Romaji": "kaigishitsu",
+                    "English": "Conference room, assembly room"
+                }, {
+                    "Japanese": "うけつけ",
+                    "Romaji": "uketsuke",
+                    "English": "Reception desk"
+                }, {
+                    "Japanese": "ロビー",
+                    "Romaji": "robii",
+                    "English": "Lobby"
+                }, {
+                    "Japanese": "へや",
+                    "Romaji": "heya",
+                    "English": "Room"
+                }, {
+                    "Japanese": "トイレ（おてあらい）",
+                    "Romaji": "toire (otearai)",
+                    "English": "Toilet, restroom"
+                }, {
+                    "Japanese": "かいだん",
+                    "Romaji": "kaidan",
+                    "English": "Staircase"
+                }, {
+                    "Japanese": "エレベーター",
+                    "Romaji": "erebeetaa",
+                    "English": "Elevator, lift"
+                }, {
+                    "Japanese": "エスカレーター",
+                    "Romaji": "esukareetaa",
+                    "English": "Escalator"
+                }, {
+                    "Japanese": "［お］くに",
+                    "Romaji": "[o] kuni",
+                    "English": "Country"
+                }, {
+                    "Japanese": "かいしゃ",
+                    "Romaji": "kaisha",
+                    "English": "Company"
+                }, {
+                    "Japanese": "うち",
+                    "Romaji": "uchi",
+                    "English": "House, home"
+                }, {
+                    "Japanese": "でんわ",
+                    "Romaji": "denwa",
+                    "English": "Telephone, telephone call"
+                }, {
+                    "Japanese": "くつ",
+                    "Romaji": "kutsu",
+                    "English": "Shoes"
+                }, {
+                    "Japanese": "ネクタイ",
+                    "Romaji": "nekutai",
+                    "English": "Necktie"
+                }, {
+                    "Japanese": "ワイン",
+                    "Romaji": "wain",
+                    "English": "Wine"
+                }, {
+                    "Japanese": "たばこ",
+                    "Romaji": "tabako",
+                    "English": "Tobacco, cigarette"
+                }, {
+                    "Japanese": "うりば",
+                    "Romaji": "uriba",
+                    "English": "Department, counter (in a department store)"
+                }, {
+                    "Japanese": "ちか",
+                    "Romaji": "chika",
+                    "English": "Basement"
+                }, {
+                    "Japanese": "－かい（－がい）",
+                    "Romaji": "-kai (-gai)",
+                    "English": "-th floor"
+                }, {
+                    "Japanese": "なんがい",
+                    "Romaji": "nangai",
+                    "English": "What floor"
+                }, {
+                    "Japanese": "－えん",
+                    "Romaji": "-en",
+                    "English": "- Yen"
+                }, {
+                    "Japanese": "いくら",
+                    "Romaji": "ikura",
+                    "English": "How much"
+                }, {
+                    "Japanese": "ひゃく",
+                    "Romaji": "hyaku",
+                    "English": "Hundred"
+                }, {
+                    "Japanese": "せん",
+                    "Romaji": "sen",
+                    "English": "Thousand"
+                }, {
+                    "Japanese": "まん",
+                    "Romaji": "man",
+                    "English": "Ten thousand"
+                }, {
+                    "Japanese": "すみません",
+                    "Romaji": "sumimasen",
+                    "English": "Excuse me."
+                }, {
+                    "Japanese": "〜でございます",
+                    "Romaji": "~de gozaimasu",
+                    "English": "(Polite equivalent of です)"
+                }, {
+                    "Japanese": "［〜を］みせてください",
+                    "Romaji": "[~ o] misete kudasai",
+                    "English": "Please show me [~]."
+                }, {
+                    "Japanese": "じゃ",
+                    "Romaji": "ja",
+                    "English": "Well, then; in that case"
+                }, {
+                    "Japanese": "［〜を］ください",
+                    "Romaji": "[~ o] kudasai",
+                    "English": "Give me [~], please."
+                }, {
+                    "Japanese": "おおさか",
+                    "Romaji": "Oosaka",
+                    "English": "Osaka (name of a station in Osaka)"
+                }, {
+                    "Japanese": "イタリア",
+                    "Romaji": "Itaria",
+                    "English": "Italy"
+                }, {
+                    "Japanese": "スイス",
+                    "Romaji": "Suisu",
+                    "English": "Switzerland"
+                }, {
+                    "Japanese": "エムティー",
+                    "Romaji": "Emutii",
+                    "English": "MT (fictitious company)"
+                }, {
+                    "Japanese": "ヨーネン",
+                    "Romaji": "Yoonen",
+                    "English": "Yonen (fictitious company)"
+                }, {
+                    "Japanese": "アキックス",
+                    "Romaji": "Akikkusu",
+                    "English": "Akix (fictitious company)"
+                }
+                ]
+            }
+            ],
+            "lesson4": [{
+                "Vocabulary": [{
+                    "Japanese": "おきます",
+                    "Romaji": "okimasu",
+                    "English": "Get up, wake up"
+                }, {
+                    "Japanese": "ねます",
+                    "Romaji": "nemasu",
+                    "English": "Sleep, go to bed"
+                }, {
+                    "Japanese": "はたらきます",
+                    "Romaji": "hatarakimasu",
+                    "English": "Work"
+                }, {
+                    "Japanese": "やすみます",
+                    "Romaji": "yasumimasu",
+                    "English": "Take a rest, take a holiday"
+                }, {
+                    "Japanese": "べんきょうします",
+                    "Romaji": "benkyou shimasu",
+                    "English": "Study"
+                }, {
+                    "Japanese": "おわります",
+                    "Romaji": "owarimasu",
+                    "English": "Finish"
+                }, {
+                    "Japanese": "デパート",
+                    "Romaji": "depaato",
+                    "English": "Department store"
+                }, {
+                    "Japanese": "ぎんこう",
+                    "Romaji": "ginkou",
+                    "English": "Bank"
+                }, {
+                    "Japanese": "ゆうびんきょく",
+                    "Romaji": "yuubinkyoku",
+                    "English": "Post office"
+                }, {
+                    "Japanese": "としょかん",
+                    "Romaji": "toshokan",
+                    "English": "Library"
+                }, {
+                    "Japanese": "びじゅつかん",
+                    "Romaji": "bijutsukan",
+                    "English": "Art museum"
+                }, {
+                    "Japanese": "いま",
+                    "Romaji": "ima",
+                    "English": "Now"
+                }, {
+                    "Japanese": "ーじ",
+                    "Romaji": "-ji",
+                    "English": "- O’clock"
+                }, {
+                    "Japanese": "ーふん（－ぷん）",
+                    "Romaji": "-fun (-pun)",
+                    "English": "- Minute"
+                }, {
+                    "Japanese": "はん",
+                    "Romaji": "han",
+                    "English": "Half"
+                }, {
+                    "Japanese": "なんじ",
+                    "Romaji": "nanji",
+                    "English": "What time"
+                }, {
+                    "Japanese": "なんぷん",
+                    "Romaji": "nanpun",
+                    "English": "What minute"
+                }, {
+                    "Japanese": "ごぜん",
+                    "Romaji": "gozen",
+                    "English": "A.M., morning"
+                }, {
+                    "Japanese": "ごご",
+                    "Romaji": "gogo",
+                    "English": "P.M., afternoon"
+                }, {
+                    "Japanese": "あさ",
+                    "Romaji": "asa",
+                    "English": "Morning"
+                }, {
+                    "Japanese": "ひる",
+                    "Romaji": "hiru",
+                    "English": "Daytime, noon"
+                }, {
+                    "Japanese": "ばん（よる）",
+                    "Romaji": "ban (yoru)",
+                    "English": "Night, evening"
+                }, {
+                    "Japanese": "おととい",
+                    "Romaji": "ototoi",
+                    "English": "The day before yesterday"
+                }, {
+                    "Japanese": "きのう",
+                    "Romaji": "kinou",
+                    "English": "Yesterday"
+                }, {
+                    "Japanese": "きょう",
+                    "Romaji": "kyou",
+                    "English": "Today"
+                }, {
+                    "Japanese": "あした",
+                    "Romaji": "ashita",
+                    "English": "Tomorrow"
+                }, {
+                    "Japanese": "あさって",
+                    "Romaji": "asatte",
+                    "English": "The day after tomorrow"
+                }, {
+                    "Japanese": "けさ",
+                    "Romaji": "kesa",
+                    "English": "This morning"
+                }, {
+                    "Japanese": "こんばん",
+                    "Romaji": "konban",
+                    "English": "This evening, tonight"
+                }, {
+                    "Japanese": "やすみ",
+                    "Romaji": "yasumi",
+                    "English": "Rest, a holiday, a day off"
+                }, {
+                    "Japanese": "ひるやすみ",
+                    "Romaji": "hiruyasumi",
+                    "English": "Lunchtime"
+                }, {
+                    "Japanese": "まいあさ",
+                    "Romaji": "maiasa",
+                    "English": "Every morning"
+                }, {
+                    "Japanese": "まいばん",
+                    "Romaji": "maiban",
+                    "English": "Every night"
+                }, {
+                    "Japanese": "まいにち",
+                    "Romaji": "mainichi",
+                    "English": "Every day"
+                }, {
+                    "Japanese": "げつようび",
+                    "Romaji": "getsuyoubi",
+                    "English": "Monday"
+                }, {
+                    "Japanese": "かようび",
+                    "Romaji": "kayoubi",
+                    "English": "Tuesday"
+                }, {
+                    "Japanese": "すいようび",
+                    "Romaji": "suiyoubi",
+                    "English": "Wednesday"
+                }, {
+                    "Japanese": "もくようび",
+                    "Romaji": "mokuyoubi",
+                    "English": "Thursday"
+                }, {
+                    "Japanese": "きんようび",
+                    "Romaji": "kinyoubi",
+                    "English": "Friday"
+                }, {
+                    "Japanese": "どようび",
+                    "Romaji": "doyoubi",
+                    "English": "Saturday"
+                }, {
+                    "Japanese": "にちようび",
+                    "Romaji": "nichiyoubi",
+                    "English": "Sunday"
+                }, {
+                    "Japanese": "なんようび",
+                    "Romaji": "nanyoubi",
+                    "English": "What day of the week?"
+                }
+                ]
+            }
+            ],
+            "lesson5": [{
+                "Vocabulary": [{
+                    "Japanese": "いきます",
+                    "Romaji": "ikimasu",
+                    "English": "go"
+                }, {
+                    "Japanese": "きます",
+                    "Romaji": "kimasu",
+                    "English": "come"
+                }, {
+                    "Japanese": "かえります",
+                    "Romaji": "kaerimasu",
+                    "English": "go home, return"
+                }, {
+                    "Japanese": "がっこう",
+                    "Romaji": "gakkou",
+                    "English": "school"
+                }, {
+                    "Japanese": "スーパー",
+                    "Romaji": "suupaa",
+                    "English": "supermarket"
+                }, {
+                    "Japanese": "えき",
+                    "Romaji": "eki",
+                    "English": "station"
+                }, {
+                    "Japanese": "ひこうき",
+                    "Romaji": "hikouki",
+                    "English": "aeroplane, airplane"
+                }, {
+                    "Japanese": "ふね",
+                    "Romaji": "fune",
+                    "English": "ship"
+                }, {
+                    "Japanese": "でんしゃ",
+                    "Romaji": "densha",
+                    "English": "electric train"
+                }, {
+                    "Japanese": "ちかてつ",
+                    "Romaji": "chikatetsu",
+                    "English": "underground, subway"
+                }, {
+                    "Japanese": "しんかんせん",
+                    "Romaji": "shinkansen",
+                    "English": "the Shinkansen, the bullet train"
+                }, {
+                    "Japanese": "バス",
+                    "Romaji": "basu",
+                    "English": "bus"
+                }, {
+                    "Japanese": "タクシー",
+                    "Romaji": "takushii",
+                    "English": "taxi"
+                }, {
+                    "Japanese": "じてんしゃ",
+                    "Romaji": "jitensha",
+                    "English": "bicycle"
+                }, {
+                    "Japanese": "あるいて",
+                    "Romaji": "aruite",
+                    "English": "on foot"
+                }, {
+                    "Japanese": "ひと",
+                    "Romaji": "hito",
+                    "English": "person, people"
+                }, {
+                    "Japanese": "ともだち",
+                    "Romaji": "tomodachi",
+                    "English": "friend"
+                }, {
+                    "Japanese": "かれ",
+                    "Romaji": "kare",
+                    "English": "he, boyfriend, lover"
+                }, {
+                    "Japanese": "かのじょ",
+                    "Romaji": "kanojo",
+                    "English": "she, girlfriend, lover"
+                }, {
+                    "Japanese": "かぞく",
+                    "Romaji": "kazoku",
+                    "English": "family"
+                }, {
+                    "Japanese": "ひとりで",
+                    "Romaji": "hitoride",
+                    "English": "alone, by oneself"
+                }, {
+                    "Japanese": "せんしゅう",
+                    "Romaji": "senshuu",
+                    "English": "last week"
+                }, {
+                    "Japanese": "こんしゅう",
+                    "Romaji": "konshuu",
+                    "English": "this week"
+                }, {
+                    "Japanese": "らいしゅう",
+                    "Romaji": "raishuu",
+                    "English": "next week"
+                }, {
+                    "Japanese": "せんげつ",
+                    "Romaji": "sengetsu",
+                    "English": "last month"
+                }, {
+                    "Japanese": "こんげつ",
+                    "Romaji": "kongetsu",
+                    "English": "this month"
+                }, {
+                    "Japanese": "らいげつ",
+                    "Romaji": "raigetsu",
+                    "English": "next month"
+                }, {
+                    "Japanese": "きょねん",
+                    "Romaji": "kyonen",
+                    "English": "last year"
+                }, {
+                    "Japanese": "ことし",
+                    "Romaji": "kotoshi",
+                    "English": "this year"
+                }, {
+                    "Japanese": "らいねん",
+                    "Romaji": "rainen",
+                    "English": "next year"
+                }, {
+                    "Japanese": "―ねん",
+                    "Romaji": "-nen",
+                    "English": "-th year"
+                }, {
+                    "Japanese": "なんねん",
+                    "Romaji": "nan nen",
+                    "English": "what year"
+                }, {
+                    "Japanese": "―がつ",
+                    "Romaji": "-gatsu",
+                    "English": "-th month of the year"
+                }, {
+                    "Japanese": "なんがつ",
+                    "Romaji": "nan gatsu",
+                    "English": "what month"
+                }, {
+                    "Japanese": "ついたち",
+                    "Romaji": "tsuitachi",
+                    "English": "first day of the month"
+                }, {
+                    "Japanese": "ふつか",
+                    "Romaji": "futsuka",
+                    "English": "second, two days"
+                }, {
+                    "Japanese": "みっか",
+                    "Romaji": "mikka",
+                    "English": "third, three days"
+                }, {
+                    "Japanese": "よっか",
+                    "Romaji": "yokka",
+                    "English": "fourth, four days"
+                }, {
+                    "Japanese": "いつか",
+                    "Romaji": "itsuka",
+                    "English": "fifth, five days"
+                }, {
+                    "Japanese": "むいか",
+                    "Romaji": "muika",
+                    "English": "sixth, six days"
+                }, {
+                    "Japanese": "なのか",
+                    "Romaji": "nanoka",
+                    "English": "seventh, seven days"
+                }, {
+                    "Japanese": "ようか",
+                    "Romaji": "youka",
+                    "English": "eighth, eight days"
+                }, {
+                    "Japanese": "ここのか",
+                    "Romaji": "kokonoka",
+                    "English": "ninth, nine days"
+                }, {
+                    "Japanese": "とおか",
+                    "Romaji": "tooka",
+                    "English": "tenth, ten days"
+                }, {
+                    "Japanese": "じゅうよっか",
+                    "Romaji": "juuyokka",
+                    "English": "fourteenth, fourteen days"
+                }, {
+                    "Japanese": "はつか",
+                    "Romaji": "hatsuka",
+                    "English": "twentieth, twenty days"
+                }, {
+                    "Japanese": "にじゅうよっか",
+                    "Romaji": "nijuuyokka",
+                    "English": "twenty-fourth, twenty-four days"
+                }, {
+                    "Japanese": "―にち",
+                    "Romaji": "-nichi",
+                    "English": "-th day of the month, - day(s)"
+                }, {
+                    "Japanese": "なんにち",
+                    "Romaji": "nan nichi",
+                    "English": "which day of the month, how many days"
+                }, {
+                    "Japanese": "いつ",
+                    "Romaji": "itsu",
+                    "English": "when"
+                }, {
+                    "Japanese": "たんじょうび",
+                    "Romaji": "tanjoubi",
+                    "English": "birthday"
+                }, {
+                    "Japanese": "そうですね",
+                    "Romaji": "sou desu ne",
+                    "English": "Yes, it is."
+                }, {
+                    "Japanese": "どうも ありがとう ございました",
+                    "Romaji": "doumo arigatou gozaimashita",
+                    "English": "Thank you very much."
+                }, {
+                    "Japanese": "どういたしまして",
+                    "Romaji": "dou itashimashite",
+                    "English": "You're welcome./Don't mention it."
+                }, {
+                    "Japanese": "―ばんせん",
+                    "Romaji": "-bansen",
+                    "English": "platform ―, -th platform"
+                }, {
+                    "Japanese": "つぎの",
+                    "Romaji": "tsugi no",
+                    "English": "next"
+                }, {
+                    "Japanese": "ふつう",
+                    "Romaji": "futsuu",
+                    "English": "local (train)"
+                }, {
+                    "Japanese": "きゅうこう",
+                    "Romaji": "kyuukou",
+                    "English": "rapid"
+                }, {
+                    "Japanese": "とっきゅう",
+                    "Romaji": "tokkyuu",
+                    "English": "express"
+                }, {
+                    "Japanese": "こうべ",
+                    "Romaji": "Koube",
+                    "English": "name of a town near Osaka"
+                }, {
+                    "Japanese": "おおさかじょう",
+                    "Romaji": "Osaka-jou",
+                    "English": "Osaka Castle, a famous castle in Osaka"
+                }
+                ]
+            }
+            ],
+            "lesson6": [{
+                "Vocabulary": [{
+                    "Japanese": "たべます",
+                    "Romaji": "tabemasu",
+                    "English": "eat"
+                }, {
+                    "Japanese": "のみます",
+                    "Romaji": "nomimasu",
+                    "English": "drink"
+                }, {
+                    "Japanese": "すいます",
+                    "Romaji": "suimasu",
+                    "English": "smoke [a cigarette]"
+                }, {
+                    "Japanese": "みます",
+                    "Romaji": "mimasu",
+                    "English": "see, look at, watch"
+                }, {
+                    "Japanese": "ききます",
+                    "Romaji": "kikimasu",
+                    "English": "hear, listen"
+                }, {
+                    "Japanese": "よみます",
+                    "Romaji": "yomimasu",
+                    "English": "read"
+                }, {
+                    "Japanese": "かきます",
+                    "Romaji": "kakimasu",
+                    "English": "write (kakimasu can also mean to draw or paint, but in this case it is written with hiragana in this book)"
+                }, {
+                    "Japanese": "かいます",
+                    "Romaji": "kaimasu",
+                    "English": "buy"
+                }, {
+                    "Japanese": "とります",
+                    "Romaji": "torimasu",
+                    "English": "take [a photograph]"
+                }, {
+                    "Japanese": "します",
+                    "Romaji": "shimasu",
+                    "English": "do, play"
+                }, {
+                    "Japanese": "あいます",
+                    "Romaji": "aimasu",
+                    "English": "meet [a friend]"
+                }, {
+                    "Japanese": "ごはん",
+                    "Romaji": "gohan",
+                    "English": "a meal, cooked rice"
+                }, {
+                    "Japanese": "あさごはん",
+                    "Romaji": "asagohan",
+                    "English": "breakfast"
+                }, {
+                    "Japanese": "ひるごはん",
+                    "Romaji": "hirugohan",
+                    "English": "lunch"
+                }, {
+                    "Japanese": "ばんごはん",
+                    "Romaji": "bangohan",
+                    "English": "supper"
+                }, {
+                    "Japanese": "パン",
+                    "Romaji": "pan",
+                    "English": "bread"
+                }, {
+                    "Japanese": "たまご",
+                    "Romaji": "tamago",
+                    "English": "egg"
+                }, {
+                    "Japanese": "にく",
+                    "Romaji": "niku",
+                    "English": "meat"
+                }, {
+                    "Japanese": "さかな",
+                    "Romaji": "sakana",
+                    "English": "fish"
+                }, {
+                    "Japanese": "やさい",
+                    "Romaji": "yasai",
+                    "English": "vegetable"
+                }, {
+                    "Japanese": "くだもの",
+                    "Romaji": "kudamono",
+                    "English": "fruit"
+                }, {
+                    "Japanese": "みず",
+                    "Romaji": "mizu",
+                    "English": "water"
+                }, {
+                    "Japanese": "おちゃ",
+                    "Romaji": "ocha",
+                    "English": "tea, green tea"
+                }, {
+                    "Japanese": "こうちゃ",
+                    "Romaji": "koucha",
+                    "English": "black tea"
+                }, {
+                    "Japanese": "ぎゅうにゅう (ミルク)",
+                    "Romaji": "gyuunyuu (miruku)",
+                    "English": "milk"
+                }, {
+                    "Japanese": "ジュース",
+                    "Romaji": "juusu",
+                    "English": "juice"
+                }, {
+                    "Japanese": "ビール",
+                    "Romaji": "biiru",
+                    "English": "beer"
+                }, {
+                    "Japanese": "おさけ",
+                    "Romaji": "osake",
+                    "English": "alcohol, Japanese rice wine"
+                }, {
+                    "Japanese": "たばこ",
+                    "Romaji": "tabako",
+                    "English": "tobacco, cigarette"
+                }, {
+                    "Japanese": "てがみ",
+                    "Romaji": "tegami",
+                    "English": "letter"
+                }, {
+                    "Japanese": "レポート",
+                    "Romaji": "repooto",
+                    "English": "report"
+                }, {
+                    "Japanese": "しゃしん",
+                    "Romaji": "shashin",
+                    "English": "photograph"
+                }, {
+                    "Japanese": "ビデオ",
+                    "Romaji": "bideo",
+                    "English": "video [tape], video deck"
+                }, {
+                    "Japanese": "みせ",
+                    "Romaji": "mise",
+                    "English": "shop, store"
+                }, {
+                    "Japanese": "にわ",
+                    "Romaji": "niwa",
+                    "English": "garden"
+                }, {
+                    "Japanese": "しゅくだい",
+                    "Romaji": "shukudai",
+                    "English": "homework"
+                }, {
+                    "Japanese": "テニス",
+                    "Romaji": "tenisu",
+                    "English": "tennis"
+                }, {
+                    "Japanese": "サッカー",
+                    "Romaji": "sakkaa",
+                    "English": "soccer, football"
+                }, {
+                    "Japanese": "おはなみ",
+                    "Romaji": "ohanami",
+                    "English": "cherry-blossom viewing"
+                }, {
+                    "Japanese": "なに",
+                    "Romaji": "nani",
+                    "English": "what"
+                }, {
+                    "Japanese": "いっしょに",
+                    "Romaji": "isshoni",
+                    "English": "together"
+                }, {
+                    "Japanese": "ちょっと",
+                    "Romaji": "chotto",
+                    "English": "a little while, a little bit"
+                }, {
+                    "Japanese": "いつも",
+                    "Romaji": "itsumo",
+                    "English": "always, usually"
+                }, {
+                    "Japanese": "ときどき",
+                    "Romaji": "tokidoki",
+                    "English": "sometimes"
+                }, {
+                    "Japanese": "それから",
+                    "Romaji": "sorekara",
+                    "English": "after that, and then"
+                }, {
+                    "Japanese": "ええ",
+                    "Romaji": "ee",
+                    "English": "yes"
+                }, {
+                    "Japanese": "いいですね",
+                    "Romaji": "ii desu ne",
+                    "English": "That's good."
+                }, {
+                    "Japanese": "わかりました",
+                    "Romaji": "wakarimashita",
+                    "English": "I see."
+                }, {
+                    "Japanese": "はい (会話)",
+                    "Romaji": "hai (kaiwa)",
+                    "English": "Yes? (lit: What is it?)"
+                }, {
+                    "Japanese": "じゃ,また (あした)",
+                    "Romaji": "ja, mata (ashita)",
+                    "English": "See you [tomorrow]."
+                }, {
+                    "Japanese": "メキシコ",
+                    "Romaji": "Mekishiko",
+                    "English": "Mexico"
+                }, {
+                    "Japanese": "おおさかデパート",
+                    "Romaji": "Osaka Depaato",
+                    "English": "a fictitious department store"
+                }, {
+                    "Japanese": "まるや",
+                    "Romaji": "Maruya",
+                    "English": "a fictitious restaurant"
+                }, {
+                    "Japanese": "フランスや",
+                    "Romaji": "Furansu-ya",
+                    "English": "a fictitious supermarket"
+                }, {
+                    "Japanese": "毎日屋",
+                    "Romaji": "Mainichi-ya",
+                    "English": "a fictitious supermarket"
+                }
+                ]
+            }
+            ],
+            "lesson7": [{
+                "Vocabulary": [{
+                    "Japanese": "きります",
+                    "Romaji": "kirimasu",
+                    "English": "cut, slice"
+                }, {
+                    "Japanese": "おくります",
+                    "Romaji": "okurimasu",
+                    "English": "send"
+                }, {
+                    "Japanese": "あげます",
+                    "Romaji": "agemasu",
+                    "English": "give"
+                }, {
+                    "Japanese": "もらいます",
+                    "Romaji": "moraimasu",
+                    "English": "receive"
+                }, {
+                    "Japanese": "かします",
+                    "Romaji": "kashimasu",
+                    "English": "lend"
+                }, {
+                    "Japanese": "かります",
+                    "Romaji": "karimasu",
+                    "English": "borrow"
+                }, {
+                    "Japanese": "おしえます",
+                    "Romaji": "oshiemasu",
+                    "English": "teach"
+                }, {
+                    "Japanese": "ならいます",
+                    "Romaji": "naraimasu",
+                    "English": "learn"
+                }, {
+                    "Japanese": "かけます",
+                    "Romaji": "kakemasu",
+                    "English": "make [a telephone call]"
+                }, {
+                    "Japanese": "て",
+                    "Romaji": "te",
+                    "English": "hand, arm"
+                }, {
+                    "Japanese": "はし",
+                    "Romaji": "hashi",
+                    "English": "chopsticks"
+                }, {
+                    "Japanese": "スプーン",
+                    "Romaji": "supuun",
+                    "English": "spoon"
+                }, {
+                    "Japanese": "ナイフ",
+                    "Romaji": "naifu",
+                    "English": "knife"
+                }, {
+                    "Japanese": "フォーク",
+                    "Romaji": "fooku",
+                    "English": "fork"
+                }, {
+                    "Japanese": "はさみ",
+                    "Romaji": "hasami",
+                    "English": "scissors"
+                }, {
+                    "Japanese": "パソコン",
+                    "Romaji": "pasokon",
+                    "English": "personal computer"
+                }, {
+                    "Japanese": "ケータイ",
+                    "Romaji": "keetai",
+                    "English": "mobile phone, cell phone"
+                }, {
+                    "Japanese": "メール",
+                    "Romaji": "meeru",
+                    "English": "e-mail"
+                }, {
+                    "Japanese": "ねんがじょう",
+                    "Romaji": "nengajou",
+                    "English": "New Year's greeting card"
+                }, {
+                    "Japanese": "パンチ",
+                    "Romaji": "panchi",
+                    "English": "punch"
+                }, {
+                    "Japanese": "ホッチキス",
+                    "Romaji": "hotchikisu",
+                    "English": "stapler"
+                }, {
+                    "Japanese": "セロテープ",
+                    "Romaji": "seroteepu",
+                    "English": "Sellotape, Scotch tape, clear adhesive tape"
+                }, {
+                    "Japanese": "けしゴム",
+                    "Romaji": "keshigomu",
+                    "English": "rubber, eraser"
+                }, {
+                    "Japanese": "かみ",
+                    "Romaji": "kami",
+                    "English": "paper"
+                }, {
+                    "Japanese": "はな",
+                    "Romaji": "hana",
+                    "English": "flower, blossom"
+                }, {
+                    "Japanese": "シャツ",
+                    "Romaji": "shatsu",
+                    "English": "shirt"
+                }, {
+                    "Japanese": "プレゼント",
+                    "Romaji": "purezento",
+                    "English": "present, gift"
+                }, {
+                    "Japanese": "にもつ",
+                    "Romaji": "nimotsu",
+                    "English": "luggage, baggage, parcel"
+                }, {
+                    "Japanese": "おかね",
+                    "Romaji": "okane",
+                    "English": "money"
+                }, {
+                    "Japanese": "きっぷ",
+                    "Romaji": "kippu",
+                    "English": "ticket"
+                }, {
+                    "Japanese": "クリスマス",
+                    "Romaji": "kurisumasu",
+                    "English": "Christmas"
+                }, {
+                    "Japanese": "ちち",
+                    "Romaji": "chichi",
+                    "English": "(my) father"
+                }, {
+                    "Japanese": "はは",
+                    "Romaji": "haha",
+                    "English": "(my) mother"
+                }, {
+                    "Japanese": "おとうさん",
+                    "Romaji": "otousan",
+                    "English": "(someone else's) father (also used to address one's own father)"
+                }, {
+                    "Japanese": "おかあさん",
+                    "Romaji": "okaasan",
+                    "English": "(someone else's) mother (also used to address one's own mother)"
+                }, {
+                    "Japanese": "もう",
+                    "Romaji": "mou",
+                    "English": "already"
+                }, {
+                    "Japanese": "まだ",
+                    "Romaji": "mada",
+                    "English": "not yet"
+                }, {
+                    "Japanese": "これから",
+                    "Romaji": "korekara",
+                    "English": "from now on, soon"
+                }, {
+                    "Japanese": "いらっしゃい",
+                    "Romaji": "irasshai",
+                    "English": "How nice of you to come. (lit. Welcome.) Do come in."
+                }, {
+                    "Japanese": "どうぞ",
+                    "Romaji": "douzo",
+                    "English": "May I? (lit. I commit an incivility.)"
+                }, {
+                    "Japanese": "いただきます",
+                    "Romaji": "itadakimasu",
+                    "English": "Thank you./I accept. (said before starting to eat or drink)"
+                }, {
+                    "Japanese": "ごちそうさまでした",
+                    "Romaji": "gochisousama deshita",
+                    "English": "That was delicious. (said after eating or drinking)"
+                }, {
+                    "Japanese": "スペイン",
+                    "Romaji": "Supein",
+                    "English": "Spain"
+                }
+                ]
+            }
+            ],
+            "lesson8": [{
+                "Vocabulary": [{
+                    "Japanese": "ハンサム",
+                    "Romaji": "hansamu",
+                    "English": "handsome"
+                }, {
+                    "Japanese": "きれい",
+                    "Romaji": "kirei",
+                    "English": "beautiful, clean"
+                }, {
+                    "Japanese": "しずか",
+                    "Romaji": "shizuka",
+                    "English": "quiet"
+                }, {
+                    "Japanese": "にぎやか",
+                    "Romaji": "nigiyaka",
+                    "English": "lively"
+                }, {
+                    "Japanese": "ゆうめい",
+                    "Romaji": "yuumei",
+                    "English": "famous"
+                }, {
+                    "Japanese": "しんせつ",
+                    "Romaji": "shinsetsu",
+                    "English": "helpful, kind, considerate (about people)"
+                }, {
+                    "Japanese": "げんき",
+                    "Romaji": "genki",
+                    "English": "healthy, energetic, cheerful"
+                }, {
+                    "Japanese": "ひま",
+                    "Romaji": "hima",
+                    "English": "free (time)"
+                }, {
+                    "Japanese": "べんり",
+                    "Romaji": "benri",
+                    "English": "convenient"
+                }, {
+                    "Japanese": "すてき",
+                    "Romaji": "suteki",
+                    "English": "fine, nice, wonderful"
+                }, {
+                    "Japanese": "おおきい",
+                    "Romaji": "ookii",
+                    "English": "big, large"
+                }, {
+                    "Japanese": "ちいさい",
+                    "Romaji": "chiisai",
+                    "English": "small, little"
+                }, {
+                    "Japanese": "あたらしい",
+                    "Romaji": "atarashii",
+                    "English": "new, fresh"
+                }, {
+                    "Japanese": "ふるい",
+                    "Romaji": "furui",
+                    "English": "old (not used to describe a person's age)"
+                }, {
+                    "Japanese": "いい(よい)",
+                    "Romaji": "ii (yoi)",
+                    "English": "good"
+                }, {
+                    "Japanese": "わるい",
+                    "Romaji": "warui",
+                    "English": "bad"
+                }, {
+                    "Japanese": "あつい",
+                    "Romaji": "atsui",
+                    "English": "hot (referring to temperature)"
+                }, {
+                    "Japanese": "さむい",
+                    "Romaji": "samui",
+                    "English": "cold (referring to temperature)"
+                }, {
+                    "Japanese": "つめたい",
+                    "Romaji": "tsumetai",
+                    "English": "cold (referring to touch)"
+                }, {
+                    "Japanese": "むずかしい",
+                    "Romaji": "muzukashii",
+                    "English": "difficult"
+                }, {
+                    "Japanese": "やさしい",
+                    "Romaji": "yasashii",
+                    "English": "easy"
+                }, {
+                    "Japanese": "たかい",
+                    "Romaji": "takai",
+                    "English": "expensive, tall, high"
+                }, {
+                    "Japanese": "やすい",
+                    "Romaji": "yasui",
+                    "English": "inexpensive, cheap"
+                }, {
+                    "Japanese": "ひくい",
+                    "Romaji": "hikui",
+                    "English": "low"
+                }, {
+                    "Japanese": "おもしろい",
+                    "Romaji": "omoshiroi",
+                    "English": "interesting"
+                }, {
+                    "Japanese": "おいしい",
+                    "Romaji": "oishii",
+                    "English": "delicious, tasty"
+                }, {
+                    "Japanese": "いそがしい",
+                    "Romaji": "isogashii",
+                    "English": "busy"
+                }, {
+                    "Japanese": "たのしい",
+                    "Romaji": "tanoshii",
+                    "English": "enjoyable"
+                }, {
+                    "Japanese": "しろい",
+                    "Romaji": "shiroi",
+                    "English": "white"
+                }, {
+                    "Japanese": "くろい",
+                    "Romaji": "kuroi",
+                    "English": "black"
+                }, {
+                    "Japanese": "あかい",
+                    "Romaji": "akai",
+                    "English": "red"
+                }, {
+                    "Japanese": "あおい",
+                    "Romaji": "aoi",
+                    "English": "blue"
+                }, {
+                    "Japanese": "さくら",
+                    "Romaji": "sakura",
+                    "English": "cherry (blossom)"
+                }, {
+                    "Japanese": "やま",
+                    "Romaji": "yama",
+                    "English": "mountain"
+                }, {
+                    "Japanese": "まち",
+                    "Romaji": "machi",
+                    "English": "town, city"
+                }, {
+                    "Japanese": "たべもの",
+                    "Romaji": "tabemono",
+                    "English": "food"
+                }, {
+                    "Japanese": "ところ",
+                    "Romaji": "tokoro",
+                    "English": "place"
+                }, {
+                    "Japanese": "りょう",
+                    "Romaji": "ryou",
+                    "English": "dormitory"
+                }, {
+                    "Japanese": "レストラン",
+                    "Romaji": "resutoran",
+                    "English": "restaurant"
+                }, {
+                    "Japanese": "せいかつ",
+                    "Romaji": "seikatsu",
+                    "English": "life"
+                }, {
+                    "Japanese": "おしごと",
+                    "Romaji": "oshigoto",
+                    "English": "work, business"
+                }, {
+                    "Japanese": "どう",
+                    "Romaji": "dou",
+                    "English": "how"
+                }, {
+                    "Japanese": "どんな",
+                    "Romaji": "donna",
+                    "English": "what kind of"
+                }, {
+                    "Japanese": "とても",
+                    "Romaji": "totemo",
+                    "English": "very"
+                }, {
+                    "Japanese": "あまり",
+                    "Romaji": "amari",
+                    "English": "not so (used with negatives)"
+                }, {
+                    "Japanese": "そして",
+                    "Romaji": "soshite",
+                    "English": "and (used to connect sentences)"
+                }, {
+                    "Japanese": "～が",
+                    "Romaji": "~ga",
+                    "English": "... but ~"
+                }, {
+                    "Japanese": "おげんきですか",
+                    "Romaji": "ogenki desu ka",
+                    "English": "How are you?"
+                }, {
+                    "Japanese": "そうですね",
+                    "Romaji": "sou desu ne",
+                    "English": "Well let me see. (pausing)"
+                }, {
+                    "Japanese": "まいらっしい",
+                    "Romaji": "mairasshai",
+                    "English": "Please come again."
+                }, {
+                    "Japanese": "シャンハイ",
+                    "Romaji": "Shanhai",
+                    "English": "Shanghai (上海)"
+                }, {
+                    "Japanese": "金閣寺",
+                    "Romaji": "Kinkaku-ji",
+                    "English": "Kinkakuji Temple (the Golden Pavilion)"
+                }, {
+                    "Japanese": "奈良公園",
+                    "Romaji": "Nara Koen",
+                    "English": "Nara Park"
+                }, {
+                    "Japanese": "富士山",
+                    "Romaji": "Fuji-san",
+                    "English": "Mt. Fuji, the highest mountain in Japan"
+                }, {
+                    "Japanese": "七人の侍",
+                    "Romaji": "Shichinin no Samurai",
+                    "English": "The Seven Samurai, a classic movie by Akira Kurosawa"
+                }
+                ]
+            }
+            ],
+            "lesson9": [{
+                "Vocabulary": [{
+                    "Japanese": "わかります",
+                    "Romaji": "wakarimasu",
+                    "English": "understand"
+                }, {
+                    "Japanese": "あります",
+                    "Romaji": "arimasu",
+                    "English": "have"
+                }, {
+                    "Japanese": "すき(な)",
+                    "Romaji": "suki (na)",
+                    "English": "like"
+                }, {
+                    "Japanese": "きらい(な)",
+                    "Romaji": "kirai (na)",
+                    "English": "dislike"
+                }, {
+                    "Japanese": "じょうず(な)",
+                    "Romaji": "jouzu (na)",
+                    "English": "good at"
+                }, {
+                    "Japanese": "へた(な)",
+                    "Romaji": "heta (na)",
+                    "English": "poor at"
+                }, {
+                    "Japanese": "のみもの",
+                    "Romaji": "nomimono",
+                    "English": "drinks"
+                }, {
+                    "Japanese": "りょうり",
+                    "Romaji": "ryouri",
+                    "English": "dish (cooked food), cooking"
+                }, {
+                    "Japanese": "スポーツ",
+                    "Romaji": "supootsu",
+                    "English": "sport"
+                }, {
+                    "Japanese": "やきゅう",
+                    "Romaji": "yakyuu",
+                    "English": "baseball"
+                }, {
+                    "Japanese": "ダンス",
+                    "Romaji": "dansu",
+                    "English": "dance"
+                }, {
+                    "Japanese": "りょこう",
+                    "Romaji": "ryokou",
+                    "English": "trip, tour"
+                }, {
+                    "Japanese": "おんがく",
+                    "Romaji": "ongaku",
+                    "English": "music"
+                }, {
+                    "Japanese": "うた",
+                    "Romaji": "uta",
+                    "English": "song"
+                }, {
+                    "Japanese": "クラシック",
+                    "Romaji": "kurashikku",
+                    "English": "classical music"
+                }, {
+                    "Japanese": "ジャズ",
+                    "Romaji": "jazu",
+                    "English": "jazz"
+                }, {
+                    "Japanese": "コンサート",
+                    "Romaji": "konsaato",
+                    "English": "concert"
+                }, {
+                    "Japanese": "カラオケ",
+                    "Romaji": "karaoke",
+                    "English": "karaoke"
+                }, {
+                    "Japanese": "かぶき",
+                    "Romaji": "kabuki",
+                    "English": "Kabuki (traditional Japanese musical drama)"
+                }, {
+                    "Japanese": "え",
+                    "Romaji": "e",
+                    "English": "picture, drawing"
+                }, {
+                    "Japanese": "じ",
+                    "Romaji": "ji",
+                    "English": "letter, character"
+                }, {
+                    "Japanese": "かんじ",
+                    "Romaji": "kanji",
+                    "English": "Chinese character"
+                }, {
+                    "Japanese": "ひらがな",
+                    "Romaji": "hiragana",
+                    "English": "hiragana script"
+                }, {
+                    "Japanese": "かたかな",
+                    "Romaji": "katakana",
+                    "English": "katakana script"
+                }, {
+                    "Japanese": "ローマじ",
+                    "Romaji": "roomaji",
+                    "English": "the Roman alphabet"
+                }, {
+                    "Japanese": "こまかいおかね",
+                    "Romaji": "komakaiokane",
+                    "English": "small change"
+                }, {
+                    "Japanese": "チケット",
+                    "Romaji": "chiketto",
+                    "English": "ticket"
+                }, {
+                    "Japanese": "じかん",
+                    "Romaji": "jikan",
+                    "English": "time"
+                }, {
+                    "Japanese": "ようじ",
+                    "Romaji": "youji",
+                    "English": "something to do, errand"
+                }, {
+                    "Japanese": "やくそく",
+                    "Romaji": "yakusoku",
+                    "English": "appointment, promise"
+                }, {
+                    "Japanese": "ごしゅじん",
+                    "Romaji": "goshujin",
+                    "English": "(my) husband"
+                }, {
+                    "Japanese": "しゅじん",
+                    "Romaji": "shujin",
+                    "English": "husband"
+                }, {
+                    "Japanese": "おくさん",
+                    "Romaji": "okusan",
+                    "English": "(someone else's) wife"
+                }, {
+                    "Japanese": "かない",
+                    "Romaji": "kanai",
+                    "English": "(my) wife"
+                }, {
+                    "Japanese": "こども",
+                    "Romaji": "kodomo",
+                    "English": "child"
+                }, {
+                    "Japanese": "よく",
+                    "Romaji": "yoku",
+                    "English": "well, much"
+                }, {
+                    "Japanese": "だいたい",
+                    "Romaji": "daitai",
+                    "English": "mostly, roughly"
+                }, {
+                    "Japanese": "たくさん",
+                    "Romaji": "takusan",
+                    "English": "many, much"
+                }, {
+                    "Japanese": "すこし",
+                    "Romaji": "sukoshi",
+                    "English": "a little, a few"
+                }, {
+                    "Japanese": "ぜんぜん",
+                    "Romaji": "zenzen",
+                    "English": "not at all (used with negatives)"
+                }, {
+                    "Japanese": "はやく",
+                    "Romaji": "hayaku",
+                    "English": "early, quickly, fast"
+                }, {
+                    "Japanese": "どうして",
+                    "Romaji": "doushite",
+                    "English": "why"
+                }, {
+                    "Japanese": "ですから",
+                    "Romaji": "desukara",
+                    "English": "because"
+                }, {
+                    "Japanese": "つづいて",
+                    "Romaji": "tsuzuite",
+                    "English": "Please lend (it to me)."
+                }, {
+                    "Japanese": "またこんど",
+                    "Romaji": "mata kondo",
+                    "English": "Please ask me again some other time. (used when refusing an invitation indirectly, considering someone's feelings)"
+                }
+                ]
+            }
+            ],
+            "lesson10": [{
+                "Vocabulary": [{
+                    "Japanese": "あります",
+                    "Romaji": "arimasu",
+                    "English": "exist, be (referring to inanimate things)"
+                }, {
+                    "Japanese": "います",
+                    "Romaji": "imasu",
+                    "English": "exist, be (referring to animate things)"
+                }, {
+                    "Japanese": "いろいろ",
+                    "Romaji": "iroiro",
+                    "English": "various"
+                }, {
+                    "Japanese": "おとこのひと",
+                    "Romaji": "otoko no hito",
+                    "English": "man"
+                }, {
+                    "Japanese": "おんなのひと",
+                    "Romaji": "onna no hito",
+                    "English": "woman"
+                }, {
+                    "Japanese": "おとこのこ",
+                    "Romaji": "otoko no ko",
+                    "English": "boy"
+                }, {
+                    "Japanese": "おんなのこ",
+                    "Romaji": "onna no ko",
+                    "English": "girl"
+                }, {
+                    "Japanese": "いぬ",
+                    "Romaji": "inu",
+                    "English": "dog"
+                }, {
+                    "Japanese": "ねこ",
+                    "Romaji": "neko",
+                    "English": "cat"
+                }, {
+                    "Japanese": "パンダ",
+                    "Romaji": "panda",
+                    "English": "panda"
+                }, {
+                    "Japanese": "ぞう",
+                    "Romaji": "zou",
+                    "English": "elephant"
+                }, {
+                    "Japanese": "き",
+                    "Romaji": "ki",
+                    "English": "tree, wood"
+                }, {
+                    "Japanese": "もの",
+                    "Romaji": "mono",
+                    "English": "thing"
+                }, {
+                    "Japanese": "でんち",
+                    "Romaji": "denchi",
+                    "English": "battery"
+                }, {
+                    "Japanese": "はこ",
+                    "Romaji": "hako",
+                    "English": "box"
+                }, {
+                    "Japanese": "スイッチ",
+                    "Romaji": "suicchi",
+                    "English": "switch"
+                }, {
+                    "Japanese": "れいぞうこ",
+                    "Romaji": "reizouko",
+                    "English": "refrigerator"
+                }, {
+                    "Japanese": "テーブル",
+                    "Romaji": "teeburu",
+                    "English": "table"
+                }, {
+                    "Japanese": "ベッド",
+                    "Romaji": "beddo",
+                    "English": "bed"
+                }, {
+                    "Japanese": "たな",
+                    "Romaji": "tana",
+                    "English": "shelf"
+                }, {
+                    "Japanese": "ドア",
+                    "Romaji": "doa",
+                    "English": "door"
+                }, {
+                    "Japanese": "まど",
+                    "Romaji": "mado",
+                    "English": "window"
+                }, {
+                    "Japanese": "ポスト",
+                    "Romaji": "posuto",
+                    "English": "postbox, mailbox"
+                }, {
+                    "Japanese": "ビル",
+                    "Romaji": "biru",
+                    "English": "building"
+                }, {
+                    "Japanese": "ATM",
+                    "Romaji": "ee tii emu",
+                    "English": "cash machine, ATM (Automatic Teller Machine)"
+                }, {
+                    "Japanese": "コンビニ",
+                    "Romaji": "konbini",
+                    "English": "convenience store"
+                }, {
+                    "Japanese": "こうえん",
+                    "Romaji": "kouen",
+                    "English": "park"
+                }, {
+                    "Japanese": "きっさてん",
+                    "Romaji": "kissaten",
+                    "English": "cafe, coffee shop"
+                }, {
+                    "Japanese": "～や",
+                    "Romaji": "~ya",
+                    "English": "~ shop, ~ store"
+                }, {
+                    "Japanese": "のりば",
+                    "Romaji": "noriba",
+                    "English": "a fixed place to catch taxis, trains, etc."
+                }, {
+                    "Japanese": "けん",
+                    "Romaji": "ken",
+                    "English": "prefecture"
+                }, {
+                    "Japanese": "うえ",
+                    "Romaji": "ue",
+                    "English": "on, above, over"
+                }, {
+                    "Japanese": "した",
+                    "Romaji": "shita",
+                    "English": "under, below, beneath"
+                }, {
+                    "Japanese": "まえ",
+                    "Romaji": "mae",
+                    "English": "front, before"
+                }, {
+                    "Japanese": "うしろ",
+                    "Romaji": "ushiro",
+                    "English": "back, behind"
+                }, {
+                    "Japanese": "みぎ",
+                    "Romaji": "migi",
+                    "English": "right [side]"
+                }, {
+                    "Japanese": "ひだり",
+                    "Romaji": "hidari",
+                    "English": "left [side]"
+                }, {
+                    "Japanese": "なか",
+                    "Romaji": "naka",
+                    "English": "in, inside"
+                }, {
+                    "Japanese": "そと",
+                    "Romaji": "soto",
+                    "English": "outside"
+                }, {
+                    "Japanese": "となり",
+                    "Romaji": "tonari",
+                    "English": "next, next door"
+                }, {
+                    "Japanese": "ちかく",
+                    "Romaji": "chikaku",
+                    "English": "near, vicinity"
+                }, {
+                    "Japanese": "あいだ",
+                    "Romaji": "aida",
+                    "English": "between, among"
+                }, {
+                    "Japanese": "～や～など",
+                    "Romaji": "~ya ~nado",
+                    "English": "and so on"
+                }, {
+                    "Japanese": "どうもすみません",
+                    "Romaji": "doumo sumimasen",
+                    "English": "Thank you."
+                }, {
+                    "Japanese": "どうも",
+                    "Romaji": "doumo",
+                    "English": "Thank you."
+                }, {
+                    "Japanese": "いちばんした",
+                    "Romaji": "ichiban shita",
+                    "English": "the bottom"
+                }, {
+                    "Japanese": "東京ディズニーランド",
+                    "Romaji": "Tōkyō Dizunīrando",
+                    "English": "Tokyo Disneyland"
+                }, {
+                    "Japanese": "アジャストア",
+                    "Romaji": "ajisutoa",
+                    "English": "a fictitious supermarket"
+                }
+                ]
+            }
+            ],
+            "lesson11": [{
+                "Vocabulary": [{
+                    "Japanese": "います",
+                    "Romaji": "imasu",
+                    "English": "have [a child]"
+                }, {
+                    "Japanese": "います",
+                    "Romaji": "imasu",
+                    "English": "stay, be [in Japan]"
+                }, {
+                    "Japanese": "かかります",
+                    "Romaji": "kakarimasu",
+                    "English": "take, cost (referring to time or money)"
+                }, {
+                    "Japanese": "やすみます",
+                    "Romaji": "yasumimasu",
+                    "English": "take a day off (work)"
+                }, {
+                    "Japanese": "ひと",
+                    "Romaji": "hito",
+                    "English": "one (used when counting things)"
+                }, {
+                    "Japanese": "ふた",
+                    "Romaji": "futa",
+                    "English": "two"
+                }, {
+                    "Japanese": "みっつ",
+                    "Romaji": "mittsu",
+                    "English": "three"
+                }, {
+                    "Japanese": "よっつ",
+                    "Romaji": "yottsu",
+                    "English": "four"
+                }, {
+                    "Japanese": "いつつ",
+                    "Romaji": "itsutsu",
+                    "English": "five"
+                }, {
+                    "Japanese": "むっつ",
+                    "Romaji": "muttsu",
+                    "English": "six"
+                }, {
+                    "Japanese": "ななつ",
+                    "Romaji": "nanatsu",
+                    "English": "seven"
+                }, {
+                    "Japanese": "やっつ",
+                    "Romaji": "yattsu",
+                    "English": "eight"
+                }, {
+                    "Japanese": "ここのつ",
+                    "Romaji": "kokonotsu",
+                    "English": "nine"
+                }, {
+                    "Japanese": "とお",
+                    "Romaji": "too",
+                    "English": "ten"
+                }, {
+                    "Japanese": "いくつ",
+                    "Romaji": "ikutsu",
+                    "English": "how many"
+                }, {
+                    "Japanese": "ひとり",
+                    "Romaji": "hitori",
+                    "English": "one person"
+                }, {
+                    "Japanese": "ふたり",
+                    "Romaji": "futari",
+                    "English": "two people"
+                }, {
+                    "Japanese": "～にん",
+                    "Romaji": "~nin",
+                    "English": "~ people"
+                }, {
+                    "Japanese": "～だい",
+                    "Romaji": "~dai",
+                    "English": "(counter for machines, cars, etc.)"
+                }, {
+                    "Japanese": "～まい",
+                    "Romaji": "~mai",
+                    "English": "(counter for paper, stamps, etc.)"
+                }, {
+                    "Japanese": "～かい",
+                    "Romaji": "~kai",
+                    "English": "- times"
+                }, {
+                    "Japanese": "りんご",
+                    "Romaji": "ringo",
+                    "English": "apple"
+                }, {
+                    "Japanese": "みかん",
+                    "Romaji": "mikan",
+                    "English": "mandarin orange"
+                }, {
+                    "Japanese": "サンドイッチ",
+                    "Romaji": "sandoicchi",
+                    "English": "sandwich"
+                }, {
+                    "Japanese": "カレー[ライス]",
+                    "Romaji": "karee [raisu]",
+                    "English": "curry [with rice]"
+                }, {
+                    "Japanese": "アイスクリーム",
+                    "Romaji": "aisukuriimu",
+                    "English": "ice cream"
+                }, {
+                    "Japanese": "きって",
+                    "Romaji": "kitte",
+                    "English": "postage stamp"
+                }, {
+                    "Japanese": "はがき",
+                    "Romaji": "hagaki",
+                    "English": "postcard"
+                }, {
+                    "Japanese": "ふうとう",
+                    "Romaji": "fuutou",
+                    "English": "envelope"
+                }, {
+                    "Japanese": "りょうしん",
+                    "Romaji": "ryoushin",
+                    "English": "parents"
+                }, {
+                    "Japanese": "きょうだい",
+                    "Romaji": "kyoudai",
+                    "English": "brothers and sisters"
+                }, {
+                    "Japanese": "あに",
+                    "Romaji": "ani",
+                    "English": "(my) elder brother"
+                }, {
+                    "Japanese": "おにいさん",
+                    "Romaji": "oniisan",
+                    "English": "(someone else's) elder brother"
+                }, {
+                    "Japanese": "あね",
+                    "Romaji": "ane",
+                    "English": "(my) elder sister"
+                }, {
+                    "Japanese": "おねえさん",
+                    "Romaji": "oneesan",
+                    "English": "(someone else's) elder sister"
+                }, {
+                    "Japanese": "おとうと",
+                    "Romaji": "otouto",
+                    "English": "(my) younger brother"
+                }, {
+                    "Japanese": "おとうとさん",
+                    "Romaji": "otouto-san",
+                    "English": "(someone else's) younger brother"
+                }, {
+                    "Japanese": "いもうと",
+                    "Romaji": "imouto",
+                    "English": "(my) younger sister"
+                }, {
+                    "Japanese": "いもうとさん",
+                    "Romaji": "imouto-san",
+                    "English": "(someone else's) younger sister"
+                }, {
+                    "Japanese": "がいこく",
+                    "Romaji": "gaikoku",
+                    "English": "foreign country"
+                }, {
+                    "Japanese": "りゅうがくせい",
+                    "Romaji": "ryuugakusei",
+                    "English": "foreign student"
+                }, {
+                    "Japanese": "クラス",
+                    "Romaji": "kurasu",
+                    "English": "class"
+                }, {
+                    "Japanese": "～じかん",
+                    "Romaji": "~jikan",
+                    "English": "~ hour(s)"
+                }, {
+                    "Japanese": "～しゅうかん",
+                    "Romaji": "~shuukan",
+                    "English": "~ week(s)"
+                }, {
+                    "Japanese": "～かげつ",
+                    "Romaji": "~kagetsu",
+                    "English": "~ month(s)"
+                }, {
+                    "Japanese": "～ねん",
+                    "Romaji": "~nen",
+                    "English": "~ year(s)"
+                }, {
+                    "Japanese": "～ぐらい",
+                    "Romaji": "~gurai",
+                    "English": "about ~"
+                }, {
+                    "Japanese": "どのくらい",
+                    "Romaji": "donokurai",
+                    "English": "how long"
+                }, {
+                    "Japanese": "ぜんぶで",
+                    "Romaji": "zenbu de",
+                    "English": "in total"
+                }, {
+                    "Japanese": "みんな",
+                    "Romaji": "minna",
+                    "English": "all, everything, everyone"
+                }, {
+                    "Japanese": "～だけ",
+                    "Romaji": "~dake",
+                    "English": "only ~"
+                }, {
+                    "Japanese": "いってらっしゃい",
+                    "Romaji": "itterasshai",
+                    "English": "See you later/So long. (lit. Go and come back.)"
+                }, {
+                    "Japanese": "いってきます",
+                    "Romaji": "ittekimasu",
+                    "English": "See you later/So long. (lit. I'm going and coming back.)"
+                }, {
+                    "Japanese": "船便",
+                    "Romaji": "funabin",
+                    "English": "sea mail"
+                }, {
+                    "Japanese": "航空便 (エアメール)",
+                    "Romaji": "koukuubin (eameeru)",
+                    "English": "airmail"
+                }, {
+                    "Japanese": "お願いします",
+                    "Romaji": "onegaishimasu",
+                    "English": "Please. (lit. ask for a favour)"
+                }, {
+                    "Japanese": "オーストラリア",
+                    "Romaji": "Oosutoraria",
+                    "English": "Australia"
+                }
+                ]
+            }
+            ],
+            "lesson12": [{
+                "Vocabulary": [{
+                    "Japanese": "かんたん(な)",
+                    "Romaji": "kantan (na)",
+                    "English": "easy, simple"
+                }, {
+                    "Japanese": "ちかい",
+                    "Romaji": "chikai",
+                    "English": "near"
+                }, {
+                    "Japanese": "とおい",
+                    "Romaji": "tooi",
+                    "English": "far"
+                }, {
+                    "Japanese": "はやい",
+                    "Romaji": "hayai",
+                    "English": "fast, early"
+                }, {
+                    "Japanese": "おそい",
+                    "Romaji": "osoi",
+                    "English": "slow, late"
+                }, {
+                    "Japanese": "おおい",
+                    "Romaji": "ooi",
+                    "English": "many, [people], much"
+                }, {
+                    "Japanese": "すくない",
+                    "Romaji": "sukunai",
+                    "English": "few [people], a little"
+                }, {
+                    "Japanese": "あたたかい",
+                    "Romaji": "atatakai",
+                    "English": "warm"
+                }, {
+                    "Japanese": "すずしい",
+                    "Romaji": "suzushii",
+                    "English": "cool"
+                }, {
+                    "Japanese": "あまい",
+                    "Romaji": "amai",
+                    "English": "sweet"
+                }, {
+                    "Japanese": "からい",
+                    "Romaji": "karai",
+                    "English": "hot (taste), spicy"
+                }, {
+                    "Japanese": "おもい",
+                    "Romaji": "omoi",
+                    "English": "heavy"
+                }, {
+                    "Japanese": "かるい",
+                    "Romaji": "karui",
+                    "English": "light"
+                }, {
+                    "Japanese": "いい",
+                    "Romaji": "ii",
+                    "English": "prefer [coffee]"
+                }, {
+                    "Japanese": "きせつ",
+                    "Romaji": "kisetsu",
+                    "English": "season"
+                }, {
+                    "Japanese": "はる",
+                    "Romaji": "haru",
+                    "English": "spring"
+                }, {
+                    "Japanese": "なつ",
+                    "Romaji": "natsu",
+                    "English": "summer"
+                }, {
+                    "Japanese": "あき",
+                    "Romaji": "aki",
+                    "English": "autumn, fall"
+                }, {
+                    "Japanese": "ふゆ",
+                    "Romaji": "fuyu",
+                    "English": "winter"
+                }, {
+                    "Japanese": "てんき",
+                    "Romaji": "tenki",
+                    "English": "weather"
+                }, {
+                    "Japanese": "あめ",
+                    "Romaji": "ame",
+                    "English": "rain, rainy"
+                }, {
+                    "Japanese": "ゆき",
+                    "Romaji": "yuki",
+                    "English": "snow, snowy"
+                }, {
+                    "Japanese": "くもり",
+                    "Romaji": "kumori",
+                    "English": "cloudy"
+                }, {
+                    "Japanese": "ホテル",
+                    "Romaji": "hoteru",
+                    "English": "hotel"
+                }, {
+                    "Japanese": "くうこう",
+                    "Romaji": "kuukou",
+                    "English": "airport"
+                }, {
+                    "Japanese": "うみ",
+                    "Romaji": "umi",
+                    "English": "sea, ocean"
+                }, {
+                    "Japanese": "せかい",
+                    "Romaji": "sekai",
+                    "English": "world"
+                }, {
+                    "Japanese": "パーティー",
+                    "Romaji": "paatii",
+                    "English": "party"
+                }, {
+                    "Japanese": "おまつり",
+                    "Romaji": "omatsuri",
+                    "English": "festival"
+                }, {
+                    "Japanese": "すきやき",
+                    "Romaji": "sukiyaki",
+                    "English": "(beef and vegetable hot pot)"
+                }, {
+                    "Japanese": "さしみ",
+                    "Romaji": "sashimi",
+                    "English": "(sliced raw fish)"
+                }, {
+                    "Japanese": "すし",
+                    "Romaji": "sushi",
+                    "English": "(vinegared rice topped with raw fish)"
+                }, {
+                    "Japanese": "てんぷら",
+                    "Romaji": "tenpura",
+                    "English": "(seafood and vegetables deep fried in batter)"
+                }, {
+                    "Japanese": "ぶたにく",
+                    "Romaji": "butaniku",
+                    "English": "pork"
+                }, {
+                    "Japanese": "とりにく",
+                    "Romaji": "toriniku",
+                    "English": "chicken"
+                }, {
+                    "Japanese": "ぎゅうにく",
+                    "Romaji": "gyuuniku",
+                    "English": "beef"
+                }, {
+                    "Japanese": "レモン",
+                    "Romaji": "remon",
+                    "English": "lemon"
+                }, {
+                    "Japanese": "いけばな",
+                    "Romaji": "ikebana",
+                    "English": "flower arrangement"
+                }, {
+                    "Japanese": "もみじ",
+                    "Romaji": "momiji",
+                    "English": "maple, red leaves of autumn"
+                }, {
+                    "Japanese": "どちら",
+                    "Romaji": "dochira",
+                    "English": "which one (of two things)"
+                }, {
+                    "Japanese": "どちらも",
+                    "Romaji": "dochiramo",
+                    "English": "both"
+                }, {
+                    "Japanese": "いちばん",
+                    "Romaji": "ichiban",
+                    "English": "the most"
+                }, {
+                    "Japanese": "ずっと",
+                    "Romaji": "zutto",
+                    "English": "by far"
+                }, {
+                    "Japanese": "はじめて",
+                    "Romaji": "hajimete",
+                    "English": "for the first time"
+                }, {
+                    "Japanese": "ただいま",
+                    "Romaji": "tadaima",
+                    "English": "I'm home."
+                }, {
+                    "Japanese": "おかえりなさい",
+                    "Romaji": "okaerinasai",
+                    "English": "Welcome home."
+                }, {
+                    "Japanese": "すごい",
+                    "Romaji": "sugoi",
+                    "English": "Wow! Look at all those people!"
+                }, {
+                    "Japanese": "つかれました",
+                    "Romaji": "tsukaremashita",
+                    "English": "I'm tired."
+                }, {
+                    "Japanese": "ぎおんまつり",
+                    "Romaji": "Gion-matsuri",
+                    "English": "the Gion Festival (the most famous festival in Kyoto)"
+                }, {
+                    "Japanese": "香港",
+                    "Romaji": "Honkon",
+                    "English": "Hong Kong (香港)"
+                }, {
+                    "Japanese": "シンガポール",
+                    "Romaji": "Shingapooru",
+                    "English": "Singapore"
+                }, {
+                    "Japanese": "ABCストア",
+                    "Romaji": "Eibishii sutoa",
+                    "English": "a fictitious supermarket"
+                }
+                ]
+            }
+            ]
+        }]
+        $(document).ready(function () {
+            var tocList = $("#toc-list");
+            var lessonsContainer = $("#lessons-container");
+
+            // Access the actual lesson data inside the nested object
+            var lessonsData = japanese_dataset[0].japanese_dataset;
+
+            if (Array.isArray(lessonsData) && lessonsData.length > 0) {
+                $.each(lessonsData, function (index, lessonData) {
+                    var lessonTitle = Object.keys(lessonData)[0];
+                    var lessonContent = lessonData[lessonTitle];
+                    var lessonId = lessonTitle.toLowerCase().replace(/[\s\(\)/_]/g, '-');
+
+                    tocList.append('<li><a href="#' + lessonId + '">' + lessonTitle.replace(/_/g, ' ') + '</a></li>');
+
+                    var lessonHtml = '<div id="' + lessonId + '" class="lesson">';
+                    lessonHtml += '<h2>' + lessonTitle.replace(/_/g, ' ') + '</h2>';
+                    lessonHtml += '<table class="vocab-table">';
+
+                    if (Array.isArray(lessonContent) && lessonContent.length > 0) {
+                        var headers = Object.keys(lessonContent[0]);
+                        lessonHtml += '<thead><tr>';
+                        $.each(headers, function (i, header) {
+                            if (header != "Romaji") // Exclude Romaji column
+                            {
+                                lessonHtml += '<th>' + header + '</th>';
+                            }
+                        });
+                        lessonHtml += '</tr></thead><tbody>';
+
+                        $.each(lessonContent, function (i, item) {
+                            lessonHtml += '<tr>';
+                            $.each(headers, function (i, header) {
+
+                                if (header != "Romaji") // Exclude Romaji column
+                                {
+                                    var tdClass = (header === 'Japanese') ? 'japanese' : '';
+                                    lessonHtml += '<td class="' + tdClass + '">' + (item[header] || '') + '</td>';
+                                }
+                            });
+                            lessonHtml += '</tr>';
+                        });
+                    } else {
+                        lessonHtml += '<tbody><tr><td colspan="' + headers.length + '">No vocabulary data available.</td></tr>';
+                    }
+
+                    lessonHtml += '</tbody></table>';
+                    lessonHtml += '</div>';
+                    lessonsContainer.append(lessonHtml);
+                });
+            } else {
+                lessonsContainer.append('<p>Error: No lesson data found.</p>');
+            }
+            $.each(lessons_dataset[0], function (lessonKey, lessonValue) {
+                // Find the lesson number from the key (e.g., 'lesson1')
+                var lessonNumber = lessonKey.replace('lesson', '');
+
+                // Create a title for the TOC link and the lesson section itself
+                var lessonTitle = 'Lesson ' + lessonNumber;
+                var lessonId = 'lesson' + lessonNumber;
+
+                // Create TOC link
+                var tocItem = $('<li><a href="#' + lessonId + '">' + lessonTitle + '</a></li>');
+                tocList.append(tocItem);
+
+                // Create Lesson section
+                var lessonSection = $('<div id="' + lessonId + '" class="lesson"></div>');
+                var lessonHeader = $('<h2>' + lessonTitle + '</h2>');
+                lessonSection.append(lessonHeader);
+
+                // Iterate through each object inside the lesson array
+                $.each(lessonValue, function (i, sectionData) {
+                    // Get the title of the subsection (e.g., "PersonalPronouns")
+                    var sectionTitle = Object.keys(sectionData)[0];
+                    var sectionContent = sectionData[sectionTitle];
+
+                    // Create a sub-heading for the section
+                    var sectionHeader = $('<h3>' + sectionTitle.replace(/([A-Z])/g, ' $1').trim() + '</h3>');
+                    lessonSection.append(sectionHeader);
+
+                    // Create a table for the vocabulary in this subsection
+                    var vocabTable = $('<table class="vocab-table"></table>');
+                    var tableHeader = $('<thead><tr><th>Japanese</th><th>English</th></tr></thead>');
+                    vocabTable.append(tableHeader);
+
+                    var tableBody = $('<tbody></tbody>');
+                    $.each(sectionContent, function (j, vocabItem) {
+                        var row = $('<tr></tr>');
+                        row.append('<td class="japanese">' + vocabItem.Japanese + '</td>');
+                        row.append('<td>' + vocabItem.English + '</td>');
+                        tableBody.append(row);
+                    });
+
+                    vocabTable.append(tableBody);
+                    lessonSection.append(vocabTable);
+                });
+
+                lessonsContainer.append(lessonSection);
+            });
+        });
+    </script>
+</body>
+
+</html>
