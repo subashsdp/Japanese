@@ -5,235 +5,76 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Complete Japanese Language Learning Guide</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Bootstrap & DataTables CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.3.4/css/dataTables.bootstrap5.css">
+
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Arial, sans-serif;
-        }
-
-        body {
-            background-color: #f9f9f9;
-            color: #333;
-            line-height: 1.6;
-            padding: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .book-container {
-            background: white;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            padding: 40px;
-            margin: 20px 0;
-        }
-
-        .header {
+        h2.lesson-title {
+            text-transform: uppercase;
+            font-weight: 700;
             text-align: center;
-            margin-bottom: 40px;
-            padding-bottom: 20px;
-            border-bottom: 2px solid #e63946;
+            color: #0d6efd;
+            padding: 0 0;
+            margin-bottom: 0;
         }
 
-        h1 {
-            color: #1d3557;
-            font-size: 2.8em;
-            margin-bottom: 15px;
+        .table-hover>tbody>tr:hover>* {
+            background-color: #ffe7fe !important;
+            /* Light blue hover */
+            color: #000;
+            /* Ensure text stays visible */
+            transition: background-color 0.2s ease-in-out;
         }
 
-        h2 {
-            color: #457b9d;
-            font-size: 1.8em;
-            margin: 30px 0 15px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #a8dadc;
-        }
 
-        h3 {
-            color: #e63946;
-            font-size: 1.4em;
-            margin: 25px 0 15px;
-        }
-
-        h4 {
-            color: #1d3557;
-            font-size: 1.2em;
-            margin: 20px 0 10px;
-        }
-
-        p {
-            margin-bottom: 15px;
-            text-align: justify;
-        }
-
-        .intro {
-            font-size: 1.1em;
-            background: #f1faee;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 30px;
-        }
-
-        .toc {
-            background: #f1faee;
-            padding: 25px;
-            border-radius: 8px;
-            margin-bottom: 30px;
-        }
-
-        .toc h2 {
+        #toc-list {
             text-align: center;
-            margin-top: 0;
-        }
-
-        .toc-list {
-            list-style-type: none;
-            column-count: 2;
-        }
-
-        .toc-list li {
-            margin-bottom: 8px;
-            break-inside: avoid;
-        }
-
-        .toc-list a {
-            text-decoration: none;
-            color: #457b9d;
-            display: block;
-            padding: 5px 10px;
-            border-radius: 4px;
-            transition: background 0.3s;
-        }
-
-        .toc-list a:hover {
-            background: #a8dadc;
-        }
-
-        .lesson {
-            margin-bottom: 40px;
-            page-break-inside: avoid;
-        }
-
-        .vocab-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .vocab-table th {
-            background-color: #1d3557;
-            color: white;
-            padding: 12px;
-            text-align: left;
-        }
-
-        .vocab-table td {
-            padding: 10px;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .vocab-table tr:nth-child(even) {
-            background-color: #f8f9fa;
-        }
-
-        .vocab-table tr:hover {
-            background-color: #e9f5f5;
-        }
-
-        .japanese {
-            font-size: 1.2em;
-            font-weight: bold;
-        }
-
-        .footer {
-            text-align: center;
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 2px solid #e63946;
-            color: #6c757d;
-            font-size: 0.9em;
-        }
-
-        @media print {
-            body {
-                background: white;
-                padding: 0;
-            }
-
-            .book-container {
-                box-shadow: none;
-                padding: 0;
-            }
-
-            .toc {
-                page-break-after: always;
-            }
-
-            .lesson {
-                page-break-inside: avoid;
-            }
-
-            h2 {
-                page-break-after: avoid;
-            }
-
-            .vocab-table {
-                page-break-inside: avoid;
-            }
-        }
-
-        #backToTop {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #007bff;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 14px;
-            display: none;
-            /* hidden by default */
-            z-index: 1000;
-        }
-
-        #backToTop:hover {
-            background: #0056b3;
         }
     </style>
 </head>
 
-<body>
-    <div class="book-container">
-        <div class="header">
-            <h1>Complete Japanese Language Learning Guide</h1>
-            <p>A Comprehensive Resource for Japanese Vocabulary and Phrases</p>
-        </div>
-        <div class="intro">
-            <p>This guide contains vocabulary and phrases organized into lessons covering various topics from basic
-                greetings to more complex grammar and vocabulary. It is designed to be a comprehensive resource for
-                Japanese language learners of all levels.</p>
-            <p>Each lesson is structured with clear tables for easy reference and study. The content progresses from
-                fundamental greetings and expressions to more advanced vocabulary and sentence structures.</p>
-        </div>
-        <div class="toc">
-            <h2>Table of Contents</h2>
-            <ul class="toc-list" id="toc-list">
-            </ul>
-        </div>
-        <div id="lessons-container">
-        </div>
-        <div class="footer">
-            <p>Complete Japanese Language Learning Guide</p>
-            <p>© 2023 - For educational purposes only</p>
+<body class="bg-light">
+    <div class="container my-4">
+        <div class="card shadow-lg p-4">
+            <div class="text-center border-bottom pb-3 mb-3">
+                <h1 class="text-primary fw-bold">Complete Japanese Language N5 Learning Guide</h1>
+                <p class="text-muted">A Comprehensive Resource for Japanese Vocabulary and Phrases</p>
+            </div>
+
+            <div class="alert alert-info">
+                <p>This guide contains vocabulary and phrases organized into lessons covering various topics from basic
+                    greetings to more complex grammar and vocabulary. It is designed to be a comprehensive resource for
+                    Japanese language learners of all levels.</p>
+                <p>Each lesson is structured with clear tables for easy reference and study. The content progresses from
+                    fundamental greetings and expressions to more advanced vocabulary and sentence structures.</p>
+            </div>
+
+            <div class="card bg-light mb-3">
+                <div class="card-body">
+                    <h2 class="text-center text-primary">TABLE OF CONTENTS</h2>
+                    <ul class="row row-cols-1 row-cols-md-2 list-unstyled" id="toc-list"></ul>
+                </div>
+            </div>
+
+            <div id="lessons-container"></div>
+
+            <div class="text-center border-top pt-3 mt-4 text-muted small">
+                <p>Complete Japanese Language Learning Guide</p>
+                <p>© 2025 - For educational purposes only</p>
+            </div>
         </div>
     </div>
-    <button id="backToTop">↑ Top</button>
+
+    <button id="backToTop" class="btn btn-primary position-fixed bottom-0 end-0 m-3 d-none">↑ Top</button>
+
+    <!-- Bootstrap & DataTables JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/2.3.4/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/2.3.4/js/dataTables.bootstrap5.js"></script>
 
     <script>
         // Correctly formatted JSON data, as a single variable
@@ -2757,27 +2598,29 @@
             var tocList = $("#toc-list");
             var lessonsContainer = $("#lessons-container");
 
-            // Access the actual lesson data inside the nested object
             var lessonsData = japanese_dataset[0].japanese_dataset;
 
             if (Array.isArray(lessonsData) && lessonsData.length > 0) {
                 $.each(lessonsData, function (index, lessonData) {
                     var lessonTitle = Object.keys(lessonData)[0];
                     var lessonContent = lessonData[lessonTitle];
-                    var lessonId = lessonTitle.toLowerCase().replace(/[\s\(\)/_]/g, '-');
+                    var lessonId = lessonTitle.toLowerCase().replace(/\s+/g, '-');
 
-                    tocList.append('<li><a href="#' + lessonId + '">' + lessonTitle.replace(/_/g, ' ') + '</a></li>');
+                    tocList.append('<li class="col mb-2"><a class="text-decoration-none text-primary" href="#' + lessonId + '">' + lessonTitle + '</a></li>');
 
-                    var lessonHtml = '<div id="' + lessonId + '" class="lesson">';
-                    lessonHtml += '<h2>' + lessonTitle.replace(/_/g, ' ') + '</h2>';
-                    lessonHtml += '<table class="vocab-table">';
+                    var lessonHtml = '<div id="' + lessonId + '" class="mb-5">';
+                    lessonHtml += '<h2 class="lesson-title">' +
+                        (lessonTitle.toUpperCase().includes('LESSON')
+                            ? lessonTitle.toUpperCase()
+                            : lessonTitle.toUpperCase())
+                        + '</h2>';
+                    lessonHtml += '<div class="table-responsive"><table class="table table-bordered table-hover table-striped data-table">';
 
                     if (Array.isArray(lessonContent) && lessonContent.length > 0) {
                         var headers = Object.keys(lessonContent[0]);
-                        lessonHtml += '<thead><tr>';
+                        lessonHtml += '<thead class="table-primary"><tr>';
                         $.each(headers, function (i, header) {
-                            if (header != "Romaji") // Exclude Romaji column
-                            {
+                            if (header != "Romaji") {
                                 lessonHtml += '<th>' + header + '</th>';
                             }
                         });
@@ -2786,10 +2629,8 @@
                         $.each(lessonContent, function (i, item) {
                             lessonHtml += '<tr>';
                             $.each(headers, function (i, header) {
-
-                                if (header != "Romaji") // Exclude Romaji column
-                                {
-                                    var tdClass = (header === 'Japanese') ? 'japanese' : '';
+                                if (header != "Romaji") {
+                                    var tdClass = (header === 'Japanese') ? 'fw-bold' : '';
                                     lessonHtml += '<td class="' + tdClass + '">' + (item[header] || '') + '</td>';
                                 }
                             });
@@ -2799,71 +2640,62 @@
                         lessonHtml += '<tbody><tr><td colspan="' + headers.length + '">No vocabulary data available.</td></tr>';
                     }
 
-                    lessonHtml += '</tbody></table>';
-                    lessonHtml += '</div>';
+                    lessonHtml += '</tbody></table></div></div>';
                     lessonsContainer.append(lessonHtml);
                 });
-            } else {
-                lessonsContainer.append('<p>Error: No lesson data found.</p>');
             }
-            $.each(lessons_dataset[0], function (lessonKey, lessonValue) {
-                // Find the lesson number from the key (e.g., 'lesson1')
-                var lessonNumber = lessonKey.replace('lesson', '');
 
-                // Create a title for the TOC link and the lesson section itself
+            $.each(lessons_dataset[0], function (lessonKey, lessonValue) {
+                var lessonNumber = lessonKey.replace('lesson', '');
                 var lessonTitle = 'Lesson ' + lessonNumber;
                 var lessonId = 'lesson' + lessonNumber;
 
-                // Create TOC link
-                var tocItem = $('<li><a href="#' + lessonId + '">' + lessonTitle + '</a></li>');
-                tocList.append(tocItem);
+                tocList.append('<li class="col mb-2"><a class="text-decoration-none text-primary" href="#' + lessonId + '">' + lessonTitle + '</a></li>');
 
-                // Create Lesson section
-                var lessonSection = $('<div id="' + lessonId + '" class="lesson"></div>');
-                var lessonHeader = $('<h2>' + lessonTitle + '</h2>');
-                lessonSection.append(lessonHeader);
+                var lessonSection = $('<div id="' + lessonId + '" class="mb-5"></div>');
+                lessonSection.append(
+                    '<h2 class="lesson-title">' +
+                    (lessonTitle.toUpperCase().includes('VOCABULARY')
+                        ? lessonTitle.toUpperCase()
+                        : lessonTitle.toUpperCase() + ' - VOCABULARY')
+                    + '</h2>'
+                );
 
-                // Iterate through each object inside the lesson array
                 $.each(lessonValue, function (i, sectionData) {
-                    // Get the title of the subsection (e.g., "PersonalPronouns")
                     var sectionTitle = Object.keys(sectionData)[0];
                     var sectionContent = sectionData[sectionTitle];
 
-                    // Create a sub-heading for the section
-                    var sectionHeader = $('<h3>' + sectionTitle.replace(/([A-Z])/g, ' $1').trim() + '</h3>');
-                    lessonSection.append(sectionHeader);
+                    var vocabTable = $('<div class="table-responsive"><table class="table table-bordered table-hover table-striped data-table"><thead class="table-primary"><tr><th>Japanese</th><th>English</th></tr></thead><tbody></tbody></table></div>');
+                    var tableBody = vocabTable.find('tbody');
 
-                    // Create a table for the vocabulary in this subsection
-                    var vocabTable = $('<table class="vocab-table"></table>');
-                    var tableHeader = $('<thead><tr><th>Japanese</th><th>English</th></tr></thead>');
-                    vocabTable.append(tableHeader);
-
-                    var tableBody = $('<tbody></tbody>');
                     $.each(sectionContent, function (j, vocabItem) {
-                        var row = $('<tr></tr>');
-                        row.append('<td class="japanese">' + vocabItem.Japanese + '</td>');
-                        row.append('<td>' + vocabItem.English + '</td>');
-                        tableBody.append(row);
+                        tableBody.append('<tr><td class="fw-bold">' + vocabItem.Japanese + '</td><td>' + vocabItem.English + '</td></tr>');
                     });
 
-                    vocabTable.append(tableBody);
                     lessonSection.append(vocabTable);
                 });
 
                 lessonsContainer.append(lessonSection);
             });
+
+            $('.data-table').DataTable({
+                paging: false,
+                info: false,
+                searching: false,
+                ordering: false,
+                responsive: true
+            });
+
             $(window).scroll(function () {
                 if ($(this).scrollTop() > 200) {
-                    $('#backToTop').fadeIn();
+                    $('#backToTop').removeClass('d-none');
                 } else {
-                    $('#backToTop').fadeOut();
+                    $('#backToTop').addClass('d-none');
                 }
             });
 
-            // Scroll to top when clicked
             $('#backToTop').click(function () {
-                $('html, body').animate({ scrollTop: 0 }, 600); // 600ms smooth scroll
-                return false;
+                $('html, body').animate({ scrollTop: 0 }, 600);
             });
         });
     </script>
